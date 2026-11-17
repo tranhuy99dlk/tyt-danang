@@ -165,12 +165,12 @@ Thấy gì là đúng:
 bash scripts/run_spark.sh
 ```
 
-Lệnh này chạy bước 11 trong một container Spark. Lần đầu Docker tải image `jupyter/pyspark-notebook` (khoảng 7 GB sau khi giải nén) nên sẽ lâu;
+Lệnh này chạy bước 11 trong một container Spark, rồi chạy bước 15 (TYT và cơ sở khám chữa bệnh) bằng Python trong `.venv`. Lần đầu Docker tải image `jupyter/pyspark-notebook` (khoảng 7 GB sau khi giải nén) nên sẽ lâu;
 các lần sau mất 4–9 phút trên máy thử.
 
 Màn hình in dần các dòng `INFO` theo từng khâu (đọc, kiểm tra, biến đổi, ghi, đối soát).
 
-Thấy gì là đúng: gần cuối có dòng `Doi soat: 25 phep, 0 LECH.`, mọi dòng có `7.` đều kết thúc bằng `ĐẠT`, và dòng cuối bắt đầu bằng `Xong.`
+Thấy gì là đúng: có dòng `Doi soat: 25 phep, 0 LECH.` và mọi dòng có `7.` đều kết thúc bằng `ĐẠT`; sau đó có dòng `Doi chieu NQ 1251: ... KHOP` và dòng cuối là `Xong buoc 15. ...`
 Cảnh báo của Spark và Java không hiện trên màn hình mà được ghi vào `logs/11_spark_stderr_*.log`.
 
 Tới đây dự án đã chạy xong và có đủ bảng kết quả. Mục 9 chỉ cần khi phải trình diễn HDFS, YARN và JupyterLab.
@@ -184,6 +184,7 @@ bash scripts/11b_hdfs_yarn_cli.sh truoc
 docker exec -w /home/jovyan/work/mis5007_tram_y_te -e HDFS_URI=hdfs://namenode:9000/mis5007 \
   mis5007-spark-notebook python scripts/11_spark_pipeline.py
 bash scripts/11b_hdfs_yarn_cli.sh sau
+.venv/bin/python scripts/15_tuyen_tren.py
 ```
 
 Lần đầu Docker tải thêm bốn image Hadoop. Bước Spark trên HDFS mất 4–9 phút trên máy thử.
@@ -247,4 +248,4 @@ Nhóm điền bảng này trước khi chuyển giao; hiện chưa có thông ti
 
 - [HUONG_DAN_SU_DUNG.md](HUONG_DAN_SU_DUNG.md) – câu hỏi nào xem file nào, sửa toạ độ trạm, đổi tham số.
 - [KIEN_TRUC.md](KIEN_TRUC.md) – dữ liệu đi qua đâu, vì sao thiết kế như vậy.
-- [CLAUDE.md](../CLAUDE.md) – quy tắc làm việc và bảng giả định A1–A14.
+- [CLAUDE.md](../CLAUDE.md) – quy tắc làm việc và bảng giả định A1–A17.

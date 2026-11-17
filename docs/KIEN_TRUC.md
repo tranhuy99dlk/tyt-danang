@@ -79,6 +79,7 @@ Có hai động cơ xử lý chạy nối tiếp nhau:
 | 11a | `11a_landing.py` | raster, Excel, parquet | `data/landing/*.csv` | CSV thô cho Spark, giữ nguyên cả giá trị lỗi |
 | 11b | `11b_hdfs_yarn_cli.sh` | `data/landing/` | HDFS `/mis5007/landing`, log CLI | `hdfs dfs -put`, `fsck`, `yarn node -list` … |
 | 11 | `11_spark_pipeline.py` | landing | curated, quarantine, gold, `*_spark.csv`, `doi_soat_spark.csv` | Xem mục 6 |
+| 15 | `15_tuyen_tren.py` | `danh-sach-cskcb.xlsx`, `tt30_2024_goi_dich_vu.csv`, `nq1251_sap_xep.csv`, trạm, `tram_vung_phuc_vu_spark.csv`, `kpi_theo_xa_spark.csv` | `cskcb_danang.csv`, `tyt_cskcb*.csv`, `ung_vien_gop_tram.csv`, `doi_soat_nq1251_*.csv` | Đặt TYT cạnh 30 CSKCB theo cấp chuyên môn; ứng viên rà soát gộp trạm (A15) và đối chiếu với NQ 1251; chạy trên máy **sau** bước 11 |
 
 Lưới 1 km các năm 2025–2030 của WorldPop là số chiếu; chỉ bước 08 đọc chúng, để đối chiếu và để phân bố dân 2030 trong từng xã (giả định A9). Spark (bước 11) không tính dự báo.
 
@@ -206,4 +207,8 @@ File cấu hình: `docker/docker-compose.yml`, tên dự án compose là `mis500
 - Mạng đường và danh sách cơ sở y tế OSM được tải ở thời điểm chạy `01_download.sh`; tải lại vào ngày khác có thể cho số liệu đường đi hơi khác.
 - Dự án mới chạy thử trên macOS (máy Intel); Linux và Windows chưa được kiểm tra.
 
-Bảng giả định đầy đủ A1–A14 nằm trong [CLAUDE.md](../CLAUDE.md).
+- Danh sách 30 CSKCB không có phòng khám tư nhỏ nên số đếm CSKCB là sàn dưới; địa chỉ dùng tên đơn vị sau 2025, tức là danh sách hiện hành chứ không phải ảnh chụp 2024 (A17).
+- Ngưỡng ứng viên gộp trạm (≥ 6 CSKCB trong 2 km) chọn sau khi biết NQ 1251 gộp xã nào, nên mức khớp và p-value là lạc quan (A15).
+- Phân loại khả năng thay thế của 15 gói dịch vụ là đánh giá của nhóm, không có trong Thông tư 30/2024/TT-BYT (A16).
+
+Bảng giả định đầy đủ A1–A17 nằm trong [CLAUDE.md](../CLAUDE.md).

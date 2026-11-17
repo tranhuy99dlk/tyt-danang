@@ -178,6 +178,16 @@ def main():
             ("year, dan, dan_60, ty_le_trong_*km_pct, dan_tren_5km, kc_trung_vi_m, dan_binh_quan_moi_tram", "số", f"KPI toàn 56 xã từng năm {YEARS[0]}–{YEARS[-1]}, giữ nguyên 56 trạm (A14)", "0–100 với tỷ lệ; ≥ 0", "11_spark_pipeline.py", "Công khai (số tổng hợp)"),)),
         ("outputs/tables/doi_soat_spark.csv", (
             ("phep_doi_soat, spark, pandas_hoac_nguon, ket_qua, ghi_chu", "chuỗi/số", "Phép đối soát: bảo toàn số dòng/tổng dân và Spark so với pandas", "mọi dòng phải ĐẠT", "11_spark_pipeline.py", "Nội bộ"),)),
+        ("outputs/tables/cskcb_danang.csv", (
+            ("ma_cs, ten_cs, tuyen, hang, cap, diem, dia_chi, lat, lon", "chuỗi/số", "30 cơ sở khám chữa bệnh: tuyến, hạng, cấp chuyên môn kỹ thuật (Luật KCB 15/2023, Điều 104), toạ độ", "toạ độ đọc được; cap ∈ ban đầu / cơ bản / chuyên sâu", "data/raw/danh-sach-cskcb.xlsx – người dùng cung cấp (A17)", "Công khai"),)),
+        ("outputs/tables/tyt_cskcb.csv", (
+            ("kc_cskcb_gan_nhat_m, cskcb_1km … cskcb_5km, cap_*_2km", "số", "Khoảng cách từ mỗi TYT tới CSKCB gần nhất và số CSKCB trong 1/2/3/5 km, tách theo cấp", "≥ 0; danh sách CSKCB là sàn dưới (A17)", "15_tuyen_tren.py", "Công khai"),
+            ("xa_bi_gop_nq1251, ung_vien_A15_moi, phan_loai_nq1251", "logic/chuỗi", "Xã bị gộp theo NQ 1251; ứng viên rà soát theo A15 (≥ 6 CSKCB trong 2 km); TP/FP/FN/TN", "danh sách rà soát, không phải đề nghị đóng trạm (A15, A16)", "15_tuyen_tren.py", "Nội bộ – chưa công bố"),)),
+        ("outputs/tables/doi_soat_nq1251_quy_tac.csv", (
+            ("quy_tac, dung_TP … p_value_hypergeom", "chuỗi/số", "So 5 quy tắc dự đoán gộp trạm với 17 xã NQ 1251 thực sự gộp", "p-value lạc quan vì ngưỡng chọn sau khi biết kết quả (A15)", "15_tuyen_tren.py", "Nội bộ"),)),
+        ("data/reference/tt30_2024_goi_dich_vu.csv", (
+            ("stt, ten_goi_dich_vu", "số/chuỗi", "15 nhóm gói dịch vụ y tế cơ bản của TYT theo Điều 2 TT 30/2024/TT-BYT", "đúng 15 dòng", "TT 30/2024/TT-BYT (bản PDF kèm theo là bản thảo – A16)", "Công khai"),
+            ("nhom_chuc_nang, benh_vien_tuyen_tren_thay_the, ly_do_danh_gia_cua_nhom", "chuỗi", "ĐÁNH GIÁ CỦA NHÓM, không có trong văn bản", "ghi rõ là diễn giải (A16)", "Nhóm thực hiện", "Công khai"),)),
     ):
         for n, k, y, q, src, nh in rows:
             fld(ds, n, k, y, src, q, nh)

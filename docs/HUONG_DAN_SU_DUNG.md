@@ -13,14 +13,17 @@ Mọi lệnh chạy từ thư mục gốc của dự án (thư mục chứa `REA
 | Tải dữ liệu nguồn (chạy lại chỉ tải file còn thiếu) | `bash scripts/01_download.sh` | tuỳ mạng |
 | Chạy toàn bộ phần pandas và tạo CSV thô cho Spark | `source .venv/bin/activate && bash scripts/run_all.sh` | 2–3 phút |
 | Chạy một bước lẻ | `cd scripts && ../.venv/bin/python 06_kpi.py` | – |
-| Chạy Spark, không cần cụm HDFS | `bash scripts/run_spark.sh` | 4–9 phút |
-| Chạy Spark trên HDFS | xem mục 5 | 4–9 phút |
+| Chạy Spark rồi bước 15, không cần cụm HDFS | `bash scripts/run_spark.sh` | 4–9 phút |
+| Chạy Spark trên HDFS rồi bước 15 | xem mục 5 | 4–9 phút |
+| Chạy riêng bước 15 (TYT và CSKCB) | `.venv/bin/python scripts/15_tuyen_tren.py` | vài giây |
 
-Thứ tự bắt buộc: `01_download.sh` → `run_all.sh` → Spark. `run_all.sh` dừng ngay ở bước đầu tiên bị lỗi.
+Thứ tự bắt buộc: `01_download.sh` → `run_all.sh` → Spark → bước 15. `run_all.sh` dừng ngay ở bước đầu tiên bị lỗi.
+`run_spark.sh` tự chạy bước 15 sau khi Spark xong; khi chạy Spark trên cụm HDFS thì phải tự chạy bước 15 (mục 5).
 
-Các bước phụ thuộc nhau theo chuỗi 02 → 03 → 04 → 05 → 06 → (07, 08, 09 → 13) → 10 → 12 → 11a → 11. Bước 13 đọc `greedy_sites.csv`
-của bước 09 nên phải chạy sau 09. Sửa đầu vào của một bước thì phải chạy lại
-từ bước đó tới hết, rồi chạy lại Spark; nếu không, bảng đối soát sẽ báo `LỆCH`.
+Các bước phụ thuộc nhau theo chuỗi 02 → 03 → 04 → 05 → 06 → (07, 08, 09 → 13, 14) → 10 → 12 → 11a → 11 → 15.
+Bước 13 và 14 đọc `greedy_sites.csv` của bước 09 nên phải chạy sau 09. Bước 15 đọc hai bảng của Spark
+(`tram_vung_phuc_vu_spark.csv`, `kpi_theo_xa_spark.csv`) nên phải chạy sau bước 11. Sửa đầu vào của một bước thì phải chạy lại
+từ bước đó tới hết, rồi chạy lại Spark và bước 15; nếu không, bảng đối soát sẽ báo `LỆCH` hoặc bước 15 dùng số cũ.
 
 ## 2. Câu hỏi nào, xem file nào
 
@@ -44,6 +47,14 @@ Tất cả nằm trong `outputs/tables/` trừ khi ghi khác.
 | Mô hình dự báo nào được chọn, sai số bao nhiêu? | `forecast_backtest.csv`, `forecast_model_choice.csv` | `MAPE_pct` |
 | Đến 2030 xã nào giảm tiếp cận? | `access_2030_change.csv`, `access_2030_total.csv` | `thay_doi_pp`, `giam_tiep_can` |
 | Nên đặt thêm điểm ở đâu? | `greedy_sites.csv`, `greedy_before_after.csv`, `diem_de_xuat_giao_thong.csv`, hình `h7` | `thu_tu`, `dan_moi_duoc_phu` |
+| Nên tăng hay giảm số trạm? | `greedy_before_after.csv` (thêm điểm) và `ung_vien_gop_tram.csv` (rà soát gộp) | `ty_le_3km` theo `K`; `trang_thai_nq1251` |
+| Trạm có đặt đúng chỗ không? | `qa_summary.csv` nhóm "Sai toạ độ"; `data/interim/stations_56.csv` | `kc_tram_tam_dan_cu_m`, `kc_ngoai_ranh_gioi_m` |
+| Trạm nào gánh quá nhiều hay quá ít dân? | `tram_vung_phuc_vu_spark.csv` | `dan_phuc_vu`, `dan60_phuc_vu` |
+| Quanh mỗi TYT có bao nhiêu CSKCB, cấp nào, gần nhất bao xa? | `tyt_cskcb.csv`, `tyt_cskcb_theo_nhom.csv` | `kc_cskcb_gan_nhat_m`, `cskcb_2km`, `cap_*_2km` |
+| Danh sách 30 CSKCB đã làm sạch | `cskcb_danang.csv` | `tuyen`, `hang`, `cap` |
+| Quy tắc gộp trạm của nhóm khớp NQ 1251 tới đâu? | `doi_soat_nq1251_quy_tac.csv`, `doi_soat_nq1251_theo_xa.csv` | `dung_TP`, `bao_dong_gia_FP`, `bo_sot_FN`; `phan_loai_nq1251` |
+| TYT phải làm những gói dịch vụ nào, cơ sở khác thay được không? | `data/reference/tt30_2024_goi_dich_vu.csv` | `benh_vien_tuyen_tren_thay_the` (đánh giá của nhóm) |
+| 8 đơn vị gộp theo NQ 1251 | `data/reference/nq1251_sap_xep.csv` | `cac_xa_nhap_vao`, `so_xa_nhap` |
 | Lưới dân cư từng ô 100 m | `dan_cu_luoi_100m.csv`, `tiep_can_luoi_100m.csv` | giải thích cột ở `giai_thich_csv_luoi.csv` |
 | Trường này nghĩa là gì, nguồn nào, nhạy cảm không? | `tu_dien_du_lieu.csv` | – |
 
@@ -58,11 +69,12 @@ Sau mỗi lần chạy, đọc ba bảng này trước khi dùng bất kỳ con 
 | `qa_summary.csv` | `dat` | Phần lớn `ĐẠT`; một số `CẦN XEM` đã biết (xem dưới) | Xuất hiện `CẦN XEM` mới |
 | `doi_soat_spark.csv` | `ket_qua` | Mọi dòng `ĐẠT` | Có dòng `LỆCH` |
 | `spark_so_dong_theo_nguon.csv` | `so_dong_cach_ly` | Pixel dân số và lưới 1 km có tỷ lệ cách ly cao vì NoData và vùng ngoài 56 xã | `stations_raw` có ít hơn 56 dòng hợp lệ |
+| log mới nhất `logs/15_tuyen_tren_*.log` | dòng `Doi chieu NQ 1251` | `... code va file tham chieu KHOP`; `CSKCB doc duoc: 30 co so` | Có chữ `LECH` (danh sách xã gộp trong code khác `nq1251_sap_xep.csv`) hoặc `CAN XEM` (CSKCB không đọc được toạ độ) |
 
 Các mục `CẦN XEM` đang tồn tại và đã được ghi nhận là hạn chế của dữ liệu:
 
-- 8 trạm nằm ngoài ranh giới xã của chính nó, xa nhất 104 m (cột `kc_ngoai_ranh_gioi_m` trong `data/interim/stations_56.csv`; ranh giới GADM thô).
-- Trạm cách tâm dân cư của xã trên 3 km (Hòa Bắc, Hòa Ninh).
+- 8 trạm nằm ngoài ranh giới xã của chính nó, xa nhất 104 m (cột `kc_ngoai_ranh_gioi_m` trong `data/interim/stations_56.csv`). Mức lệch này nhiều khả năng do ranh giới GADM thô; không dùng làm bằng chứng trạm đặt sai chỗ.
+- Trạm cách tâm dân cư của xã trên 3 km: chỉ còn Trạm Y tế xã Hòa Ninh (3.150 m). Đây là bằng chứng chính cho nhận định "đặt sai chỗ".
 - Phường có ranh giới OSM khác GADM (OSM đã vẽ theo bản đồ sau sáp nhập).
 - WorldPop lệch khoảng 21% so với số liệu NQ 1251.
 
@@ -81,6 +93,20 @@ Bản đầy đủ là Parquet ở `data/spark/quarantine/dong_loi` hoặc `/mis
    cd .. && bash scripts/run_spark.sh
    ```
 3. Đọc `outputs/tables/qa_stations.csv` và `qa_stations_nhap_tay_bi_loai.csv`. Toạ độ nằm ngoài Đà Nẵng cũ bị loại, trạm đó quay về vị trí ước lượng.
+
+### Cập nhật danh sách cơ sở khám chữa bệnh
+
+1. Sửa `data/raw/danh-sach-cskcb.xlsx` (sheet đầu tiên). Bước 15 đọc các cột theo tên: `Tên`, `Mã`, `Tuyến CMKT`, `Hạng bệnh viện`,
+   `Cấp CMKT`, `Điểm`, `Địa chỉ`, `tọa độ`. Cột `tọa độ` ghi dạng `vĩ độ, kinh độ`; dòng không đọc được toạ độ bị loại và log ghi `CAN XEM`.
+   Cột `Cấp CMKT` dùng đúng ba giá trị `Cấp ban đầu`, `Cấp cơ bản`, `Cấp chuyên sâu`.
+2. Chạy lại riêng bước 15: `.venv/bin/python scripts/15_tuyen_tren.py` (không cần chạy lại Spark).
+3. Ghi lại thay đổi vào giả định A17 trong [CLAUDE.md](../CLAUDE.md) (số cơ sở, nguồn, ngày cập nhật).
+
+### Đổi ngưỡng rà soát gộp trạm (A15)
+
+Hai hằng số ở đầu `scripts/15_tuyen_tren.py`: `A15_BK` (bán kính, mặc định 2000 m) và `A15_NGUONG` (số CSKCB tối thiểu, mặc định 6).
+Bảng `doi_soat_nq1251_quy_tac.csv` luôn tính kèm 4 quy tắc khác để so. Đổi ngưỡng để "khớp NQ 1251 hơn" làm p-value càng lạc quan;
+mọi thay đổi phải ghi vào A15.
 
 ### Đổi ngưỡng khoảng cách, năm phân tích, tốc độ
 
@@ -115,7 +141,7 @@ Các tham số phân tích nằm trong `common.py` (bảng ở trên). Các bi�
 |---|---|---|---|
 | `PAR` | `01_download.sh` | `4` | Số luồng tải song song |
 | `FULL` | `01_download.sh` | `0` | `FULL=1` tải thêm 7 file nhóm tuổi 60+ độ phân giải 100 m năm 2024; hiện chưa có script nào đọc các file này |
-| `PYTHON` | `run_all.sh` | `python3` | Trình thông dịch Python dùng để chạy các bước |
+| `PYTHON` | `run_all.sh`, `run_spark.sh` | `python3` (run_all), `.venv/bin/python` (run_spark) | Trình thông dịch Python dùng để chạy các bước pandas và bước 15 |
 | `SPARK_IMAGE` | `run_spark.sh` | `jupyter/pyspark-notebook:latest` | Image Docker chạy bước 11 |
 | `HDFS_DIR`, `NN`, `RM` | `11b_hdfs_yarn_cli.sh` | `/mis5007`, `mis5007-namenode`, `mis5007-resourcemanager` | Thư mục gốc trên HDFS, tên container NameNode và ResourceManager |
 | `HDFS_URI` | `11_spark_pipeline.py` | không đặt | Đặt thì đọc và ghi các vùng trên HDFS; không đặt thì dùng `data/landing/` và `data/spark/` |
@@ -141,6 +167,7 @@ bash scripts/11b_hdfs_yarn_cli.sh truoc                   # tạo các vùng tr�
 docker exec -w /home/jovyan/work/mis5007_tram_y_te -e HDFS_URI=hdfs://namenode:9000/mis5007 \
   mis5007-spark-notebook python scripts/11_spark_pipeline.py
 bash scripts/11b_hdfs_yarn_cli.sh sau                     # liệt kê kết quả trên HDFS, fsck, trạng thái YARN
+.venv/bin/python scripts/15_tuyen_tren.py                 # bước 15, chạy trên máy sau khi Spark xong
 ```
 
 Hoặc chạy bước 11 trong JupyterLab: mở http://localhost:8888, nhập mật khẩu ghi ở dòng `JUPYTER_TOKEN` trong `docker/docker-compose.yml`,
@@ -182,6 +209,8 @@ Spark chạy `local[*]` trong container JupyterLab và đọc/ghi HDFS. YARN ch�
 | `hdfs dfsadmin -report` có "Under replicated blocks" | File ghi với hệ số nhân bản 3 trên cụm 1 DataNode | `bash scripts/11b_hdfs_yarn_cli.sh sau` (tự đưa về 1) |
 | `Name node is in safe mode` | NameNode vừa khởi động | Chờ khoảng một phút; `11b_hdfs_yarn_cli.sh truoc` tự chờ |
 | Bước 11 trên HDFS báo `Path does not exist: .../landing/...` | Chưa đưa CSV thô lên HDFS | `bash scripts/11b_hdfs_yarn_cli.sh truoc` |
+| Bước 15 báo `No such file ... tram_vung_phuc_vu_spark.csv` | Chưa chạy Spark | Chạy `bash scripts/run_spark.sh` (tự chạy bước 15) |
+| Log bước 15 có `LECH: danh sach xa gop trong code vs file tham chieu` | `data/reference/nq1251_sap_xep.csv` và danh sách `NQ1251_GROUPS` trong `15_tuyen_tren.py` khác nhau | Sửa cho khớp; danh sách trong code cũng phải khớp `07_diagnose.py` |
 
 Không tìm ra nguyên nhân: mở file log mới nhất của bước bị lỗi trong `logs/`.
 
@@ -191,5 +220,8 @@ Không tìm ra nguyên nhân: mở file log mới nhất của bước bị lỗ
 - WorldPop là ước tính mô hình; ghi rõ điều này cạnh mọi con số dân.
 - Mọi con số sau năm 2024 là dự báo (bước 08) hoặc số chiếu của WorldPop; ghi rõ là dự báo và kèm khoảng 80% (A9).
 - Ngưỡng 3 km là giả định của nhóm (A1); luôn kèm kết quả 2 km, 5 km, theo đường đi và theo 15 phút.
+- `ung_vien_gop_tram.csv` là danh sách rà soát, không phải đề nghị đóng trạm; khi dẫn mức khớp với NQ 1251 phải nói rõ ngưỡng được chọn sau khi biết kết quả (A15).
+- Phân loại "cơ sở khác thay thế được" của 15 gói dịch vụ là đánh giá của nhóm, không có trong Thông tư 30/2024/TT-BYT; dẫn bản chính thức của thông tư, không dẫn bản thảo PDF trong `data/reference/` (A16).
+- Số đếm CSKCB là sàn dưới vì danh sách không có phòng khám tư nhỏ (A17).
 - Ghi giấy phép: WorldPop CC BY 4.0; OpenStreetMap ODbL 1.0 ("© OpenStreetMap contributors"); GADM chỉ dùng học thuật, không phân phối lại; AWS Terrain Tiles ghi nguồn.
 - Kết quả trong `_luu_tru_pham_vi_2015_2030/` thuộc phạm vi cũ (năm cơ sở 2025, có dự báo); không dùng.

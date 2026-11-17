@@ -20,3 +20,6 @@ logs/
 
 # Ket qua pham vi cu (nam co so 2025, co du bao 2030) - khong dung cho bao cao
 _luu_tru_pham_vi_2015_2030/
+
+# Ket qua cua cac phien ban script cu (khong dung cho bao cao)
+_luu_tru_ban_cu/
