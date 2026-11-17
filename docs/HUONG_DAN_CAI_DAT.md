@@ -51,7 +51,22 @@ In ra ba dòng phiên bản, không có dòng `command not found`. Bản đã th
 
 ## 3. Lấy thư mục dự án
 
-Dự án chưa nằm trên kho mã nguồn nào; nhận thư mục `mis5007_tram_y_te` từ người trong nhóm dưới dạng file nén. Có hai kiểu gói:
+Mã nguồn nằm ở https://github.com/tranhuy99dlk/tyt-danang. Có hai cách lấy thư mục dự án.
+
+**Cách 1 – clone từ GitHub**
+
+```bash
+git clone https://github.com/tranhuy99dlk/tyt-danang.git mis5007_tram_y_te
+cd mis5007_tram_y_te
+```
+
+Kho có sẵn code, tài liệu, ba file nhóm tự chuẩn bị, dữ liệu OpenStreetMap nhóm đã tải và kết quả mẫu.
+Kho không chứa WorldPop, độ cao và GADM; mục 6 sẽ tải về (khoảng 0,9 GB). Vì dữ liệu OpenStreetMap đi kèm,
+các chỉ số theo đường đi ra đúng số của nhóm, giống gói A bên dưới.
+
+**Cách 2 – nhận file nén từ người trong nhóm**
+
+Dùng khi không vào được GitHub. Có hai kiểu gói:
 
 | Gói | Chứa | Dung lượng | Khi nào dùng |
 |---|---|---|---|
@@ -78,7 +93,7 @@ Giải nén, rồi mở Terminal tại thư mục dự án:
 cd đường/dẫn/tới/mis5007_tram_y_te
 ```
 
-Ba file sau **không tải được bằng script**, bắt buộc phải có sẵn trong gói:
+Ba file sau **không tải được bằng script**; chúng có sẵn trong kho GitHub và bắt buộc phải có trong gói nén:
 
 | File | Nội dung |
 |---|---|
@@ -124,6 +139,7 @@ bash scripts/01_download.sh
 
 Script tải 105 file (WorldPop, độ cao, GADM) qua 4 luồng song song, rồi 4 truy vấn OpenStreetMap, tổng khoảng 0,9 GB.
 Với gói A, gần như mọi file đã có nên script chỉ tải GADM.
+Với bản clone từ GitHub, script tải đủ 105 file và bỏ qua 4 truy vấn OpenStreetMap (in `SKIP`) vì dữ liệu này đã có trong kho.
 
 Thấy gì là đúng: gần cuối có dòng `OK=<số file vừa tải>  FAIL=0`. Có `FAIL` thì chạy lại đúng lệnh đó; file đã tải được bỏ qua.
 Mỗi file tải về được ghi URL, SHA-256 và giấy phép vào `data/manifest_raw.csv`.
@@ -183,7 +199,7 @@ Dùng xong: `docker compose -f docker/docker-compose.yml stop`.
 
 ## Kiểm tra cuối: so với kết quả tham chiếu
 
-Mở `outputs/tables/kpi_tong_hop_spark.csv`. Với gói A, các giá trị phải trùng bảng dưới (lần chạy ngày 17/11/2026, năm hiện trạng 2024).
+Mở `outputs/tables/kpi_tong_hop_spark.csv`. Với gói A hoặc bản clone từ GitHub, các giá trị phải trùng bảng dưới (lần chạy ngày 17/11/2026, năm hiện trạng 2024).
 Với gói B, ba dòng đầu phải trùng; các dòng theo đường đi có thể lệch nhẹ.
 
 | Chỉ số | Giá trị tham chiếu |
@@ -211,7 +227,7 @@ Phần này **chưa được chạy thử**; ghi lại để người làm biế
 | `00_check.sh` báo Docker chưa chạy | Mở ứng dụng Docker Desktop, chờ khởi động xong |
 | `01_download.sh` có dòng `FAIL` | Chạy lại lệnh; thường do mạng hoặc máy chủ OpenStreetMap bận |
 | `run_all.sh` báo `ModuleNotFoundError` | Quên `source .venv/bin/activate` |
-| `00_check.sh` báo `[THIEU] data/raw/location-tyt.xlsx` hoặc file trong `data/reference/` | Gói nhận được thiếu file ở mục 3; xin lại từ người gửi |
+| `00_check.sh` báo `[THIEU] data/raw/location-tyt.xlsx` hoặc file trong `data/reference/` | Gói nhận được thiếu file ở mục 3; xin lại từ người gửi, hoặc clone lại từ GitHub |
 | `run_spark.sh` in một dòng rồi im lặng lâu ở lần đầu | Docker đang tải image; mở Terminal khác chạy `docker pull jupyter/pyspark-notebook:latest` để xem tiến độ |
 | `port is already allocated` ở mục 9 | Máy đang dùng cổng đó; đổi số bên trái dấu `:` trong `docker/docker-compose.yml` |
 

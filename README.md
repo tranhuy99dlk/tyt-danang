@@ -15,10 +15,11 @@ tính lại toàn bộ KPI và đối soát với bản pandas. Spark chạy đ�
 
 ## Bắt đầu nhanh
 
-Cần macOS, Docker Desktop đang chạy, `uv`, khoảng 20 GB ổ đĩa trống và thư mục dự án có sẵn ba file nhóm tự chuẩn bị
-(xem [hướng dẫn cài đặt](docs/HUONG_DAN_CAI_DAT.md#3-lấy-thư-mục-dự-án)).
+Cần macOS, Docker Desktop đang chạy, `uv` và khoảng 20 GB ổ đĩa trống. Kho GitHub đã kèm ba file nhóm tự chuẩn bị;
+cách lấy dự án khi không dùng GitHub: [hướng dẫn cài đặt](docs/HUONG_DAN_CAI_DAT.md#3-lấy-thư-mục-dự-án).
 
 ```bash
+git clone https://github.com/tranhuy99dlk/tyt-danang.git mis5007_tram_y_te && cd mis5007_tram_y_te
 bash scripts/00_check.sh                                              # máy đủ điều kiện chưa
 uv venv --python 3.11 .venv && uv pip install --python .venv/bin/python -r requirements.lock.txt
 bash scripts/01_download.sh                                           # tải khoảng 0,9 GB dữ liệu nguồn mở
