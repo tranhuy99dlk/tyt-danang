@@ -1,0 +1,1838 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-11-15T22:52:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 729405654,
+  "lat": 16.0681938,
+  "lon": 108.2013645,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Cong Ty CP Benh Vien Da Khoa Hoa Xuan"
+  }
+},
+{
+  "type": "node",
+  "id": 729405656,
+  "lat": 16.0541960,
+  "lon": 108.2190335,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Benh Vien Y Hoc Co Truyen Tp.Da Nang"
+  }
+},
+{
+  "type": "node",
+  "id": 729405657,
+  "lat": 16.0571470,
+  "lon": 108.2179094,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Benh Vien Phu Nu Tp.Da Nang"
+  }
+},
+{
+  "type": "node",
+  "id": 729405659,
+  "lat": 16.0536495,
+  "lon": 108.2089108,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Trung Tam Bac Si Gia Dinh Da Nang"
+  }
+},
+{
+  "type": "node",
+  "id": 729405662,
+  "lat": 16.0594010,
+  "lon": 108.2098753,
+  "tags": {
+    "addr:housenumber": "291",
+    "addr:postcode": "550000",
+    "addr:street": "Nguyễn Văn Linh",
+    "amenity": "hospital",
+    "check_date": "2026-03-05",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Hoàn Mỹ Đà Nẵng",
+    "name:en": "Hoan My Da Nang Hospital",
+    "name:vi": "Bệnh viện Hoàn Mỹ Đà Nẵng",
+    "opening_hours": "Mo-Sa 07:00-11:30, 12:30-16:00; Su 07:00-11:30",
+    "website": "https://hoanmy.com/danang/"
+  }
+},
+{
+  "type": "node",
+  "id": 729405667,
+  "lat": 16.0713797,
+  "lon": 108.2001187,
+  "tags": {
+    "addr:housenumber": "376",
+    "addr:street": "Đường Trần Cao Vân",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Benh Vien Da Khoa Binh Dan"
+  }
+},
+{
+  "type": "node",
+  "id": 729405671,
+  "lat": 16.0686754,
+  "lon": 108.2189349,
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Benh Vien Tu Binh Dan"
+  }
+},
+{
+  "type": "node",
+  "id": 729405675,
+  "lat": 16.0824806,
+  "lon": 108.2205999,
+  "tags": {
+    "amenity": "hospital",
+    "name": "Trung Tam Phuc Hoi Co Nhi Suy Dinh Duong Da Nang"
+  }
+},
+{
+  "type": "node",
+  "id": 1433192072,
+  "lat": 16.2367913,
+  "lon": 108.0786590,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "no",
+    "name": "Lang Co Hospital"
+  }
+},
+{
+  "type": "node",
+  "id": 2147654917,
+  "lat": 16.1016726,
+  "lon": 108.2486987,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4209757693,
+  "lat": 16.0477544,
+  "lon": 108.2443796,
+  "tags": {
+    "amenity": "doctors"
+  }
+},
+{
+  "type": "node",
+  "id": 4470678589,
+  "lat": 16.0576736,
+  "lon": 108.2097865,
+  "tags": {
+    "addr:housenumber": "46 C",
+    "addr:street": "Phạm Văn Nghị",
+    "amenity": "doctors",
+    "email": "dongbshc@gmail.com",
+    "healthcare": "doctor",
+    "internet_access": "wlan",
+    "name": "Phòng khám Nội-nhi Bs Đông_Bs Hóa",
+    "name:vi": "Phòng khám Nội-nhi Bs Đông_Bs Hóa",
+    "opening_hours": "24/7",
+    "phone": "05113616686"
+  }
+},
+{
+  "type": "node",
+  "id": 4597655189,
+  "lat": 16.0789018,
+  "lon": 108.2216548,
+  "tags": {
+    "amenity": "dentist",
+    "healthcare": "dentist",
+    "name:en": "Serenity"
+  }
+},
+{
+  "type": "node",
+  "id": 4617969089,
+  "lat": 16.0432946,
+  "lon": 108.2216654,
+  "tags": {
+    "addr:housenumber": "269",
+    "addr:street": "Đường Núi Thành",
+    "amenity": "dentist",
+    "healthcare": "dentist",
+    "internet_access": "wlan",
+    "name": "East Meets West Dental",
+    "name:en": "East Meets West Dental",
+    "opening_hours": "Mo-Su 07:30-12:00, 13:30-19:00",
+    "website": "https://www.eastmeetswestdental.org/"
+  }
+},
+{
+  "type": "node",
+  "id": 4732061922,
+  "lat": 15.8843233,
+  "lon": 108.3280358,
+  "tags": {
+    "amenity": "hospital",
+    "name": "Pacific Hospital",
+    "name:vi": "Pacific Hospital"
+  }
+},
+{
+  "type": "node",
+  "id": 4739422926,
+  "lat": 16.0852632,
+  "lon": 108.2195653,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 6320067585,
+  "lat": 16.0606133,
+  "lon": 108.2151326,
+  "tags": {
+    "amenity": "doctors",
+    "healthcare": "doctor",
+    "name": "Family Medical Practice Danang"
+  }
+},
+{
+  "type": "node",
+  "id": 6337147975,
+  "lat": 15.8816837,
+  "lon": 108.3279118,
+  "tags": {
+    "amenity": "dentist",
+    "check_date": "2026-05-28",
+    "healthcare": "dentist",
+    "name": "Dental Clinic"
+  }
+},
+{
+  "type": "node",
+  "id": 6353650685,
+  "lat": 16.0703418,
+  "lon": 108.2133699,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 6513665107,
+  "lat": 16.0745239,
+  "lon": 108.2181276,
+  "tags": {
+    "addr:housenumber": "104",
+    "addr:street": "Đường Quang Trung",
+    "amenity": "dentist",
+    "building": "yes",
+    "healthcare": "dentist"
+  }
+},
+{
+  "type": "node",
+  "id": 6524320299,
+  "lat": 16.0311651,
+  "lon": 108.2253809,
+  "tags": {
+    "addr:housenumber": "29",
+    "addr:street": "Đường Trương Chí Cương",
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy",
+    "name": "Nhà thuốc Hà Phương"
+  }
+},
+{
+  "type": "node",
+  "id": 6525667439,
+  "lat": 16.0714220,
+  "lon": 108.2039152,
+  "tags": {
+    "addr:housenumber": "133",
+    "addr:street": "Đường Trần Cao Vân",
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 6528662176,
+  "lat": 16.0506945,
+  "lon": 108.1794935,
+  "tags": {
+    "addr:housenumber": "09",
+    "addr:street": "Đường Nguyễn Đình Tứ",
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy",
+    "name": "SKV Pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 6528665334,
+  "lat": 16.0501521,
+  "lon": 108.1805500,
+  "tags": {
+    "addr:housenumber": "281",
+    "addr:street": "Đường Tôn Đản",
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 6539587371,
+  "lat": 16.0619222,
+  "lon": 108.2139467,
+  "tags": {
+    "addr:city": "Da Nang",
+    "addr:district": "Hai Chau",
+    "addr:housenumber": "129",
+    "addr:postcode": "550000",
+    "addr:street": "Đường Nguyễn Hoàng",
+    "addr:subdistrict": "Nam Duong",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "healthcare:speciality": "dentist;dental_oral_maxillo_facial_surgery;dentistry;orthodontics",
+    "name": "Dana Dental - Nha Khoa Đà Nẵng",
+    "operator": "Công ty TNHH Nha Khoa Dana",
+    "operator:type": "business"
+  }
+},
+{
+  "type": "node",
+  "id": 6539660693,
+  "lat": 16.0611251,
+  "lon": 108.2136513,
+  "tags": {
+    "addr:housenumber": "172",
+    "addr:street": "Đường Nguyễn Hoàng",
+    "amenity": "dentist",
+    "healthcare": "dentist",
+    "name": "HD Dental"
+  }
+},
+{
+  "type": "node",
+  "id": 6611784187,
+  "lat": 16.0327557,
+  "lon": 108.2137324,
+  "tags": {
+    "amenity": "doctors",
+    "healthcare": "doctor"
+  }
+},
+{
+  "type": "node",
+  "id": 7043222499,
+  "lat": 16.0556207,
+  "lon": 108.2220154,
+  "tags": {
+    "addr:city": "da nanag",
+    "addr:district": "hai chau",
+    "addr:housenumber": "116",
+    "addr:street": "2 thang 9",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Phòng khám ACC Đà Nẵng"
+  }
+},
+{
+  "type": "node",
+  "id": 7095259620,
+  "lat": 16.0680604,
+  "lon": 108.2248061,
+  "tags": {
+    "amenity": "pharmacy",
+    "dispensing": "yes",
+    "healthcare": "pharmacy",
+    "name": "Diệp Tô Đường"
+  }
+},
+{
+  "type": "node",
+  "id": 7103226686,
+  "lat": 16.0689400,
+  "lon": 108.2238427,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy",
+    "name": "Dapharco Blu +"
+  }
+},
+{
+  "type": "node",
+  "id": 7541325568,
+  "lat": 16.0765970,
+  "lon": 108.2158614,
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Hải Châu",
+    "addr:housenumber": "276 - 278",
+    "addr:postcode": "550000",
+    "addr:province": "Đà Nẵng",
+    "addr:street": "Đường Đống Đa",
+    "addr:subdistrict": "Thanh Bình",
+    "amenity": "hospital",
+    "email": "thiennhanhospital@gmail.com",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "healthcare:speciality": "chiropractic;general;gynaecology;ophthalmology;paediatrics;internal;orthopaedics;dentist;psychiatry;dermatology;biology;otolaryngology;osteopathy;radiology;orthodontics;urology;surgery;cardiology;plastic_surgery;physiotherapy;neurology;acupuncture",
+    "name": "Thien Nhan Hospital",
+    "operator": "Công Ty Cổ Phần Bệnh Viện Thiện Nhân",
+    "operator:type": "business",
+    "phone": "+84363568988",
+    "website": "https://thiennhanhospital.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 8166987975,
+  "lat": 16.0691553,
+  "lon": 108.1837520,
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:province": "Đà Nẵng",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Huong Dat Dental Clinic"
+  }
+},
+{
+  "type": "node",
+  "id": 10617137156,
+  "lat": 15.8839804,
+  "lon": 108.3256205,
+  "tags": {
+    "addr:city": "Hội An",
+    "addr:country": "VN",
+    "addr:housenumber": "503",
+    "addr:street": "Hai Bà Trưng",
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "healthcare:speciality": "general",
+    "name": "Hoi An Medical Service",
+    "name:en": "Hoi An Medical Service",
+    "name:vi": "Phòng Khám Bác Sĩ Trần Quang Dũng",
+    "opening_hours": "07:00-11:30,14:30-18:30",
+    "operator": "Trần Quang Dũng",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 10898889115,
+  "lat": 15.9732367,
+  "lon": 108.2615788,
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "Lô 14, Khu B2-40",
+    "addr:province": "Phường Hòa Hải",
+    "addr:subdistrict": "Khu đô thị FPT City",
+    "amenity": "doctors",
+    "healthcare": "doctor",
+    "healthcare:speciality": "dermatology;hepatology",
+    "name": "Phòng khám Da liễu, Laser Thẩm mỹ - Bs.CKI Phạm Nguyễn Diệu Ly",
+    "operator": "Bs.CKI Phạm Nguyễn Diệu Ly"
+  }
+},
+{
+  "type": "node",
+  "id": 11056160162,
+  "lat": 16.0718374,
+  "lon": 108.1866077,
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Thanh Khê",
+    "addr:housenumber": "734",
+    "addr:postcode": "550000",
+    "addr:province": "Đà Nẵng",
+    "addr:street": "Trần Cao Vân",
+    "addr:subdistrict": "Xuân Hà",
+    "amenity": "dentist",
+    "healthcare": "dentist",
+    "healthcare:speciality": "dentist",
+    "name": "Nha Khoa Không Gian",
+    "opening_hours": "Mo-Su 08:00-18:30"
+  }
+},
+{
+  "type": "node",
+  "id": 11648863669,
+  "lat": 15.8936977,
+  "lon": 108.3170881,
+  "tags": {
+    "healthcare": "alternative",
+    "name:en": "Tam An Oriental Medecine Clinic"
+  }
+},
+{
+  "type": "node",
+  "id": 11891349408,
+  "lat": 16.0574648,
+  "lon": 108.1804160,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Trạm y tế Phường An Khê",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 11891349429,
+  "lat": 16.0732168,
+  "lon": 108.1105526,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Đối diện Trạm y tế Xã Hòa Sơn",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 11891349450,
+  "lat": 16.0730803,
+  "lon": 108.1106193,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "Trạm y tế Xã Hòa Sơn",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 11894187996,
+  "lat": 15.8840209,
+  "lon": 108.3480301,
+  "tags": {
+    "bus": "yes",
+    "highway": "bus_stop",
+    "name": "356 Cửa Đại - Trạm y tế Phương Cẩm Châu",
+    "public_transport": "platform"
+  }
+},
+{
+  "type": "node",
+  "id": 12167363607,
+  "lat": 16.0559032,
+  "lon": 108.2455391,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2024-09-11",
+    "healthcare": "pharmacy",
+    "name": "Nha Thuoc"
+  }
+},
+{
+  "type": "node",
+  "id": 12167891414,
+  "lat": 16.0627328,
+  "lon": 108.2453811,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-06",
+    "healthcare": "pharmacy",
+    "name": "Blue Pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 12169339368,
+  "lat": 16.0544287,
+  "lon": 108.2402866,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2024-09-11",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 12169743818,
+  "lat": 16.0540360,
+  "lon": 108.2444176,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-16",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 12169743822,
+  "lat": 16.0505732,
+  "lon": 108.2455337,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2024-09-11",
+    "healthcare": "pharmacy",
+    "name": "Nha Thuoc Pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 12169743831,
+  "lat": 16.0521039,
+  "lon": 108.2450827,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2024-09-11",
+    "healthcare": "pharmacy",
+    "name": "Nhà Thuốc My An Pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 12169835037,
+  "lat": 16.0637974,
+  "lon": 108.2417169,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2024-09-11",
+    "healthcare": "pharmacy",
+    "name": "Nha Thuoc"
+  }
+},
+{
+  "type": "node",
+  "id": 12169835046,
+  "lat": 16.0665148,
+  "lon": 108.2362682,
+  "tags": {
+    "amenity": "dentist",
+    "check_date": "2024-09-11",
+    "healthcare": "dentist",
+    "name": "Nha Khoa 199"
+  }
+},
+{
+  "type": "node",
+  "id": 12169835047,
+  "lat": 16.0667020,
+  "lon": 108.2362229,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-13",
+    "healthcare": "pharmacy",
+    "name": "Pharmacity"
+  }
+},
+{
+  "type": "node",
+  "id": 12169835052,
+  "lat": 16.0651225,
+  "lon": 108.2407401,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2024-09-11",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 12169835053,
+  "lat": 16.0650823,
+  "lon": 108.2407953,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-16",
+    "healthcare": "pharmacy",
+    "name": "Ky Nguyen"
+  }
+},
+{
+  "type": "node",
+  "id": 12174890757,
+  "lat": 16.0540297,
+  "lon": 108.2381256,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2024-09-13",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 12174890758,
+  "lat": 16.0539934,
+  "lon": 108.2379587,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2024-09-13",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 12830368143,
+  "lat": 16.0536070,
+  "lon": 108.2466497,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-12",
+    "healthcare": "pharmacy",
+    "name": "Dapharco BLU"
+  }
+},
+{
+  "type": "node",
+  "id": 12833199625,
+  "lat": 16.0668238,
+  "lon": 108.2352323,
+  "tags": {
+    "amenity": "dentist",
+    "check_date": "2025-05-13",
+    "healthcare": "dentist",
+    "name": "Ann Dentist"
+  }
+},
+{
+  "type": "node",
+  "id": 12837179238,
+  "lat": 16.0528921,
+  "lon": 108.2463105,
+  "tags": {
+    "amenity": "pharmacy",
+    "brand": "Pharmacity",
+    "brand:wikidata": "Q115324413",
+    "check_date": "2025-05-14",
+    "healthcare": "pharmacy",
+    "name": "Pharmacity"
+  }
+},
+{
+  "type": "node",
+  "id": 12839774217,
+  "lat": 16.0517524,
+  "lon": 108.2458174,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-15",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 12839774219,
+  "lat": 16.0516489,
+  "lon": 108.2454496,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-15",
+    "healthcare": "pharmacy",
+    "name": "Hello Pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 12841142110,
+  "lat": 16.0511237,
+  "lon": 108.2455716,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-16",
+    "healthcare": "pharmacy",
+    "name": "Kati Pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 12841766768,
+  "lat": 16.0527159,
+  "lon": 108.2448323,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-16",
+    "healthcare": "pharmacy",
+    "name": "CVC"
+  }
+},
+{
+  "type": "node",
+  "id": 12843905561,
+  "lat": 16.0497468,
+  "lon": 108.2472515,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-17",
+    "healthcare": "pharmacy",
+    "name": "Uni"
+  }
+},
+{
+  "type": "node",
+  "id": 12846565770,
+  "lat": 16.0482025,
+  "lon": 108.2416306,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-19",
+    "healthcare": "pharmacy",
+    "name": "Mona"
+  }
+},
+{
+  "type": "node",
+  "id": 12846672301,
+  "lat": 16.0475874,
+  "lon": 108.2414065,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-18",
+    "healthcare": "pharmacy",
+    "name": "Pharmacity"
+  }
+},
+{
+  "type": "node",
+  "id": 12846758501,
+  "lat": 16.0475873,
+  "lon": 108.2414064,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-18",
+    "healthcare": "pharmacy",
+    "name": "Pharmacity"
+  }
+},
+{
+  "type": "node",
+  "id": 12846758601,
+  "lat": 16.0473380,
+  "lon": 108.2443406,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-18",
+    "healthcare": "pharmacy",
+    "name": "ABC pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 12850675076,
+  "lat": 16.0475061,
+  "lon": 108.2412586,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-20",
+    "healthcare": "pharmacy",
+    "name": "Hong Quang"
+  }
+},
+{
+  "type": "node",
+  "id": 12850675089,
+  "lat": 16.0486067,
+  "lon": 108.2444395,
+  "tags": {
+    "amenity": "doctors",
+    "check_date": "2025-05-20",
+    "healthcare": "doctor"
+  }
+},
+{
+  "type": "node",
+  "id": 12853140360,
+  "lat": 16.0521266,
+  "lon": 108.2455258,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-21",
+    "healthcare": "pharmacy",
+    "name": "Soleil"
+  }
+},
+{
+  "type": "node",
+  "id": 12856967337,
+  "lat": 16.0630337,
+  "lon": 108.2342239,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-23",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 12857894337,
+  "lat": 16.0393510,
+  "lon": 108.2459329,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-23",
+    "healthcare": "pharmacy",
+    "name": "Pharmacity"
+  }
+},
+{
+  "type": "node",
+  "id": 12866042124,
+  "lat": 16.0540107,
+  "lon": 108.2388172,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-05-27",
+    "healthcare": "pharmacy",
+    "name": "Dong Giang"
+  }
+},
+{
+  "type": "node",
+  "id": 13027946001,
+  "lat": 16.0311313,
+  "lon": 108.2249476,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 13027946201,
+  "lat": 16.0309819,
+  "lon": 108.2244918,
+  "tags": {
+    "amenity": "dentist",
+    "healthcare": "dentist",
+    "name": "Phong rang huy dentist"
+  }
+},
+{
+  "type": "node",
+  "id": 13074118501,
+  "lat": 16.0388096,
+  "lon": 108.2219039,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy",
+    "name": "Family pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 13075369901,
+  "lat": 16.0374489,
+  "lon": 108.2222749,
+  "tags": {
+    "addr:housenumber": "435",
+    "addr:street": "Đường Núi Thành",
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy",
+    "name": "An Khang",
+    "opening_hours": "Mo-Su 07:00-22:00"
+  }
+},
+{
+  "type": "node",
+  "id": 13287246424,
+  "lat": 16.0642510,
+  "lon": 108.2300897,
+  "tags": {
+    "amenity": "dentist",
+    "check_date": "2025-11-07",
+    "healthcare": "dentist",
+    "name": "Dentium"
+  }
+},
+{
+  "type": "node",
+  "id": 13287356619,
+  "lat": 16.0655230,
+  "lon": 108.2298616,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-11-07",
+    "healthcare": "pharmacy",
+    "name": "Busan Pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 13288569370,
+  "lat": 16.0617174,
+  "lon": 108.2195610,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2025-11-08",
+    "healthcare": "pharmacy",
+    "name": "Nhà Thuốc Trường Sinh"
+  }
+},
+{
+  "type": "node",
+  "id": 13415734802,
+  "lat": 16.0737882,
+  "lon": 108.2427896,
+  "tags": {
+    "amenity": "pharmacy",
+    "brand": "Pharmacity",
+    "brand:wikidata": "Q115324413",
+    "healthcare": "pharmacy",
+    "name": "Pharmacity"
+  }
+},
+{
+  "type": "node",
+  "id": 13415832803,
+  "lat": 16.0716300,
+  "lon": 108.2410550,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 13417561901,
+  "lat": 16.0692673,
+  "lon": 108.2413420,
+  "tags": {
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "Trustcare"
+  }
+},
+{
+  "type": "node",
+  "id": 13417578101,
+  "lat": 16.0657358,
+  "lon": 108.2393576,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 13417728101,
+  "lat": 16.0736413,
+  "lon": 108.2404421,
+  "tags": {
+    "addr:housenumber": "19",
+    "addr:street": "Đường Loseby",
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy",
+    "name": "Hani Pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 13526649668,
+  "lat": 16.0895648,
+  "lon": 108.2432806,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 13537125072,
+  "lat": 15.8806268,
+  "lon": 108.3424131,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 13537125080,
+  "lat": 15.8805458,
+  "lon": 108.3402848,
+  "tags": {
+    "amenity": "dentist",
+    "healthcare": "dentist"
+  }
+},
+{
+  "type": "node",
+  "id": 13591978771,
+  "lat": 16.0697071,
+  "lon": 108.2104019,
+  "tags": {
+    "amenity": "pharmacy",
+    "brand": "Guardian",
+    "brand:wikidata": "Q63371124",
+    "check_date": "2026-02-23",
+    "healthcare": "pharmacy",
+    "level": "0",
+    "name": "Guardian",
+    "opening_hours": "08:00-22:00"
+  }
+},
+{
+  "type": "node",
+  "id": 13855440608,
+  "lat": 16.0327025,
+  "lon": 108.2229117,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 13893488114,
+  "lat": 15.8884355,
+  "lon": 108.3223605,
+  "tags": {
+    "addr:housenumber": "116",
+    "addr:street": "Lê Hồng Phong",
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy",
+    "name": "Van thien"
+  }
+},
+{
+  "type": "node",
+  "id": 13893490106,
+  "lat": 15.8859288,
+  "lon": 108.3212410,
+  "tags": {
+    "addr:housenumber": "67",
+    "addr:street": "Nguyễn Tất Thành",
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy",
+    "name": "Upharma"
+  }
+},
+{
+  "type": "node",
+  "id": 13959498760,
+  "lat": 15.9563817,
+  "lon": 108.2554935,
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Điện Bàn Đông",
+    "addr:province": "Đà Nẵng",
+    "addr:street": "Đường Lê Đỉnh",
+    "addr:subdistrict": "Điện Ngọc",
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "healthcare:speciality": "otolaryngology;người_lớn;trẻ_em",
+    "name": "Phòng Khám Nội Soi Tai Mũi Họng Bác Sĩ Vy",
+    "opening_hours": "Mo-Sa 16:30-20:00, Sunday: all day",
+    "operator": "Thạc sĩ, Bác sĩ nội trú Đặng Thị Phương Vy",
+    "operator:type": "private"
+  }
+},
+{
+  "type": "node",
+  "id": 14030318801,
+  "lat": 15.9605973,
+  "lon": 108.1798534,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 14030318810,
+  "lat": 15.9645174,
+  "lon": 108.1797880,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 14030318913,
+  "lat": 15.8803365,
+  "lon": 108.1206738,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 14030319703,
+  "lat": 15.8868933,
+  "lon": 108.1411095,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 14030319901,
+  "lat": 15.8890841,
+  "lon": 108.1603082,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 14055713317,
+  "lat": 16.0812815,
+  "lon": 108.2308552,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy",
+    "name": "Phuong Anh"
+  }
+},
+{
+  "type": "node",
+  "id": 14055713318,
+  "lat": 16.0809722,
+  "lon": 108.2306810,
+  "tags": {
+    "addr:housenumber": "26",
+    "addr:street": "Đường Hoàng Việt",
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy",
+    "name": "Long Chau"
+  }
+},
+{
+  "type": "node",
+  "id": 14182792362,
+  "lat": 15.9775392,
+  "lon": 108.2545527,
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Ngũ Hành Sơn",
+    "addr:housenumber": "408",
+    "addr:street": "Đường Trần Đại Nghĩa",
+    "amenity": "pharmacy",
+    "dispensing": "yes",
+    "drive_through": "no",
+    "healthcare": "pharmacy",
+    "name": "Nhà Thuốc FPT Long Châu",
+    "opening_hours": "Mo-Su 08:00-22:00",
+    "operator": "FPT",
+    "phone": "+8418006928",
+    "website": "https://nhathuoclongchau.com.vn/"
+  }
+},
+{
+  "type": "node",
+  "id": 14254868777,
+  "lat": 16.0492029,
+  "lon": 108.2378775,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 14255055401,
+  "lat": 16.0499748,
+  "lon": 108.2473980,
+  "tags": {
+    "amenity": "pharmacy",
+    "check_date": "2026-10-06",
+    "healthcare": "pharmacy",
+    "name": "Hello pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 14257559601,
+  "lat": 16.0662375,
+  "lon": 108.2079040,
+  "tags": {
+    "amenity": "pharmacy",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "node",
+  "id": 14299396201,
+  "lat": 16.0719207,
+  "lon": 108.2153661,
+  "tags": {
+    "addr:housenumber": "95",
+    "addr:postcode": "550000",
+    "addr:street": "Đường Hải Phòng",
+    "email": "labonadanang@gmail.com",
+    "healthcare": "laboratory",
+    "name": "Công Ty Cổ Phần Xét Nghiệm Y Khoa Công Nghệ Cao Labona Đà Nẵng",
+    "name:en": "Labona Da Nang High-Tech Medical Laboratory",
+    "name:vi": "Công Ty Cổ Phần Xét Nghiệm Y Khoa Công Nghệ Cao Labona Đà Nẵng",
+    "opening_hours": "Mo-Su 06:00-19:30",
+    "phone": "0903544996"
+  }
+},
+{
+  "type": "node",
+  "id": 14340283625,
+  "lat": 16.0779635,
+  "lon": 108.2317991,
+  "tags": {
+    "addr:floor": "G",
+    "amenity": "pharmacy",
+    "check_date": "2026-11-02",
+    "healthcare": "pharmacy",
+    "level": "0",
+    "name": "Thiện Nhân"
+  }
+},
+{
+  "type": "way",
+  "id": 118673887,
+  "center": {
+    "lat": 16.0542165,
+    "lon": 108.2073008
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Quân y 17"
+  }
+},
+{
+  "type": "way",
+  "id": 258076343,
+  "center": {
+    "lat": 16.0321595,
+    "lon": 108.2229726
+  },
+  "tags": {
+    "amenity": "pharmacy",
+    "building": "yes",
+    "healthcare": "pharmacy"
+  }
+},
+{
+  "type": "way",
+  "id": 344021057,
+  "center": {
+    "lat": 16.0226987,
+    "lon": 108.2493906
+  },
+  "tags": {
+    "addr:street": "Lê Văn Hiến",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Phụ sản - Nhi Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 372316060,
+  "center": {
+    "lat": 16.0480325,
+    "lon": 108.1705537
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Phổi Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 372433638,
+  "center": {
+    "lat": 16.0729442,
+    "lon": 108.2154554
+  },
+  "tags": {
+    "addr:housenumber": "124",
+    "addr:street": "Đường Hải Phòng",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Đà Nẵng",
+    "name:en": "Da Nang Hosptial"
+  }
+},
+{
+  "type": "way",
+  "id": 372433951,
+  "center": {
+    "lat": 16.0731525,
+    "lon": 108.2168358
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Hải Châu",
+    "addr:housenumber": "122",
+    "addr:street": "Đường Hải Phòng",
+    "addr:subdistrict": "Thạch Thang",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện C Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 372434056,
+  "center": {
+    "lat": 16.0736863,
+    "lon": 108.2174517
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:district": "Hải Châu",
+    "addr:housenumber": "95",
+    "addr:street": "Quang Trung",
+    "addr:subdistrict": "Thạch Thang",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Chỉnh hình & Phục hồi Chức năng Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 489789425,
+  "center": {
+    "lat": 16.0387507,
+    "lon": 108.2112279
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "amenity": "hospital",
+    "name": "Bệnh viện Đa khoa Quốc tế Vinmec Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 561996753,
+  "center": {
+    "lat": 16.0374445,
+    "lon": 108.2196525
+  },
+  "tags": {
+    "addr:city": "Đà Nẵng",
+    "addr:housenumber": "68",
+    "addr:street": "Phan Đăng Lưu",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Mắt thành phố Đà Nẵng",
+    "name:en": "Eye Hospital Danang"
+  }
+},
+{
+  "type": "way",
+  "id": 565578591,
+  "center": {
+    "lat": 15.8906980,
+    "lon": 108.3155453
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Trạm Y tế Tân An"
+  }
+},
+{
+  "type": "way",
+  "id": 602613019,
+  "center": {
+    "lat": 15.8802222,
+    "lon": 108.3287498
+  },
+  "tags": {
+    "addr:city": "Hội An",
+    "addr:district": "Hội An",
+    "addr:housenumber": "140",
+    "addr:postcode": "51000",
+    "addr:province": "Quảng Nam",
+    "addr:street": "Nguyễn Trường Tộ",
+    "addr:subdistrict": "Phường Minh An",
+    "amenity": "pharmacy",
+    "brand": "ABC Pharmacy",
+    "building": "yes",
+    "contact:facebook": "https://www.facebook.com/abcpharmacy51",
+    "description": "Welcome to ABC Pharmacy Hoi An, the premier destination for all your healthcare needs in Hoi An- Quang Nam. Our experienced pharmacists are dedicated to providing top-quality service and expert advice on prescription and over-the-counter medications",
+    "email": "nhathuocabc51@gmail.com",
+    "healthcare": "pharmacy",
+    "image": "https://abcpharmacy.com.vn/upload/hinhanh/logo-7466_296x92.png",
+    "name": "ABC Pharmacy Hoi An",
+    "opening_hours": "Mo-Su 07:00-22:00",
+    "operator": "ABC Pharmacy",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "payment:visa_debit": "yes",
+    "phone": "+842353788345",
+    "source": "local knowledge",
+    "website": "https://abcpharmacy.com.vn/abc-pharmacy-hoi-an-drugstore-for-quality-healthcare/"
+  }
+},
+{
+  "type": "way",
+  "id": 699498729,
+  "center": {
+    "lat": 15.9850546,
+    "lon": 108.2399683
+  },
+  "tags": {
+    "addr:street": "Đường Mai Đăng Chơn",
+    "building": "hospital",
+    "name": "Trạm Y tế phường Hòa Quý"
+  }
+},
+{
+  "type": "way",
+  "id": 699673422,
+  "center": {
+    "lat": 16.0412115,
+    "lon": 108.2448999
+  },
+  "tags": {
+    "addr:housenumber": "04",
+    "addr:street": "Đường Lưu Quang Thuận",
+    "amenity": "hospital",
+    "building": "hospital",
+    "name": "Trạm Y tế phường Mỹ An"
+  }
+},
+{
+  "type": "way",
+  "id": 1076716238,
+  "center": {
+    "lat": 16.0657753,
+    "lon": 108.2359315
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện 199 - Bộ Công an"
+  }
+},
+{
+  "type": "way",
+  "id": 1181510562,
+  "center": {
+    "lat": 16.0053318,
+    "lon": 108.2095449
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Phục hồi chức năng thành phố Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 1181510563,
+  "center": {
+    "lat": 16.0057641,
+    "lon": 108.2106405
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Y học cổ truyền thành phố Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 1182415212,
+  "center": {
+    "lat": 15.8909554,
+    "lon": 108.2461835
+  },
+  "tags": {
+    "addr:housenumber": "24",
+    "addr:street": "Đường Lê Hữu Trác",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Đa khoa khu vực Quảng Nam"
+  }
+},
+{
+  "type": "way",
+  "id": 1182415213,
+  "center": {
+    "lat": 15.8850911,
+    "lon": 108.1182515
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Đa khoa khu vực miền núi phía Bắc Quảng Nam"
+  }
+},
+{
+  "type": "way",
+  "id": 1208699791,
+  "center": {
+    "lat": 16.0832864,
+    "lon": 108.2170112
+  },
+  "tags": {
+    "amenity": "pharmacy",
+    "brand": "Pharmacity",
+    "brand:wikidata": "Q115324413",
+    "building": "yes",
+    "healthcare": "pharmacy",
+    "name": "Pharmacity",
+    "opening_hours": "Mo-Su 07:00-23:00",
+    "operator": "Nhà thuốc Pharmacity",
+    "phone": "+8418006821",
+    "website": "https://www.pharmacity.vn/"
+  }
+},
+{
+  "type": "way",
+  "id": 1226646126,
+  "center": {
+    "lat": 16.0697057,
+    "lon": 108.1639233
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Ung bướu Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 1226646127,
+  "center": {
+    "lat": 16.0660463,
+    "lon": 108.2220718
+  },
+  "tags": {
+    "addr:housenumber": "51",
+    "addr:street": "Đường Trần Quốc Toản",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Y học cổ truyền thành phố Đà Nẵng (cơ sở 2)"
+  }
+},
+{
+  "type": "way",
+  "id": 1226646130,
+  "center": {
+    "lat": 16.0795422,
+    "lon": 108.1459188
+  },
+  "tags": {
+    "addr:housenumber": "193",
+    "addr:street": "Nguyễn Lương Bằng",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Tâm thần thành phố Đà Nẵng"
+  }
+},
+{
+  "type": "way",
+  "id": 1226646131,
+  "center": {
+    "lat": 16.0737867,
+    "lon": 108.1762198
+  },
+  "tags": {
+    "addr:housenumber": "91",
+    "addr:street": "Đường Dũng Sĩ Thanh Khê",
+    "amenity": "hospital",
+    "contact:facebook": "benhviendalieuthanhphodanang",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Da liễu thành phố Đà Nẵng",
+    "name:en": "Da Nang Dermatology & Venereology Hospital",
+    "name:vi": "Bệnh viện Da liễu thành phố Đà Nẵng",
+    "opening_hours": "Mo-Su 06:30-11:30, 13:00-16:30",
+    "phone": "02363756951",
+    "website": "https://dalieudanang.com/"
+  }
+},
+{
+  "type": "way",
+  "id": 1226646132,
+  "center": {
+    "lat": 16.0557752,
+    "lon": 108.1621981
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Đa khoa Nam Liên Chiểu"
+  }
+},
+{
+  "type": "way",
+  "id": 1226646134,
+  "center": {
+    "lat": 16.0765046,
+    "lon": 108.2142367
+  },
+  "tags": {
+    "addr:housenumber": "38",
+    "addr:street": "Đường Cao Thắng",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Trung tâm Y tế quận Hải Châu"
+  }
+},
+{
+  "type": "way",
+  "id": 1226646135,
+  "center": {
+    "lat": 16.0687421,
+    "lon": 108.1895833
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Trung tâm Y tế khu vực Thanh Khê"
+  }
+},
+{
+  "type": "way",
+  "id": 1226646136,
+  "center": {
+    "lat": 16.0579051,
+    "lon": 108.2346537
+  },
+  "tags": {
+    "addr:housenumber": "1118",
+    "addr:street": "Đường Ngô Quyền",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Trung tâm Y tế quận Sơn Trà"
+  }
+},
+{
+  "type": "way",
+  "id": 1226646137,
+  "center": {
+    "lat": 16.0083739,
+    "lon": 108.2571427
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Trung tâm Y tế quận Ngũ Hành Sơn"
+  }
+},
+{
+  "type": "way",
+  "id": 1226646138,
+  "center": {
+    "lat": 16.0098564,
+    "lon": 108.1951896
+  },
+  "tags": {
+    "addr:housenumber": "105",
+    "addr:street": "Đường Nguyễn Nhàn",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Trung tâm Y tế khu vực Cẩm Lệ"
+  }
+},
+{
+  "type": "way",
+  "id": 1226646139,
+  "center": {
+    "lat": 16.0640276,
+    "lon": 108.1554429
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Trung tâm Y tế quận Liên Chiểu"
+  }
+},
+{
+  "type": "way",
+  "id": 1226646140,
+  "center": {
+    "lat": 16.0097340,
+    "lon": 108.1516407
+  },
+  "tags": {
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Trung tâm Y tế huyện Hoà Vang"
+  }
+},
+{
+  "type": "way",
+  "id": 1226662835,
+  "center": {
+    "lat": 15.8899508,
+    "lon": 108.2518361
+  },
+  "tags": {
+    "addr:housenumber": "97",
+    "addr:street": "Đường Mẹ Thứ",
+    "amenity": "clinic",
+    "healthcare": "clinic",
+    "name": "Trạm Y tế phường Điện Bàn"
+  }
+},
+{
+  "type": "way",
+  "id": 1226662837,
+  "center": {
+    "lat": 15.8805848,
+    "lon": 108.3327320
+  },
+  "tags": {
+    "addr:housenumber": "4",
+    "addr:street": "Đường Trần Hưng Đạo",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Trung tâm Y tế khu vực Hội An"
+  }
+},
+{
+  "type": "way",
+  "id": 1524495306,
+  "center": {
+    "lat": 16.0229038,
+    "lon": 108.2142000
+  },
+  "tags": {
+    "addr:housenumber": "64",
+    "addr:street": "Đường Cách Mạng Tháng Tám",
+    "amenity": "hospital",
+    "healthcare": "hospital",
+    "name": "Bệnh viện Đa khoa Tâm Trí Đà Nẵng",
+    "name:en": "Da Nang Tam Tri General Hospital",
+    "website": "https://bvtamtridanang.com.vn"
+  }
+},
+{
+  "type": "way",
+  "id": 1551461503,
+  "center": {
+    "lat": 16.0546601,
+    "lon": 108.2104648
+  },
+  "tags": {
+    "addr:housenumber": "118",
+    "addr:street": "Đường Lê Đình Lý",
+    "amenity": "hospital",
+    "name": "Bệnh viện Răng - Hàm - Mặt thành phố Đà Nẵng"
+  }
+}
+
+  ]
+}

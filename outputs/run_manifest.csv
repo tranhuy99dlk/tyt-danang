@@ -1,0 +1,57 @@
+file,rows,bytes,sha256,script,created_utc,note
+data/interim/communes_56.geojson,56,44208,988968ace65c6a9fc88b790096b8007b3c7c462c88f9d9d04ac679ea7891eca7,02_boundaries,2026-11-17T01:02:10Z,nguon chinh GADM
+outputs/tables/qa_boundaries.csv,56,5669,10b05b758903fea1fd79d1dac262282434c9999f0537870987a65dd5fe2374fd,02_boundaries,2026-11-17T01:02:10Z,
+data/interim/grid_100m.parquet,41221,4939554,9fe1724d3499066c58af37a5e16467a3eb2a66aad4945c1e83e3c2e7e03b5180,03_grid,2026-11-17T01:02:16Z,
+data/interim/grid_panel_2015_2024.parquet,412210,14398880,4f40076378dcc6f430e9435f5bce64556c83b9e294dd26dcba7618922f8c200f,03_grid,2026-11-17T01:02:16Z,panel o luoi x nam 2015-2024
+outputs/tables/commune_series.csv,560,67252,221020ac8ad028a77a12db2281f73c5863e3fbaa610a96435ce4774a9ebf42a6,03_grid,2026-11-17T01:02:16Z,tong theo xa tu panel
+outputs/tables/qa_grid.csv,35,1701,eaf2fc8151441a6ea6bef0235b90b9369e81a07cfc4f09dc3dc7dbb5bb5f135a,03_grid,2026-11-17T01:02:16Z,
+outputs/tables/validation_downscale_A4.csv,9,337,bbe4b654564acae83158768796cf1f69e3e45dc91694a96b1c481cbeb129fef0,03_grid,2026-11-17T01:02:16Z,
+outputs/tables/panel_year_source.csv,10,214,f47af39c45fb9cc946ca39bf2b258b15edf3bfb9090e2f273cd6ecd198e5ce60,03_grid,2026-11-17T01:02:16Z,
+outputs/tables/osm_health_facilities.csv,228,20832,fe3897db406a66d4c20f5ec6659af32319122d30f363333088eff7668e9b3200,04_stations,2026-11-17T01:02:18Z,moi co so y te OSM trong hop bao (2 moc)
+data/interim/stations_56.csv,56,11687,6271f56a99c20341608a048c7a5f64aaa0bf9a16033073ce1866542588158ee8,04_stations,2026-11-17T01:02:20Z,
+outputs/tables/qa_stations.csv,56,4589,d9c65daf78204b45d06c3c7ba00c502e308d38a29957ac25205b7e9d21970019,04_stations,2026-11-17T01:02:20Z,
+outputs/tables/qa_stations_nhap_tay_bi_loai.csv,0,40,6237865c4336bf7910664f56ba928c46dd799ddcc31fac1f2eb1fec3be14a608,04_stations,2026-11-17T01:02:20Z,dong trong location-tyt.xlsx khong dung duoc (CAN XEM)
+outputs/tables/osm_tyt_khong_ghep_duoc.csv,7,637,a1558ac7e40bf84c4707b8ac1fc943c68f7a8b34fe962d387c1bd32083637c4f,04_stations,2026-11-17T01:02:20Z,tram OSM khong ghep vao 56 xa (thuong o Quang Nam/Hue)
+data/interim/road_graph.npz,253466,7652614,8c9bd2007df331373cc59e5a302c1b4a662242e93526c91b8176968fafe0c9d6,05_network,2026-11-17T01:02:28Z,do thi duong (thanh phan lien thong lon nhat)
+data/interim/grid_network.parquet,41221,1481893,642ccfe06ccaa857b28b299438b868715ef56aeff2b7adb20e071056b9a06abd,05_network,2026-11-17T01:02:28Z,
+outputs/tables/qa_network.csv,23,957,77c88a3965c24dce8c7f6bd6b71a6a1a1819101a44963578728526efda576d44,05_network,2026-11-17T01:02:28Z,
+outputs/tables/kpi_overview.csv,18,1275,e57981a172e9135fe8e6a2a3367fca45537a79b57f3277723bca866e62cd27fa,06_kpi,2026-11-17T01:02:31Z,
+outputs/tables/kpi_by_group.csv,3,458,846c07c21df5c96a19bb467022d6c5eb1b1be02f6d25db7e07c8754b26bdbfa9,06_kpi,2026-11-17T01:02:31Z,
+outputs/tables/kpi_by_district.csv,7,496,3e01f59c60f6be3a8dbda2db84164459f399ee9194b381f6a44eaaf5f98a7f5a,06_kpi,2026-11-17T01:02:31Z,
+outputs/tables/kpi_by_commune.csv,56,10179,44f1022b2c8864509d3f2a717635a6a6fd1ffc348736f5ca85b96769c6974f7e,06_kpi,2026-11-17T01:02:32Z,
+outputs/tables/station_catchment.csv,56,6167,4aa131c5cd4ea70772ec8b51dd8546dcdeecb5f00941cf4e781aecfa7c1365ff,06_kpi,2026-11-17T01:02:32Z,
+data/interim/grid_access.parquet,41221,7431486,c9fe68191cb5b8b06192aad721d17b464cdb699bbcbaa7206b6e0e7b01053510,06_kpi,2026-11-17T01:02:32Z,
+outputs/tables/white_zones.csv,143,21649,35939afb12854e04a154c862035fe5c35d532b03db4d689227d1c24d124f5a5f,07_diagnose,2026-11-17T01:02:36Z,
+outputs/tables/scenario_nq1251.csv,3,482,fcd5448e0dd791750d6b7afa7456181ba2cee742108f2c412ae553d25b6f1716,07_diagnose,2026-11-17T01:02:59Z,
+outputs/figures/h1_ban_do_khoang_cach.png,,217141,2334bd3cca4cd8359009d568120522f501b0b78e0ae13c9d1025ad3c33159ba6,07_diagnose,2026-11-17T01:03:00Z,
+outputs/figures/h2_vung_trang_dia_hinh.png,,230347,520b9be2dc1549ddf829f33223eda56cee2fbde3950addb101a65d154473fb67,07_diagnose,2026-11-17T01:03:02Z,
+outputs/figures/h3_ty_le_3km_theo_xa.png,,108736,1178716edce58c6a513649bd563b26f477d4d5bd767571199ab8808d0e803096,07_diagnose,2026-11-17T01:03:03Z,
+outputs/figures/h4_mat_do_vs_khoang_cach.png,,75503,ec8e62107b5c2eeaa153d1fa0ec4f251869e483c58cbb224c42a2be00cde4c1a,07_diagnose,2026-11-17T01:03:06Z,
+outputs/tables/greedy_curve.csv,22,669,d74a9d4c2afa10d69cfed5bd98fe666d6c87ff9bb6959d63b5e2dece4af92221,09_greedy,2026-11-17T01:03:19Z,
+outputs/tables/greedy_sites.csv,10,1493,322150e80c56a0286a01ba94a249dc814b2287a6df0253c90622d220d55852eb,09_greedy,2026-11-17T01:03:19Z,
+outputs/tables/greedy_before_after.csv,5,451,680ad08c7ecba0acd813d7768ac15465c303806c3566f28ba05711190af48636,09_greedy,2026-11-17T01:03:23Z,
+outputs/figures/h7_de_xuat_vi_tri.png,,164110,2d6455caaa7c336c9ed6a664fac4c5396b930f2fe64dbe61e43c790b45d27c1a,09_greedy,2026-11-17T01:03:25Z,
+outputs/tables/tram_giao_thong.csv,56,13460,b875cb289db7efc5e6fe80cb19db3820ab239f99eb57763ef30f9e4e4564d187,13_giao_thong,2026-11-17T01:03:38Z,duong canh tram (OSM) + chi so di lai vung phuc vu (A6)
+outputs/tables/diem_de_xuat_giao_thong.csv,10,2449,ba55a723df462f782beb0eed6afd981479a249d3896b44f2ee9f8829f05ba766,13_giao_thong,2026-11-17T01:03:39Z,duong canh diem de xuat (OSM) + duong di toi tram hien huu
+outputs/tables/dan_cu_luoi_100m.csv,41221,9346689,d79966f4e0ff7cc0df7b85c7c07de543a767b1a2fdc6ca5b6e1401b5fe722f43,12_export_csv,2026-11-17T01:03:46Z,"luoi dan cu 100 m tu raster WorldPop (A2, A3)"
+outputs/tables/tiep_can_luoi_100m.csv,41221,3449722,e92915dc34c50059641f77cf21075ad52f2a5fc7e46b1e237d59bcce15926b00,12_export_csv,2026-11-17T01:03:46Z,"khoang cach chim bay + mang duong moi o (A1, A5, A6)"
+outputs/tables/giai_thich_csv_luoi.csv,22,3522,beaf20a86e2b79b2078112b4d9cd1800b9c2c482d527f618fdb04ab79791dea8,12_export_csv,2026-11-17T01:03:46Z,giai thich cot cua 2 file luoi CSV
+data/landing/pop_100m_raw.csv,3006720,71357558,bdce0084878c81a435efd7d6c8281dcdd1fd5f429fe910a7a7d98a996a35cff2,11a_landing,2026-11-17T01:04:03Z,"pixel 100 m x nam, gia tri tho (co NoData -99999)"
+data/landing/cells_dim.csv,300672,36877908,52ef8e591a3db26a6b84112dea82cb2af0608c35eb42832cf32e7884d9a84b30,11a_landing,2026-11-17T01:04:14Z,moi pixel 100 m trong hop bao; ma_tram rong = ngoai 56 xa
+data/landing/age_1km_raw.csv,284160,8251604,9f1fb23f1d9f92817c6dc5c4241ff889fda27f941404677c34c3b02f449e6b4f,11a_landing,2026-11-17T01:04:16Z,"luoi 1 km: pop + 7 nhom tuoi 60-90+, gia tri tho"
+data/landing/stations_raw.csv,65,4002,27cba10c18a832b0322fd3f1510019cc5f2d1ecc67f4257b219bb2e07cc14480,11a_landing,2026-11-17T01:04:17Z,"nguyen van location-tyt.xlsx (ca dong tieu de, dong ten quan)"
+data/landing/net_dist.csv,41221,2971072,0a525fcadd5e20453c7496116a1a6d79d389946e495155b3749465a19c8fc0c1,11a_landing,2026-11-17T01:04:17Z,duong di ngan nhat (Dijkstra) tu o toi tram - san pham 05_network.py
+data/landing/dm_56_tram.csv,56,5944,56f0d9fefb1a92e1092e1236aaab623f4371e4d35ff41553b6a83a2263836e8e,11a_landing,2026-11-17T01:04:17Z,danh muc 56 tram / xa
+outputs/tables/kpi_tong_hop_spark.csv,20,1682,08227d36ba231213e295a054ee1684b48e9ea789ca657e060aea8a4bb9390060,11_spark_pipeline,2026-11-17T01:28:14Z,"KPI chinh + phu nam 2024, tinh bang Spark"
+outputs/tables/kpi_theo_nam_spark.csv,10,1522,7940acd2a499ff874e6ee7f0dfaef7ac6dcc5ea194ac739570172dde62f10b6d,11_spark_pipeline,2026-11-17T01:28:14Z,56 tram giu nguyen qua cac nam (A14)
+outputs/tables/kpi_theo_xa_nam_spark.csv,560,70653,1426e040692ba294548e394fdde815358e471d13105a554cde31bb71bd700073,11_spark_pipeline,2026-11-17T01:28:14Z,"xa x nam, 56 tram giu nguyen (A14)"
+outputs/tables/kpi_theo_xa_spark.csv,56,10475,6ac1d7738374f762070c4064698ed36c28101abebc43d479c07c0649a323b076,11_spark_pipeline,2026-11-17T01:28:14Z,"theo xa nam 2024, kem mang duong"
+outputs/tables/kpi_theo_nhom_spark.csv,3,589,6820a7339c8c0840b81df5a667a11ae1f16e4e70f4c11a305785d7957748965c,11_spark_pipeline,2026-11-17T01:28:14Z,phuong / xa dong bang / xa mien nui (A7)
+outputs/tables/tram_vung_phuc_vu_spark.csv,56,5398,913763e5e740d053587b64cbdd115e5f866e03453d41194a2332de2020605d88,11_spark_pipeline,2026-11-17T01:28:14Z,dan phuc vu boi tram gan nhat
+outputs/tables/spark_so_dong_theo_nguon.csv,6,269,b6d160a3fc5269247a66bd215072e781189301e7bc8039372822d5ffac825f11,11_spark_pipeline,2026-11-17T01:28:14Z,so dong tho / hop le / cach ly tung nguon
+outputs/tables/spark_quarantine_tong_hop.csv,7,285,f8a3ea55b61612e22416765cf1389cc60e0565300a8b43ebc2e8d6bf6234ff35,11_spark_pipeline,2026-11-17T01:28:14Z,so dong cach ly theo nguon va ly do
+outputs/tables/spark_quarantine_mau.csv,59,8114,f68553db3c4806d6ee7ad8b7bc7d5d65bc4de8487aa8551e57ad55523e0a19a5,11_spark_pipeline,2026-11-17T01:28:14Z,"toi da 10 dong mau moi (nguon, ly do); ban day du o vung quarantine"
+outputs/tables/doi_soat_spark.csv,25,2774,93b3de4cb4f9e5f5f06b8d3402108bd4eeb336424cb62d7fad1d2a62db77aa12,11_spark_pipeline,2026-11-17T01:28:23Z,
+outputs/tables/qa_official_population.csv,34,6602,9d02e0400a8272c9a41f8161f5bb929f8390960e33211f81eb8d77b1287b550e,10_quality,2026-11-17T01:29:27Z,moc so lieu NQ 1251 chua xac dinh nam (ho so de an)
+outputs/tables/qa_summary.csv,32,2983,2a4f3c65c63ecec7937864b7a401da8089039c83bf82d37fba70b7a07aee31f2,10_quality,2026-11-17T01:29:27Z,
+outputs/tables/tu_dien_du_lieu.csv,53,11441,5377cb978c8d159d288870b47420b92116ba8cc51ac221e623922db92991139c,10_quality,2026-11-17T01:29:27Z,

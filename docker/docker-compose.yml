@@ -1,0 +1,90 @@
+# Cum Hadoop HDFS + YARN + Spark/JupyterLab cho du an MIS5007 - tram y te Da Nang cu.
+# Dua tren docker-compose.yml cua hoc phan (cung image). Khac:
+#   - gan THANG thu muc du an vao container spark-notebook;
+#   - ten container co tien to "mis5007-" va cong NameNode UI = 9871, Spark UI = 4041
+#     de chay DUOC DONG THOI voi cum khac tren may dang dung ten "namenode"/"datanode" va cong 9870, 4040.
+#     Ben trong mang cua cum, cac dich vu van goi nhau bang ten namenode / datanode / resourcemanager.
+# Chay tu thu muc du an:   docker compose -f docker/docker-compose.yml up -d
+# Dung (giu du lieu HDFS): docker compose -f docker/docker-compose.yml stop
+name: mis5007
+
+networks:
+  hadoop_spark_net:
+    driver: bridge
+
+volumes:
+  hadoop_namenode:
+  hadoop_datanode:
+
+services:
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: mis5007-namenode
+    hostname: namenode
+    restart: unless-stopped
+    ports:
+      - "9871:9870"   # HDFS NameNode Web UI -> http://localhost:9871
+    environment:
+      - CLUSTER_NAME=bigdata_cluster
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - HDFS_CONF_dfs_replication=1
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+    networks: [hadoop_spark_net]
+
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: mis5007-datanode
+    hostname: datanode
+    restart: unless-stopped
+    ports:
+      - "9864:9864"   # DataNode Web UI
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - HDFS_CONF_dfs_replication=1
+    volumes:
+      - hadoop_datanode:/hadoop/dfs/data
+    depends_on: [namenode]
+    networks: [hadoop_spark_net]
+
+  resourcemanager:
+    image: bde2020/hadoop-resourcemanager:2.0.0-hadoop3.2.1-java8
+    container_name: mis5007-resourcemanager
+    hostname: resourcemanager
+    restart: unless-stopped
+    ports:
+      - "8088:8088"   # YARN Web UI
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - YARN_CONF_yarn_resourcemanager_hostname=resourcemanager
+    depends_on: [namenode, datanode]
+    networks: [hadoop_spark_net]
+
+  nodemanager:
+    image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
+    container_name: mis5007-nodemanager
+    hostname: nodemanager
+    restart: unless-stopped
+    ports:
+      - "8042:8042"   # NodeManager Web UI
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - YARN_CONF_yarn_resourcemanager_hostname=resourcemanager
+    depends_on: [resourcemanager]
+    networks: [hadoop_spark_net]
+
+  spark-notebook:
+    image: jupyter/pyspark-notebook:latest
+    container_name: mis5007-spark-notebook
+    hostname: spark-notebook
+    restart: unless-stopped
+    ports:
+      - "8888:8888"   # JupyterLab
+      - "4041:4040"   # Spark UI (khi co job dang chay) -> http://localhost:4041
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=bigdata2026        # mat khau JupyterLab (giong file cua lop)
+      - HADOOP_USER_NAME=root            # de Spark ghi duoc vao HDFS (cum bat kiem tra quyen)
+    volumes:
+      - ..:/home/jovyan/work/mis5007_tram_y_te   # thu muc du an (cha cua docker/)
+    networks: [hadoop_spark_net]

@@ -1,0 +1,23 @@
+﻿tap_du_lieu,ten_truong,kieu,don_vi,y_nghia,nguon,gia_dinh
+dan_cu_luoi_100m.csv,(moi dong),,,Mot o 100 m x 100 m cua raster WorldPop co dan > 0 va co tam o nam trong 1 trong 56 xa/phuong. O khong dan va o ngoai 56 xa da bi loai (xem logs/03_grid_*.log),WorldPop Global2 R2025A 100 m constrained (CC BY 4.0),A2
+dan_cu_luoi_100m.csv,cell_id,chuoi,,Ma o = hang/cot cua o trong cua so raster cat theo hop bao Da Nang cu; khoa noi 2 file,WorldPop Global2 R2025A 100 m constrained (CC BY 4.0),
+dan_cu_luoi_100m.csv,"lon, lat",so thuc,do (WGS84),Toa do TAM o,WorldPop Global2 R2025A 100 m constrained (CC BY 4.0),
+dan_cu_luoi_100m.csv,ma_tram,chuoi,,Ma xa/phuong (= ma tram TYT01-TYT56) chua tam o,Ranh gioi 56 xa (02_boundaries.py),"A2, A12"
+dan_cu_luoi_100m.csv,"ten_day_du, quan_huyen, loai_dv",chuoi,,"Ten xa/phuong, quan/huyen, loai don vi truoc 01/01/2025",data/reference/danh_sach_56_tram.csv,
+dan_cu_luoi_100m.csv,nhom,chuoi,,Phuong / Xa dong bang-ven do / Xa mien nui (phan loai theo dia hinh),06_kpi.py,A7
+dan_cu_luoi_100m.csv,"pop_2015, pop_2016, pop_2017, pop_2018, pop_2019, pop_2020, pop_2021, pop_2022, pop_2023, pop_2024",so thuc,nguoi/o,"Gia tri pixel cua file vnm_pop_<nam>_CN_100m_R2025A_v1.tif = so nguoi UOC TINH trong o. La so thuc (mo hinh phan bo dan), khong phai dem dau nguoi; cong cac o cua mot xa ra dan so uoc tinh cua xa",WorldPop Global2 R2025A 100 m constrained (CC BY 4.0),A2
+dan_cu_luoi_100m.csv,share60_src,chuoi,,"Nguon cua ty le 60+ (o 1 km chua o, hoac trung binh xa neu o 1 km = 0)",WorldPop agesex 1 km,A3
+dan_cu_luoi_100m.csv,share60_2024,so thuc,0-1,"Ty le dan tu 60 tuoi tro len, lay tu o 1 km chua o",WorldPop agesex 1 km (CC BY 4.0),A3
+dan_cu_luoi_100m.csv,pop60_2024,so thuc,nguoi/o,Dan 60+ uoc tinh = pop_2024 x share60_2024,Tinh tu WorldPop,A3
+dan_cu_luoi_100m.csv,"elev_m, slope_deg",so thuc,"m, do",Do cao va do doc tai tam o,AWS Terrain Tiles (Mapzen) z11,
+tiep_can_luoi_100m.csv,(moi dong),,,Cung tap o voi dan_cu_luoi_100m.csv (noi bang cell_id). Khoang cach do tu tam o toi tram,,
+tiep_can_luoi_100m.csv,ma_tram,chuoi,,Xa/phuong chua o (khong phai tram gan nhat),,
+tiep_can_luoi_100m.csv,"pop_2024, pop60_2024",so thuc,nguoi/o,Lap lai tu file dan cu de tinh ty le dan theo nguong khoang cach,WorldPop Global2 R2025A 100 m constrained (CC BY 4.0),"A2, A3"
+tiep_can_luoi_100m.csv,dist_m,so thuc,m,Khoang cach DUONG CHIM BAY tu tam o toi tram gan nhat trong 56 tram,Tinh tu WorldPop + toa do tram,"A1, A5"
+tiep_can_luoi_100m.csv,tram_gan_nhat,chuoi,,Ma tram gan nhat theo duong chim bay,,A5
+tiep_can_luoi_100m.csv,dist_m_chi_osm,so thuc,m,"Nhu dist_m nhung chi dung cac tram co toa do thuc (nhap tay hoac OSM), bo tram uoc luong",location-tyt.xlsx + OpenStreetMap qua Overpass (ODbL 1.0),"A5, A13"
+tiep_can_luoi_100m.csv,net_dist_m,so thuc,m,"Khoang cach DUONG DI NGAN NHAT theo mang duong OSM (Dijkstra) tu o toi tram gan nhat, gom ca doan tu tam o ra duong",OpenStreetMap qua Overpass (ODbL 1.0),A6
+tiep_can_luoi_100m.csv,net_time_min,so thuc,phut,Thoi gian di xe may theo toc do gia dinh tung loai duong + di bo doan ra duong,OpenStreetMap qua Overpass (ODbL 1.0),A6
+tiep_can_luoi_100m.csv,net_station,chuoi,,Ma tram gan nhat theo mang duong (co the khac tram_gan_nhat),OpenStreetMap qua Overpass (ODbL 1.0),A6
+tiep_can_luoi_100m.csv,snap_cell_m,so thuc,m,Khoang cach tu tam o toi nut duong gan nhat,OpenStreetMap qua Overpass (ODbL 1.0),A6
+tiep_can_luoi_100m.csv,detour,so thuc,lan,"He so vong = net_dist_m / max(dist_m, 50); > 1,5 nghia la duong di vong nhieu",,"A6, A8"

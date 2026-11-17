@@ -1,0 +1,26 @@
+﻿phep_doi_soat,spark,pandas_hoac_nguon,ket_qua,ghi_chu
+Số dòng cách ly ghi ra vùng quarantine = tổng số dòng cách ly các nguồn,2936775.0,2936775.0,ĐẠT,hdfs://namenode:9000/mis5007/quarantine/dong_loi
+Pixel × năm hợp lệ = dòng bảng sự kiện + dòng thuộc ô toàn 0,408264.0,408264.0,ĐẠT,
+Số dòng bảng sự kiện đọc lại từ vùng curated = trước khi ghi,408224.0,408224.0,ĐẠT,hdfs://namenode:9000/mis5007/curated/fact_dan_so_o_nam
+"Tổng dân thô (pixel ≥ 0, mọi năm) = hợp lệ + cách ly",14344694.51628365,14344694.516283646,ĐẠT,hợp lệ 11335050; cách ly (ngoài 56 xã) 3009645
+Tổng dân bảng sự kiện = tổng dân hợp lệ,11335049.857399365,11335049.857399363,ĐẠT,
+Số trạm hợp lệ,56.0,56.0,ĐẠT,
+"Toạ độ trạm sau chiếu UTM: Spark vs pandas/pyproj, lệch lớn nhất (m)",0.0,0.0,ĐẠT,
+Số ô lưới có dân trong 56 xã,41221.0,41221.0,ĐẠT,
+"Số cặp (xã, năm) khớp khoá",560.0,560.0,ĐẠT,
+Tổng pop theo xã × năm: sai số tương đối lớn nhất,1.998039728334342e-16,0.0,ĐẠT,
+Tổng pop60 theo xã × năm: sai số tương đối lớn nhất,2.4865296030743084e-15,0.0,ĐẠT,
+"Khoảng cách tới trạm gần nhất: Spark (nối chéo) vs pandas (KDTree), lệch lớn nhất (m)",0.0,0.0,ĐẠT,
+Tỷ lệ ô có cùng trạm gần nhất (%),100.0,100.0,ĐẠT,khác nhau chỉ khi hai trạm cách đều
+"Theo xã năm 2024 – ty_le_trong_3km_pct: Spark vs pandas, lệch lớn nhất",0.0045,0.0,ĐẠT,ngưỡng 0.011
+"Theo xã năm 2024 – ty_le_60_trong_3km_pct: Spark vs pandas, lệch lớn nhất",0.0041,0.0,ĐẠT,ngưỡng 0.011
+"Theo xã năm 2024 – ty_le_trong_3km_mang_duong_pct: Spark vs pandas, lệch lớn nhất",0.0049,0.0,ĐẠT,ngưỡng 0.011
+"Theo xã năm 2024 – kc_trung_vi_m: Spark vs pandas, lệch lớn nhất",0.4952,0.0,ĐẠT,ngưỡng 1.0
+"Theo xã năm 2024 – dan_tren_5km: Spark vs pandas, lệch lớn nhất",0.4954,0.0,ĐẠT,ngưỡng 1.0
+"Theo nhóm phường/xã – tỷ lệ 3 km: Spark vs pandas, lệch lớn nhất (điểm %)",0.0037,0.0,ĐẠT,
+Toàn 56 xã – Tỷ lệ dân trong 3 km (đường chim bay),98.674,98.67,ĐẠT,ngưỡng 0.011
+Toàn 56 xã – Tỷ lệ dân 60+ trong 3 km,98.654,98.65,ĐẠT,ngưỡng 0.011
+Toàn 56 xã – Tỷ lệ dân trong 3 km theo mạng đường,96.052,96.05,ĐẠT,ngưỡng 0.011
+Toàn 56 xã – Khoảng cách trung vị (theo dân) tới trạm gần nhất,610.915,611.0,ĐẠT,ngưỡng 1.0
+Toàn 56 xã – Dân cách trạm gần nhất > 5 km (vùng trắng),2714.982,2715.0,ĐẠT,ngưỡng 1.0
+Toàn 56 xã – Dân bình quân mỗi trạm (tổng dân / số trạm),21031.681,21032.0,ĐẠT,ngưỡng 1.0
