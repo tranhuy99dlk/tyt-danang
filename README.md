@@ -22,13 +22,13 @@ cách lấy dự án khi không dùng GitHub: [hướng dẫn cài đặt](docs/
 git clone https://github.com/tranhuy99dlk/tyt-danang.git mis5007_tram_y_te && cd mis5007_tram_y_te
 bash scripts/00_check.sh                                              # máy đủ điều kiện chưa
 uv venv --python 3.11 .venv && uv pip install --python .venv/bin/python -r requirements.lock.txt
-bash scripts/01_download.sh                                           # tải khoảng 0,9 GB dữ liệu nguồn mở
+bash scripts/01_download.sh                                           # tải khoảng 1 GB dữ liệu nguồn mở
 source .venv/bin/activate && bash scripts/run_all.sh                  # phần pandas + CSV thô cho Spark
 bash scripts/run_spark.sh                                             # pipeline Spark
 ```
 
 Chạy đúng thì lệnh cuối in ra dòng `Doi soat: 25 phep, 0 LECH.` và kết quả nằm trong `outputs/tables/`.
-Trên máy thử, hai lệnh cuối mất khoảng 2 phút và 4–6 phút (chưa tính thời gian tải dữ liệu và image Docker ở lần đầu).
+Trên máy thử, hai lệnh cuối mất 2–3 phút và 4–9 phút (chưa tính thời gian tải dữ liệu và image Docker ở lần đầu).
 Mở `outputs/tables/kpi_tong_hop_spark.csv` để xem KPI chính.
 
 ## Tài liệu
@@ -53,7 +53,7 @@ data/reference/   danh sách 56 trạm, số liệu dân số NQ 1251
 data/interim/     file trung gian của pandas
 data/landing/     CSV thô cho Spark
 data/spark/       curated / quarantine / gold khi không dùng HDFS
-outputs/tables/   mọi bảng kết quả (CSV)        outputs/figures/   hình h1–h4, h7
+outputs/tables/   mọi bảng kết quả (CSV)        outputs/figures/   hình h1–h5, h7–h9
 outputs/run_manifest.csv   mỗi file kết quả: script tạo ra, số dòng, SHA-256
 logs/             nhật ký từng lần chạy
 ```
@@ -77,6 +77,6 @@ logs/             nhật ký từng lần chạy
 - Dân số là ước tính mô hình của WorldPop, không phải số đếm.
 - Ngưỡng 3 km là giả định của nhóm; luôn đọc kèm kết quả 2 km, 5 km, theo đường đi và theo 15 phút.
 - Toạ độ trạm do nhóm nhập tay, kiểm tra theo Cổng dữ liệu Đà Nẵng (congdulieu.vn), dữ liệu cập nhật 12/12/2024; chưa kiểm chứng thực địa.
-- Dự án không dự báo; `scripts/08_forecast.py` đã ngừng dùng.
+- Số liệu sau năm 2024 (`forecast_*.csv`, `access_2030_*.csv`, hình h5) là **dự báo** từ chuỗi 2015–2024, không phải số đo; đọc kèm khoảng 80%.
 
 Chi tiết: [docs/KIEN_TRUC.md](docs/KIEN_TRUC.md#10-hạn-chế-đã-biết).

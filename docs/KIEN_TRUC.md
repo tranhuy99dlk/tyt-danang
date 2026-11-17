@@ -17,7 +17,7 @@ Hệ thống phải trả lời được:
 3. Các chỉ số phụ: dân bình quân mỗi trạm, khoảng cách trung vị, dân ở xa trên 5 km, tỷ lệ người 60+ được tiếp cận, chênh lệch phường – xã miền núi.
 4. Nên đặt thêm điểm ở đâu.
 
-Phạm vi thời gian: 10 mốc năm 2015–2024, năm hiện trạng 2024. Dự án không dự báo.
+Phạm vi phân tích: 10 mốc năm 2015–2024, năm hiện trạng 2024. Bước 08 dự báo thêm tới 2030 từ chuỗi này; kết quả dự báo nằm trong các file riêng.
 
 Yêu cầu kỹ thuật của học phần: Docker Desktop, PySpark, HDFS NameNode, HDFS/YARN CLI, PySpark kết nối HDFS trong JupyterLab;
 pipeline Spark phải đọc với schema, kiểm tra, tách lỗi, làm sạch, biến đổi/join, tổng hợp, ghi kết quả và có đối soát.
@@ -30,7 +30,7 @@ pipeline Spark phải đọc với schema, kiểm tra, tách lỗi, làm sạch,
 │ WorldPop R2025A  │ │ 01_download.sh     │ │ data/raw/           │ │ pandas (trên máy)    │ │ 10_quality.py     │ │ outputs/tables/  │
 │  .tif 100 m,1 km │►│  tải + SHA-256     │►│  + manifest_raw.csv │►│  02 ranh giới        │►│  qa_summary.csv   │►│  *.csv (KPI, QA) │
 │ OpenStreetMap    │ │                    │ │ data/reference/     │ │  03 lưới dân số      │ │  tu_dien_du_lieu  │ │ outputs/figures/ │
-│  (Overpass API)  │ │ 11a_landing.py     │ │ data/interim/       │ │  04 trạm             │ │                   │ │  h1–h4, h7 .png  │
+│  (Overpass API)  │ │ 11a_landing.py     │ │ data/interim/       │ │  04 trạm             │ │                   │ │  h1–h5, h7–h9    │
 │ GADM 4.1         │ │  .tif/.xlsx → CSV  │ ├─────────────────────┤ │  05 mạng đường       │ │ 11 (bước 7)       │ │ run_manifest.csv │
 │ AWS Terrain Tiles│ │  thô, không sửa    │ │ landing    CSV thô  │ │  06 KPI, 07, 09, 13  │ │  doi_soat_spark   │ │  SHA-256 mỗi file│
 │ location-tyt.xlsx│ │                    │ │ curated    Parquet  │ ├──────────────────────┤ │  bảo toàn số dòng,│ │ notebook đã chạy │
@@ -70,15 +70,17 @@ Có hai động cơ xử lý chạy nối tiếp nhau:
 | 05 | `05_network.py` | OSM đường | `road_graph.npz`, `grid_network.parquet` | Đồ thị đường; Dijkstra đa nguồn từ 56 trạm |
 | 06 | `06_kpi.py` | lưới, trạm, mạng đường | `kpi_overview.csv`, `kpi_by_*.csv`, `grid_access.parquet` | KPI chính và phụ (bản pandas) |
 | 07 | `07_diagnose.py` | `grid_access.parquet` | `white_zones.csv`, `scenario_nq1251.csv`, h1–h4 | Vùng trắng; kịch bản gộp 56 → 47 trạm |
+| 08 | `08_forecast.py` | `commune_series.csv`, `grid_access.parquet`, lưới 1 km 2025–2030 | `forecast_*.csv`, `access_2030_*.csv`, `grid_2030.parquet`, h5 | So 4 mô hình bằng backtest, dự báo dân và dân 60+ từng xã tới 2030, tiếp cận 3 km năm 2030 |
 | 09 | `09_greedy.py` | `grid_access.parquet` | `greedy_*.csv`, h7 | Xếp hạng 10 điểm đề xuất |
 | 13 | `13_giao_thong.py` | OSM đường, đồ thị, vùng phục vụ, `greedy_sites.csv` của bước 09 | `tram_giao_thong.csv`, `diem_de_xuat_giao_thong.csv` | Đường cạnh từng trạm, từng điểm đề xuất |
+| 14 | `14_ban_do.py` | ranh giới, trạm, `grid_access.parquet`, `greedy_sites.csv` | `pham_vi_da_nang_cu.csv`, `xa_phuong_56_toa_do.csv`, `ban_do_truoc_sau_de_xuat.csv`, h8, h9 | Bản đồ hành chính trước 01/01/2025 và bản đồ so sánh trước/sau đề xuất |
 | 10 | `10_quality.py` | mọi bảng trên | `qa_summary.csv`, `qa_official_population.csv`, `tu_dien_du_lieu.csv` | Thiếu, trùng, sai toạ độ, lệch tổng; từ điển dữ liệu |
 | 12 | `12_export_csv.py` | `grid_access.parquet` | `dan_cu_luoi_100m.csv`, `tiep_can_luoi_100m.csv` | Xuất lưới ra CSV kèm giải thích cột |
 | 11a | `11a_landing.py` | raster, Excel, parquet | `data/landing/*.csv` | CSV thô cho Spark, giữ nguyên cả giá trị lỗi |
 | 11b | `11b_hdfs_yarn_cli.sh` | `data/landing/` | HDFS `/mis5007/landing`, log CLI | `hdfs dfs -put`, `fsck`, `yarn node -list` … |
 | 11 | `11_spark_pipeline.py` | landing | curated, quarantine, gold, `*_spark.csv`, `doi_soat_spark.csv` | Xem mục 6 |
 
-Bước 08 (`08_forecast.py`) đã ngừng dùng; file còn giữ nhưng tự thoát khi chạy.
+Lưới 1 km các năm 2025–2030 của WorldPop là số chiếu; chỉ bước 08 đọc chúng, để đối chiếu và để phân bố dân 2030 trong từng xã (giả định A9). Spark (bước 11) không tính dự báo.
 
 ## 5. Các vùng lưu trữ
 

@@ -6,7 +6,7 @@ Bai toan: chon K diem tu tap ung vien de toi da hoa so dan DUOC PHU MOI trong ba
 lon nhat, cap nhat tap da phu, lap lai. Dam bao toan hoc: dat >= (1 - 1/e) ~ 63% toi uu
 (Nemhauser, Wolsey & Fisher 1978) - trong thuc te thuong sat toi uu hon nhieu.
 Ung vien (gia dinh A10): moi khoi 300 m x 300 m co dan -> o 100 m dong dan nhat trong khoi.
-Muc tieu chinh: dan nam co so (BASE_YEAR); do nhay: dan 60+ nam co so. Khong dung du bao.
+Muc tieu chinh: dan nam co so (BASE_YEAR); do nhay: dan 60+ nam co so. Khong dung so du bao cua buoc 08.
 Dau ra: greedy_sites.csv, greedy_curve.csv, greedy_before_after.csv, h7.
 """
 import json

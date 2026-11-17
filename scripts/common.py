@@ -39,6 +39,7 @@ CRS_M = "EPSG:32649"                       # UTM 49N, don vi met, de do khoang c
 BASE_YEAR = 2024                           # nam hien trang = nam cuoi truoc sap xep (WorldPop R2025A)
 YEARS = list(range(2015, 2025))            # 10 moc nam 2015..2024
 PANEL = INTERIM / f"grid_panel_{YEARS[0]}_{YEARS[-1]}.parquet"
+FORECAST_YEAR = 2030                       # nam dich cua buoc 08 (du bao); KHONG thuoc cac nam phan tich
 THRESH_KM = [2.0, 3.0, 5.0]                # do nhay; nguong chinh 3 km
 MAIN_KM = 3.0
 WHITE_KM = 5.0                             # "vung trang": cach tram gan nhat > 5 km

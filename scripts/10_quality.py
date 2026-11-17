@@ -132,7 +132,7 @@ def main():
     ds = str(PANEL.relative_to(ROOT))
     for n, k, y, q in (("cell_id, ma_tram, year", "chuỗi/số nguyên", "Khoá ô × năm", "duy nhất theo (cell_id, year)"),
                        ("pop, pop60", "số thực", "Giá trị tốt nhất có (100 m trực tiếp hoặc hạ cấp A4)", "≥ 0"),
-                       ("pop_ds, pop60_ds", "số thực", "Chuỗi hạ cấp từ 1 km (A4) – chỉ để kiểm định A4, không dùng cho KPI", "≥ 0"),
+                       ("pop_ds, pop60_ds", "số thực", "Chuỗi hạ cấp từ 1 km (A4) – dùng để kiểm định A4 và làm chuỗi học của bước dự báo 08; không dùng cho KPI", "≥ 0"),
                        ("nguon", "chuỗi", "100m_truc_tiep / ha_cap_1km_A4", "không rỗng")):
         fld(ds, n, k, y, WP, q, "Thấp")
     ds = "data/interim/grid_access.parquet"
@@ -181,6 +181,13 @@ def main():
     ):
         for n, k, y, q, src, nh in rows:
             fld(ds, n, k, y, src, q, nh)
+    ds = "outputs/tables/forecast_commune_2030.csv"
+    for n, k, y, q in ((f"dan_{BASE_YEAR}, dan60_{BASE_YEAR}", "số thực (người)", "Giá trị năm cuối của chuỗi học (WorldPop, ước tính)", "> 0"),
+                       ("dan_2030, dan60_2030", "số thực (người)", "DỰ BÁO của mô hình thắng backtest (08_forecast.py, A9)", "nằm trong khoảng lo80–hi80"),
+                       ("dan_2030_lo80, dan_2030_hi80", "số thực (người)", "Khoảng 80% thực nghiệm từ sai số backtest ở h = 5", "lo ≤ dự báo ≤ hi"),
+                       ("dan_2030_worldpop", "số thực (người)", "Số CHIẾU 2030 của WorldPop (chỉ để đối chiếu)", "≥ 0"),
+                       ("lech_du_bao_vs_worldpop_pct", "số thực (%)", "Lệch giữa dự báo và số chiếu WorldPop", "kỳ vọng nhỏ")):
+        fld(ds, n, k, y, "Tính từ " + WP + " – là dự báo, không phải số đo", q, "Thấp (số tổng hợp theo xã)")
     dd = pd.DataFrame(D)
     save_csv(dd, TAB / "tu_dien_du_lieu.csv", S)
 

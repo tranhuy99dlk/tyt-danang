@@ -11,14 +11,14 @@ Mọi lệnh chạy từ thư mục gốc của dự án (thư mục chứa `REA
 |---|---|---|
 | Kiểm tra máy đủ điều kiện | `bash scripts/00_check.sh` | vài giây |
 | Tải dữ liệu nguồn (chạy lại chỉ tải file còn thiếu) | `bash scripts/01_download.sh` | tuỳ mạng |
-| Chạy toàn bộ phần pandas và tạo CSV thô cho Spark | `source .venv/bin/activate && bash scripts/run_all.sh` | khoảng 2 phút |
+| Chạy toàn bộ phần pandas và tạo CSV thô cho Spark | `source .venv/bin/activate && bash scripts/run_all.sh` | 2–3 phút |
 | Chạy một bước lẻ | `cd scripts && ../.venv/bin/python 06_kpi.py` | – |
-| Chạy Spark, không cần cụm HDFS | `bash scripts/run_spark.sh` | 4–6 phút |
-| Chạy Spark trên HDFS | xem mục 5 | 4–6 phút |
+| Chạy Spark, không cần cụm HDFS | `bash scripts/run_spark.sh` | 4–9 phút |
+| Chạy Spark trên HDFS | xem mục 5 | 4–9 phút |
 
 Thứ tự bắt buộc: `01_download.sh` → `run_all.sh` → Spark. `run_all.sh` dừng ngay ở bước đầu tiên bị lỗi.
 
-Các bước phụ thuộc nhau theo chuỗi 02 → 03 → 04 → 05 → 06 → (07, 09 → 13) → 10 → 12 → 11a → 11. Bước 13 đọc `greedy_sites.csv`
+Các bước phụ thuộc nhau theo chuỗi 02 → 03 → 04 → 05 → 06 → (07, 08, 09 → 13) → 10 → 12 → 11a → 11. Bước 13 đọc `greedy_sites.csv`
 của bước 09 nên phải chạy sau 09. Sửa đầu vào của một bước thì phải chạy lại
 từ bước đó tới hết, rồi chạy lại Spark; nếu không, bảng đối soát sẽ báo `LỆCH`.
 
@@ -37,7 +37,12 @@ Tất cả nằm trong `outputs/tables/` trừ khi ghi khác.
 | Mỗi trạm phục vụ bao nhiêu dân? | `tram_vung_phuc_vu_spark.csv` | `dan_phuc_vu` |
 | Trạm nằm cạnh đường nào, đi lại có thuận tiện không? | `tram_giao_thong.csv` | `duong_gan_nhat`, `cap_duong_gan_nhat`, `he_so_vong_trung_vi` |
 | Dân ở xa trạm tập trung ở đâu, vì sao? | `white_zones.csv`, hình `h1`, `h2` | `nguyen_nhan` |
+| Đà Nẵng trước 01/01/2025 nằm trong khung toạ độ nào, gồm những xã/phường nào? | `pham_vi_da_nang_cu.csv`, `xa_phuong_56_toa_do.csv`, hình `h8` | khung kinh độ, vĩ độ; số trên bản đồ |
+| Tiếp cận thay đổi thế nào trước và sau khi thêm điểm đề xuất? | `ban_do_truoc_sau_de_xuat.csv`, hình `h9` | `ty_le_truoc_pct`, `ty_le_sau_pct` |
 | Sáp nhập 56 → 47 trạm ảnh hưởng thế nào? | `scenario_nq1251.csv` | 3 kịch bản |
+| Đến 2030 dân và người 60+ từng xã dự báo là bao nhiêu? | `forecast_commune_2030.csv`, `forecast_total_2030.csv`, hình `h5` | `dan_2030`, `dan_2030_lo80`, `dan_2030_hi80` |
+| Mô hình dự báo nào được chọn, sai số bao nhiêu? | `forecast_backtest.csv`, `forecast_model_choice.csv` | `MAPE_pct` |
+| Đến 2030 xã nào giảm tiếp cận? | `access_2030_change.csv`, `access_2030_total.csv` | `thay_doi_pp`, `giam_tiep_can` |
 | Nên đặt thêm điểm ở đâu? | `greedy_sites.csv`, `greedy_before_after.csv`, `diem_de_xuat_giao_thong.csv`, hình `h7` | `thu_tu`, `dan_moi_duoc_phu` |
 | Lưới dân cư từng ô 100 m | `dan_cu_luoi_100m.csv`, `tiep_can_luoi_100m.csv` | giải thích cột ở `giai_thich_csv_luoi.csv` |
 | Trường này nghĩa là gì, nguồn nào, nhạy cảm không? | `tu_dien_du_lieu.csv` | – |
@@ -56,7 +61,7 @@ Sau mỗi lần chạy, đọc ba bảng này trước khi dùng bất kỳ con 
 
 Các mục `CẦN XEM` đang tồn tại và đã được ghi nhận là hạn chế của dữ liệu:
 
-- 8 trạm nằm ngoài ranh giới xã của chính nó từ 2 m đến 104 m (cột `kc_ngoai_ranh_gioi_m` trong `data/interim/stations_56.csv`; ranh giới GADM thô).
+- 8 trạm nằm ngoài ranh giới xã của chính nó, xa nhất 104 m (cột `kc_ngoai_ranh_gioi_m` trong `data/interim/stations_56.csv`; ranh giới GADM thô).
 - Trạm cách tâm dân cư của xã trên 3 km (Hòa Bắc, Hòa Ninh).
 - Phường có ranh giới OSM khác GADM (OSM đã vẽ theo bản đồ sau sáp nhập).
 - WorldPop lệch khoảng 21% so với số liệu NQ 1251.
@@ -72,7 +77,7 @@ Bản đầy đủ là Parquet ở `data/spark/quarantine/dong_loi` hoặc `/mis
 2. Chạy lại từ bước 04:
    ```bash
    source .venv/bin/activate && cd scripts
-   for s in 04_stations 05_network 06_kpi 07_diagnose 09_greedy 13_giao_thong 10_quality 12_export_csv 11a_landing; do python $s.py || break; done
+   for s in 04_stations 05_network 06_kpi 07_diagnose 08_forecast 09_greedy 13_giao_thong 14_ban_do 10_quality 12_export_csv 11a_landing; do python $s.py || break; done
    cd .. && bash scripts/run_spark.sh
    ```
 3. Đọc `outputs/tables/qa_stations.csv` và `qa_stations_nhap_tay_bi_loai.csv`. Toạ độ nằm ngoài Đà Nẵng cũ bị loại, trạm đó quay về vị trí ước lượng.
@@ -184,6 +189,7 @@ Không tìm ra nguyên nhân: mở file log mới nhất của bước bị lỗ
 
 - Mỗi con số phải dẫn về một file trong `outputs/tables/` hoặc `logs/`. Chưa có file thì ghi "chưa có số".
 - WorldPop là ước tính mô hình; ghi rõ điều này cạnh mọi con số dân.
+- Mọi con số sau năm 2024 là dự báo (bước 08) hoặc số chiếu của WorldPop; ghi rõ là dự báo và kèm khoảng 80% (A9).
 - Ngưỡng 3 km là giả định của nhóm (A1); luôn kèm kết quả 2 km, 5 km, theo đường đi và theo 15 phút.
 - Ghi giấy phép: WorldPop CC BY 4.0; OpenStreetMap ODbL 1.0 ("© OpenStreetMap contributors"); GADM chỉ dùng học thuật, không phân phối lại; AWS Terrain Tiles ghi nguồn.
 - Kết quả trong `_luu_tru_pham_vi_2015_2030/` thuộc phạm vi cũ (năm cơ sở 2025, có dự báo); không dùng.

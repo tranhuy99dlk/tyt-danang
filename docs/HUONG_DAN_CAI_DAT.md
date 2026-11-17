@@ -18,9 +18,9 @@ bash scripts/run_spark.sh                                             # pipeline
 | Hạng mục | Yêu cầu |
 |---|---|
 | Hệ điều hành | macOS. Dự án mới được chạy thử trên macOS 15, máy Intel. Linux và Windows chưa được kiểm tra (xem mục 10) |
-| Ổ đĩa trống | Từ 20 GB: dữ liệu nguồn khoảng 0,9 GB, môi trường Python 0,5 GB, image Docker khoảng 9 GB, kết quả dưới 0,5 GB |
+| Ổ đĩa trống | Từ 20 GB: dữ liệu nguồn khoảng 1 GB, môi trường Python 0,5 GB, image Docker khoảng 9 GB, kết quả dưới 0,5 GB |
 | RAM | Máy 16 GB; cấp cho Docker ít nhất 6 GB |
-| Mạng | Cần Internet để tải dữ liệu (khoảng 0,9 GB) và image Docker (lần đầu) |
+| Mạng | Cần Internet để tải dữ liệu (khoảng 1 GB) và image Docker (lần đầu) |
 | Quyền | Cài được phần mềm; không cần quyền quản trị để chạy dự án |
 
 ## 2. Cài công cụ
@@ -61,7 +61,7 @@ cd mis5007_tram_y_te
 ```
 
 Kho có sẵn code, tài liệu, ba file nhóm tự chuẩn bị, dữ liệu OpenStreetMap nhóm đã tải và kết quả mẫu.
-Kho không chứa WorldPop, độ cao và GADM; mục 6 sẽ tải về (khoảng 0,9 GB). Vì dữ liệu OpenStreetMap đi kèm,
+Kho không chứa WorldPop, độ cao và GADM; mục 6 sẽ tải về (khoảng 1 GB). Vì dữ liệu OpenStreetMap đi kèm,
 các chỉ số theo đường đi ra đúng số của nhóm, giống gói A bên dưới.
 
 **Cách 2 – nhận file nén từ người trong nhóm**
@@ -137,9 +137,9 @@ In ra `OK 3.1.1`.
 bash scripts/01_download.sh
 ```
 
-Script tải 105 file (WorldPop, độ cao, GADM) qua 4 luồng song song, rồi 4 truy vấn OpenStreetMap, tổng khoảng 0,9 GB.
+Script tải 153 file (WorldPop, độ cao, GADM) qua 4 luồng song song, rồi 4 truy vấn OpenStreetMap, tổng khoảng 1 GB.
 Với gói A, gần như mọi file đã có nên script chỉ tải GADM.
-Với bản clone từ GitHub, script tải đủ 105 file và bỏ qua 4 truy vấn OpenStreetMap (in `SKIP`) vì dữ liệu này đã có trong kho.
+Với bản clone từ GitHub, script tải đủ 153 file và bỏ qua 4 truy vấn OpenStreetMap (in `SKIP`) vì dữ liệu này đã có trong kho.
 
 Thấy gì là đúng: gần cuối có dòng `OK=<số file vừa tải>  FAIL=0`. Có `FAIL` thì chạy lại đúng lệnh đó; file đã tải được bỏ qua.
 Mỗi file tải về được ghi URL, SHA-256 và giấy phép vào `data/manifest_raw.csv`.
@@ -151,7 +151,7 @@ source .venv/bin/activate
 bash scripts/run_all.sh
 ```
 
-Chạy 11 bước nối tiếp, mất khoảng 2 phút trên máy thử. Màn hình in `=== 02_boundaries ===`, `=== 03_grid ===`, … cho tới `=== 11a_landing ===`.
+Chạy 13 bước nối tiếp, mất khoảng 2–3 phút trên máy thử. Màn hình in `=== 02_boundaries ===`, `=== 03_grid ===`, … cho tới `=== 11a_landing ===`.
 
 Thấy gì là đúng:
 
@@ -166,7 +166,7 @@ bash scripts/run_spark.sh
 ```
 
 Lệnh này chạy bước 11 trong một container Spark. Lần đầu Docker tải image `jupyter/pyspark-notebook` (khoảng 7 GB sau khi giải nén) nên sẽ lâu;
-các lần sau mất 4–6 phút trên máy thử.
+các lần sau mất 4–9 phút trên máy thử.
 
 Màn hình in dần các dòng `INFO` theo từng khâu (đọc, kiểm tra, biến đổi, ghi, đối soát).
 
@@ -186,7 +186,7 @@ docker exec -w /home/jovyan/work/mis5007_tram_y_te -e HDFS_URI=hdfs://namenode:9
 bash scripts/11b_hdfs_yarn_cli.sh sau
 ```
 
-Lần đầu Docker tải thêm bốn image Hadoop. Bước Spark trên HDFS mất 4–6 phút trên máy thử.
+Lần đầu Docker tải thêm bốn image Hadoop. Bước Spark trên HDFS mất 4–9 phút trên máy thử.
 
 Thấy gì là đúng:
 
@@ -205,10 +205,10 @@ Với gói B, ba dòng đầu phải trùng; các dòng theo đường đi có t
 | Chỉ số | Giá trị tham chiếu |
 |---|---|
 | Tổng dân 56 xã/phường năm 2024 (WorldPop, ước tính) | 1.177.774 người |
-| Tỷ lệ dân trong 3 km đường chim bay | 98,67% |
+| Tỷ lệ dân trong 3 km đường chim bay | 98,69% |
 | Dân bình quân mỗi trạm | 21.032 người/trạm |
-| Tỷ lệ dân trong 3 km theo mạng đường | 96,05% |
-| Tỷ lệ dân tới trạm trong 15 phút xe máy | 99,68% |
+| Tỷ lệ dân trong 3 km theo mạng đường | 96,10% |
+| Tỷ lệ dân tới trạm trong 15 phút xe máy | 99,71% |
 
 Số dòng cũng phải khớp (`outputs/tables/spark_so_dong_theo_nguon.csv`): `pop_100m_raw` có 3.006.720 dòng thô, `stations_raw` có 56 dòng hợp lệ.
 

@@ -4,7 +4,7 @@
 #   S1 WorldPop Global2 R2025A (CC BY 4.0)
 #   S2 OpenStreetMap qua Overpass API (ODbL 1.0, (c) OpenStreetMap contributors)
 #   Bo tro: AWS Terrain Tiles (do cao), GADM 4.1 (ranh gioi doi chieu, chi dung hoc thuat)
-# Chay:  bash 01_download.sh          (mac dinh: 105 file + 4 truy van OSM, khoang 0,9 GB)
+# Chay:  bash 01_download.sh          (mac dinh: 153 file + 4 truy van OSM, khoang 1 GB)
 #        FULL=1 bash 01_download.sh   (them 60+ 100 m nam 2024)
 # Pham vi du an: 2015-2024 (10 moc nam). Luoi 100 m tai du ca 10 nam.
 # Chay lai an toan: file da tai va da ghi manifest se duoc bo qua.
@@ -57,6 +57,13 @@ for y in $YRS; do
   add "$WP/Population/Global_2015_2030/R2025A/$y/VNM/v1/100m/constrained/vnm_pop_${y}_CN_100m_R2025A_v1.tif" "$RAW/worldpop/pop100m/vnm_pop_${y}_CN_100m_R2025A_v1.tif" "WorldPop Global2 R2025A pop 100m constrained" "$LIC_WP"
 done
 for y in $YRS; do
+  add "$WP/Population/Global_2015_2030/R2025A/$y/VNM/v1/1km_ua/constrained/vnm_pop_${y}_CN_1km_R2025A_UA_v1.tif" "$RAW/worldpop/pop1km/vnm_pop_${y}_CN_1km_R2025A_UA_v1.tif" "WorldPop Global2 R2025A pop 1km UA constrained" "$LIC_WP"
+  for a in 60 65 70 75 80 85 90; do
+    add "$WP/AgeSex_structures/Global_2015_2030/R2025A/$y/VNM/v1/1km_ua/constrained/vnm_t_${a}_${y}_CN_1km_R2025A_UA_v1.tif" "$RAW/worldpop/age1km/vnm_t_${a}_${y}_CN_1km_R2025A_UA_v1.tif" "WorldPop Global2 R2025A agesex 1km UA constrained" "$LIC_WP"
+  done
+done
+# Buoc 08 (du bao): luoi 1 km cac nam CHIEU 2025-2030 cua WorldPop - chi de doi chieu va phan bo dan 2030 (A9), khong vao KPI
+for y in 2025 2026 2027 2028 2029 2030; do
   add "$WP/Population/Global_2015_2030/R2025A/$y/VNM/v1/1km_ua/constrained/vnm_pop_${y}_CN_1km_R2025A_UA_v1.tif" "$RAW/worldpop/pop1km/vnm_pop_${y}_CN_1km_R2025A_UA_v1.tif" "WorldPop Global2 R2025A pop 1km UA constrained" "$LIC_WP"
   for a in 60 65 70 75 80 85 90; do
     add "$WP/AgeSex_structures/Global_2015_2030/R2025A/$y/VNM/v1/1km_ua/constrained/vnm_t_${a}_${y}_CN_1km_R2025A_UA_v1.tif" "$RAW/worldpop/age1km/vnm_t_${a}_${y}_CN_1km_R2025A_UA_v1.tif" "WorldPop Global2 R2025A agesex 1km UA constrained" "$LIC_WP"
