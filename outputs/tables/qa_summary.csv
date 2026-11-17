@@ -12,7 +12,7 @@ Trùng,Cặp trạm trùng toạ độ (< 50 m),0.0,ĐẠT,
 Trùng,Trạm có ≥ 2 ứng viên OSM cách nhau > 300 m,0.0,ĐẠT,cần kiểm tra thực địa
 Sai toạ độ,Trạm nằm ngoài hộp bao Đà Nẵng cũ,0.0,ĐẠT,
 Sai toạ độ,Trạm (nhập tay/OSM) nằm ngoài ranh giới xã của chính nó,8.0,CẦN XEM,có thể đúng (trạm đặt sát ranh) hoặc sai gắn thẻ
-Sai toạ độ,Trạm cách tâm dân cư xã > 3 km,2.0,CẦN XEM,"Trạm Y tế xã Hòa Bắc, Trạm Y tế xã Hòa Ninh"
+Sai toạ độ,Trạm cách tâm dân cư xã > 3 km,1.0,CẦN XEM,Trạm Y tế xã Hòa Ninh
 Sai toạ độ,Ranh giới OSM vs GADM: IoU trung vị,0.922,ĐẠT,
 Sai toạ độ,"Xã có IoU OSM-GADM < 0,7",8.0,CẦN XEM,"Phường Thanh Khê Tây, Phường Thanh Khê Đông, Phường Xuân Hà, Phường Chính Gián, Phường Thạc Gián, Phường Thuận Phước, Phường Phước Ninh, Phường Bình Thuận"
 Lệch tổng,Giá trị dân số âm,0.0,ĐẠT,

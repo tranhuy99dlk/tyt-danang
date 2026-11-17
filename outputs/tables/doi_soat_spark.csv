@@ -16,11 +16,11 @@ Tỷ lệ ô có cùng trạm gần nhất (%),100.0,100.0,ĐẠT,khác nhau ch�
 "Theo xã năm 2024 – ty_le_60_trong_3km_pct: Spark vs pandas, lệch lớn nhất",0.0041,0.0,ĐẠT,ngưỡng 0.011
 "Theo xã năm 2024 – ty_le_trong_3km_mang_duong_pct: Spark vs pandas, lệch lớn nhất",0.0049,0.0,ĐẠT,ngưỡng 0.011
 "Theo xã năm 2024 – kc_trung_vi_m: Spark vs pandas, lệch lớn nhất",0.4952,0.0,ĐẠT,ngưỡng 1.0
-"Theo xã năm 2024 – dan_tren_5km: Spark vs pandas, lệch lớn nhất",0.4954,0.0,ĐẠT,ngưỡng 1.0
+"Theo xã năm 2024 – dan_tren_5km: Spark vs pandas, lệch lớn nhất",0.4958,0.0,ĐẠT,ngưỡng 1.0
 "Theo nhóm phường/xã – tỷ lệ 3 km: Spark vs pandas, lệch lớn nhất (điểm %)",0.0037,0.0,ĐẠT,
-Toàn 56 xã – Tỷ lệ dân trong 3 km (đường chim bay),98.674,98.67,ĐẠT,ngưỡng 0.011
-Toàn 56 xã – Tỷ lệ dân 60+ trong 3 km,98.654,98.65,ĐẠT,ngưỡng 0.011
-Toàn 56 xã – Tỷ lệ dân trong 3 km theo mạng đường,96.052,96.05,ĐẠT,ngưỡng 0.011
-Toàn 56 xã – Khoảng cách trung vị (theo dân) tới trạm gần nhất,610.915,611.0,ĐẠT,ngưỡng 1.0
-Toàn 56 xã – Dân cách trạm gần nhất > 5 km (vùng trắng),2714.982,2715.0,ĐẠT,ngưỡng 1.0
+Toàn 56 xã – Tỷ lệ dân trong 3 km (đường chim bay),98.686,98.69,ĐẠT,ngưỡng 0.011
+Toàn 56 xã – Tỷ lệ dân 60+ trong 3 km,98.667,98.67,ĐẠT,ngưỡng 0.011
+Toàn 56 xã – Tỷ lệ dân trong 3 km theo mạng đường,96.104,96.1,ĐẠT,ngưỡng 0.011
+Toàn 56 xã – Khoảng cách trung vị (theo dân) tới trạm gần nhất,610.877,611.0,ĐẠT,ngưỡng 1.0
+Toàn 56 xã – Dân cách trạm gần nhất > 5 km (vùng trắng),2624.299,2624.0,ĐẠT,ngưỡng 1.0
 Toàn 56 xã – Dân bình quân mỗi trạm (tổng dân / số trạm),21031.681,21032.0,ĐẠT,ngưỡng 1.0

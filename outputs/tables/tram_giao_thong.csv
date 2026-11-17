@@ -19,11 +19,11 @@ TYT17,Trạm Y tế phường Vĩnh Trung,Quận Thanh Khê,Phường,16.0672094
 TYT18,Trạm Y tế phường Thạc Gián,Quận Thanh Khê,Phường,16.067491867578138,108.20770055753894,683.0,Đường Lê Duẩn,primary,17.1,primary,Đường Lê Duẩn,17.1,đường chính cấp 1,3969,348,1.0,100.0,,0
 TYT19,Trạm Y tế phường An Khê,Quận Thanh Khê,Phường,16.05759054342992,108.18092899563341,749.0,,residential,26.9,trunk,Đường Trường Chinh,63.5,đường khu dân cư,24627,720,2.2,100.0,1.416,0
 TYT20,Trạm Y tế phường Hòa Khê,Quận Thanh Khê,Phường,16.063467294205008,108.19219427309766,427.0,Đường Hà Huy Tập,residential,12.7,primary,Đường Điện Biên Phủ,254.1,đường khu dân cư,19444,664,2.0,100.0,1.38,0
-TYT21,Trạm Y tế xã Hòa Bắc,Huyện Hòa Vang,Xã,16.12253818796165,108.05817828464205,3553.0,Đường tỉnh 601,secondary,46.9,secondary,Đường tỉnh 601,46.9,đường chính cấp 2,3016,4405,11.4,34.55,1.304,1373
-TYT22,Trạm Y tế xã Hòa Liên,Huyện Hòa Vang,Xã,16.09840555682067,108.09660464370877,909.0,Đường tỉnh 601,secondary,9.7,secondary,Đường tỉnh 601,9.7,đường chính cấp 2,8816,1853,4.7,79.88,1.351,505
-TYT23,Trạm Y tế xã Hòa Ninh,Huyện Hòa Vang,Xã,16.055141965961482,108.08784129333246,3236.0,,residential,34.9,secondary,Đường tỉnh 602,50.9,đường khu dân cư,8872,3597,8.5,36.05,1.462,1683
-TYT24,Trạm Y tế xã Hòa Sơn,Huyện Hòa Vang,Xã,16.073234522644096,108.11118273990269,1515.0,Đường An Ngãi 1,residential,31.7,secondary,Đường An Ngãi,45.6,đường khu dân cư,16693,1524,4.4,94.53,1.373,0
-TYT25,Trạm Y tế xã Hòa Nhơn,Huyện Hòa Vang,Xã,16.006940760306353,108.13449908183883,218.0,,residential,3.3,tertiary,,59.3,đường khu dân cư,11429,2526,6.2,62.63,1.25,190
+TYT21,Trạm Y tế xã Hòa Bắc,Huyện Hòa Vang,Xã,16.129306704366904,108.05112035767151,2686.0,Đường tỉnh 601,secondary,3.9,secondary,Đường tỉnh 601,3.9,đường chính cấp 2,3021,3358,8.9,46.21,1.346,951
+TYT22,Trạm Y tế xã Hòa Liên,Huyện Hòa Vang,Xã,16.09840555682067,108.09660464370877,909.0,Đường tỉnh 601,secondary,9.7,secondary,Đường tỉnh 601,9.7,đường chính cấp 2,8615,1827,4.7,79.47,1.351,484
+TYT23,Trạm Y tế xã Hòa Ninh,Huyện Hòa Vang,Xã,16.05513164021174,108.08700443912963,3150.0,,service,7.1,secondary,Đường tỉnh 602,35.8,đường nội bộ/lối vào,8841,3578,8.3,36.96,1.415,1628
+TYT24,Trạm Y tế xã Hòa Sơn,Huyện Hòa Vang,Xã,16.073447350506562,108.11069301591166,1534.0,Đường An Ngãi,secondary,10.0,secondary,Đường An Ngãi,10.0,đường chính cấp 2,17298,1487,4.0,94.03,1.33,2
+TYT25,Trạm Y tế xã Hòa Nhơn,Huyện Hòa Vang,Xã,16.006940760306353,108.13449908183883,218.0,,residential,3.3,tertiary,,59.3,đường khu dân cư,11380,2526,6.1,62.91,1.25,172
 TYT26,Trạm Y tế xã Hòa Phú,Huyện Hòa Vang,Xã,15.98507172389988,108.0748889221716,1001.0,,residential,19.3,primary,Quốc lộ 14G,258.0,đường khu dân cư,7916,3574,7.9,39.36,1.342,1348
 TYT27,Trạm Y tế xã Hòa Phong,Huyện Hòa Vang,Xã,15.993240236655085,108.14262006195322,1182.0,,unclassified,12.4,trunk,Đường Trường Sơn,133.3,đường nhỏ nối khu dân cư,21532,1533,3.9,86.04,1.39,25
 TYT28,Trạm Y tế xã Hòa Châu,Huyện Hòa Vang,Xã,15.987488605139244,108.20055837189807,297.0,,service,30.7,trunk,Quốc lộ 1,33.0,đường nội bộ/lối vào,20230,1462,3.6,99.97,1.292,0
@@ -31,8 +31,8 @@ TYT29,Trạm Y tế xã Hòa Tiến,Huyện Hòa Vang,Xã,15.96953810709839,108.
 TYT30,Trạm Y tế xã Hòa Phước,Huyện Hòa Vang,Xã,15.958800123091805,108.22342017789971,1722.0,,track,6.1,residential,,241.6,đường mòn/đường đất,10311,2097,5.8,99.19,1.45,0
 TYT31,Trạm Y tế xã Hòa Khương,Huyện Hòa Vang,Xã,15.961476543342128,108.14115528777738,792.0,,residential,3.5,trunk,Đường Trường Sơn,192.4,đường khu dân cư,16796,2077,4.6,78.33,1.311,293
 TYT32,Trạm Y tế phường Hòa Hiệp Bắc,Quận Liên Chiểu,Phường,16.127867005488966,108.12091778811015,452.0,Đường Nguyễn Phước Chu,residential,2.2,trunk,Đường Nguyễn Văn Cừ,161.2,đường khu dân cư,20536,1108,2.6,93.11,1.359,506
-TYT33,Trạm Y tế phường Hòa Hiệp Nam,Quận Liên Chiểu,Phường,16.10778719200616,108.12685803436781,652.0,,residential,11.6,primary,Đường Nguyễn Tất Thành,51.4,đường khu dân cư,20597,1232,3.2,96.32,1.36,0
-TYT34,Trạm Y tế phường Hòa Khánh Bắc,Quận Liên Chiểu,Phường,16.070540560865172,108.14553023102111,780.0,,residential,22.6,secondary,Đường Âu Cơ,71.9,đường khu dân cư,77764,1618,4.0,91.47,1.488,2
+TYT33,Trạm Y tế phường Hòa Hiệp Nam,Quận Liên Chiểu,Phường,16.10778719200616,108.12685803436781,652.0,,residential,11.6,primary,Đường Nguyễn Tất Thành,51.4,đường khu dân cư,20476,1230,3.2,96.8,1.36,0
+TYT34,Trạm Y tế phường Hòa Khánh Bắc,Quận Liên Chiểu,Phường,16.070540560865172,108.14553023102111,780.0,,residential,22.6,secondary,Đường Âu Cơ,71.9,đường khu dân cư,77557,1617,4.0,91.6,1.488,0
 TYT35,Trạm Y tế phường Hòa Khánh Nam,Quận Liên Chiểu,Phường,16.055873243878278,108.15622124521293,403.0,Đường Hoàng Văn Thái,residential,2.9,primary,Đường Hoàng Văn Thái,267.0,đường khu dân cư,27657,1096,3.2,97.89,1.4,0
 TYT36,Trạm Y tế phường Hòa Minh,Quận Liên Chiểu,Phường,16.059047103417306,108.16570507056723,892.0,,residential,19.9,trunk,Đường Tôn Đức Thắng,63.4,đường khu dân cư,39154,976,2.8,99.98,1.403,0
 TYT37,Trạm Y tế phường Thanh Bình,Quận Hải Châu,Phường,16.08153354320131,108.21344402455814,236.0,Đường Thanh Thủy,residential,6.2,primary,Đường Nguyễn Tất Thành,123.5,đường khu dân cư,13872,522,1.8,100.0,1.232,0

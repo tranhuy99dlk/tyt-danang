@@ -1,8 +1,8 @@
 ﻿thu_tu,xa,lat,lon,dan_moi_duoc_phu,ty_le_3km_sau_pct,kc_toi_tram_hien_huu_m,tram_hien_huu_gan_nhat,duong_gan_nhat,cap_duong_gan_nhat,kc_toi_duong_gan_nhat_m,cap_cao_nhat_trong_300m,duong_cap_cao_nhat_trong_300m,kc_toi_duong_cap_cao_nhat_m,mo_ta_cap_duong_gan_nhat,duong_di_toi_tram_hien_huu_gan_nhat_m,tram_gan_nhat_theo_duong_di,he_so_vong_toi_tram_hien_huu
-1,Xã Hòa Phong,15.98375,108.10542,3351,98.96,3274.0,Trạm Y tế xã Hòa Phú,,residential,22.7,tertiary,,44.7,đường khu dân cư,4511.0,Trạm Y tế xã Hòa Phú,1.38
-2,Xã Hòa Ninh,16.04042,108.05042,2493,99.17,4327.0,Trạm Y tế xã Hòa Ninh,,unclassified,79.4,primary,Đường Vành đai phía tây Đà Nẵng,275.2,đường nhỏ nối khu dân cư,5294.0,Trạm Y tế xã Hòa Ninh,1.22
-3,Xã Hòa Nhơn,16.02458,108.11208,2273,99.36,3095.0,Trạm Y tế xã Hòa Nhơn,,residential,2.3,tertiary,,7.5,đường khu dân cư,3386.0,Trạm Y tế xã Hòa Nhơn,1.09
-4,Xã Hòa Bắc,16.12542,108.00958,1054,99.45,5213.0,Trạm Y tế xã Hòa Bắc,Đường tỉnh 601,secondary,142.7,secondary,Đường tỉnh 601,142.7,đường chính cấp 2,6625.0,Trạm Y tế xã Hòa Bắc,1.27
+1,Xã Hòa Phong,15.98375,108.10542,3351,98.97,3274.0,Trạm Y tế xã Hòa Phú,,residential,22.7,tertiary,,44.7,đường khu dân cư,4511.0,Trạm Y tế xã Hòa Phú,1.38
+2,Xã Hòa Ninh,16.04042,108.05042,2438,99.18,4243.0,Trạm Y tế xã Hòa Ninh,,unclassified,79.4,primary,Đường Vành đai phía tây Đà Nẵng,275.2,đường nhỏ nối khu dân cư,5213.0,Trạm Y tế xã Hòa Ninh,1.23
+3,Xã Hòa Nhơn,16.02458,108.11208,2333,99.38,3095.0,Trạm Y tế xã Hòa Nhơn,,residential,2.3,tertiary,,7.5,đường khu dân cư,3386.0,Trạm Y tế xã Hòa Nhơn,1.09
+4,Xã Hòa Bắc,16.12542,108.00958,900,99.45,4468.0,Trạm Y tế xã Hòa Bắc,Đường tỉnh 601,secondary,142.7,secondary,Đường tỉnh 601,142.7,đường chính cấp 2,5485.0,Trạm Y tế xã Hòa Bắc,1.23
 5,Xã Hòa Khương,15.94542,108.14792,888,99.53,1920.0,Trạm Y tế xã Hòa Khương,,track,12.3,track,,12.3,đường mòn/đường đất,2920.0,Trạm Y tế xã Hòa Khương,1.52
 6,Phường Hoà Hải,15.98875,108.27042,844,99.6,1554.0,Trạm Y tế phường Hoà Hải,Đường Phan Đình Thông,residential,13.5,secondary,Đường Trường Sa,103.0,đường khu dân cư,2478.0,Trạm Y tế phường Hoà Hải,1.59
 7,Phường Thọ Quang,16.12958,108.23958,782,99.67,4227.0,Trạm Y tế phường Thọ Quang,Đường Yết Kiêu,residential,213.5,residential,Đường Yết Kiêu,213.5,đường khu dân cư,8016.0,Trạm Y tế phường Thọ Quang,1.9

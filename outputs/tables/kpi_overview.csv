@@ -2,18 +2,18 @@
 "Tổng dân 56 xã/phường (WorldPop 2024, ước tính)",1177774.0,người,
 Tổng dân 60+ (A3),134755.0,người,
 Số trạm,56.0,trạm,"56 toạ độ nhập tay (A13), 0 toạ độ OSM, 0 ước lượng (A5)"
-Tỷ lệ dân trong 2 km (đường chim bay),95.16,%,độ nhạy
-Tỷ lệ dân trong 3 km (đường chim bay),98.67,%,KPI chính
-Tỷ lệ dân trong 5 km (đường chim bay),99.77,%,độ nhạy
-Tỷ lệ dân trong 3 km - chỉ dùng trạm có toạ độ thực (nhập tay/OSM),98.67,%,độ nhạy A5
-Tỷ lệ dân 60+ trong 3 km,98.65,%,
+Tỷ lệ dân trong 2 km (đường chim bay),95.18,%,độ nhạy
+Tỷ lệ dân trong 3 km (đường chim bay),98.69,%,KPI chính
+Tỷ lệ dân trong 5 km (đường chim bay),99.78,%,độ nhạy
+Tỷ lệ dân trong 3 km - chỉ dùng trạm có toạ độ thực (nhập tay/OSM),98.69,%,độ nhạy A5
+Tỷ lệ dân 60+ trong 3 km,98.67,%,
 Khoảng cách trung vị (theo dân) tới trạm gần nhất,611.0,m,
-Khoảng cách p90 (theo dân),1605.0,m,
-Dân cách trạm gần nhất > 5 km (vùng trắng),2715.0,người,
-Dân 60+ cách trạm > 5 km,315.0,người,
+Khoảng cách p90 (theo dân),1603.0,m,
+Dân cách trạm gần nhất > 5 km (vùng trắng),2624.0,người,
+Dân 60+ cách trạm > 5 km,305.0,người,
 Dân bình quân mỗi trạm (tổng dân / số trạm),21032.0,người/trạm,
-Tỷ lệ dân trong 3 km theo mạng đường,96.05,%,A6
-Tỷ lệ dân trong 5 km theo mạng đường,99.36,%,A6
-"Hệ số vòng đường trung vị (mạng/chim bay, theo dân, ô cách trạm > 500 m)",1.368,lần,A6
+Tỷ lệ dân trong 3 km theo mạng đường,96.1,%,A6
+Tỷ lệ dân trong 5 km theo mạng đường,99.4,%,A6
+"Hệ số vòng đường trung vị (mạng/chim bay, theo dân, ô cách trạm > 500 m)",1.366,lần,A6
 "Thời gian trung vị tới trạm (xe máy, A6)",2.6,phút,
-"Tỷ lệ dân tới trạm ≤ 15 phút (xe máy, A6)",99.68,%,
+"Tỷ lệ dân tới trạm ≤ 15 phút (xe máy, A6)",99.71,%,
