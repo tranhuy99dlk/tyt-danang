@@ -1,8 +1,10 @@
 ﻿phep_doi_soat,spark,pandas_hoac_nguon,ket_qua,ghi_chu
-Số dòng cách ly ghi ra vùng quarantine = tổng số dòng cách ly các nguồn,2936775.0,2936775.0,ĐẠT,hdfs://namenode:9000/mis5007/quarantine/dong_loi
+Số dòng lỗi dữ liệu ghi ra vùng quarantine = tổng lỗi dữ liệu các nguồn,9.0,9.0,ĐẠT,hdfs://namenode:9000/mis5007/quarantine/dong_loi
+Số dòng ngoài phạm vi ghi ra vùng excluded = tổng ngoài phạm vi các nguồn,2936766.0,2936766.0,ĐẠT,"hdfs://namenode:9000/mis5007/excluded/ngoai_pham_vi (NoData của WorldPop, ngoài 56 xã – không phải lỗi)"
+Số bảng Parquet có cờ _SUCCESS = số bảng đã ghi,16.0,16.0,ĐẠT,Parquet không có giao dịch: thiếu _SUCCESS nghĩa là lần ghi bị ngắt
 Pixel × năm hợp lệ = dòng bảng sự kiện + dòng thuộc ô toàn 0,408264.0,408264.0,ĐẠT,
 Số dòng bảng sự kiện đọc lại từ vùng curated = trước khi ghi,408224.0,408224.0,ĐẠT,hdfs://namenode:9000/mis5007/curated/fact_dan_so_o_nam
-"Tổng dân thô (pixel ≥ 0, mọi năm) = hợp lệ + cách ly",14344694.51628365,14344694.516283646,ĐẠT,hợp lệ 11335050; cách ly (ngoài 56 xã) 3009645
+"Tổng dân thô (pixel ≥ 0, mọi năm) = hợp lệ + không vào bảng sạch",14344694.51628365,14344694.516283646,ĐẠT,hợp lệ 11335050; ngoài phạm vi (ngoài 56 xã) 3009645
 Tổng dân bảng sự kiện = tổng dân hợp lệ,11335049.857399365,11335049.857399363,ĐẠT,
 Số trạm hợp lệ,56.0,56.0,ĐẠT,
 "Toạ độ trạm sau chiếu UTM: Spark vs pandas/pyproj, lệch lớn nhất (m)",0.0,0.0,ĐẠT,

@@ -55,25 +55,25 @@ data/landing/age_1km_raw.csv,284160,8251604,9f1fb23f1d9f92817c6dc5c4241ff889fda2
 data/landing/stations_raw.csv,65,4002,a4126c652a1195b0d81cbcea6a698ea08ca0135b6a6d53e3e35358619d368912,11a_landing,2026-11-17T17:27:22Z,"nguyen van location-tyt.xlsx (ca dong tieu de, dong ten quan)"
 data/landing/net_dist.csv,41221,2970977,df3b8abb2bbe10f59936f9ab6453263e7c915b69bff1affb8543b2a8f7b4de2e,11a_landing,2026-11-17T17:27:22Z,duong di ngan nhat (Dijkstra) tu o toi tram - san pham 05_network.py
 data/landing/dm_56_tram.csv,56,5944,56f0d9fefb1a92e1092e1236aaab623f4371e4d35ff41553b6a83a2263836e8e,11a_landing,2026-11-17T17:27:22Z,danh muc 56 tram / xa
-outputs/tables/kpi_tong_hop_spark.csv,20,1681,b8f08a34c9e1df132a23db5c8d0e50f84924aba1649fa3601477d7d57a66ffe6,11_spark_pipeline,2026-11-17T17:30:47Z,"KPI chinh + phu nam 2024, tinh bang Spark"
-outputs/tables/kpi_theo_nam_spark.csv,10,1529,67a4eca22b160590e730e82c4f5ba9d3b91aa43b58b054c56789c835014d6611,11_spark_pipeline,2026-11-17T17:30:48Z,56 tram giu nguyen qua cac nam (A14)
-outputs/tables/kpi_theo_xa_nam_spark.csv,560,70604,7dac3813c893f79a8d235984ebd402e6f5a02d6c9038af317d854d84e3b8136b,11_spark_pipeline,2026-11-17T17:30:48Z,"xa x nam, 56 tram giu nguyen (A14)"
-outputs/tables/kpi_theo_xa_spark.csv,56,10467,76d83afbd1c5057d8830b093dd0b2a28d50375bfe0f6ea2e47dfa8e135344c40,11_spark_pipeline,2026-11-17T17:30:48Z,"theo xa nam 2024, kem mang duong"
-outputs/tables/kpi_theo_nhom_spark.csv,3,593,c03914c3ebf4acc12d03efb0c2ca373cf342ec5fe09f5fa19076a3b444ba751d,11_spark_pipeline,2026-11-17T17:30:48Z,phuong / xa dong bang / xa mien nui (A7)
-outputs/tables/tram_vung_phuc_vu_spark.csv,56,5398,d8fad8c875b14bb3625e999324816c0b2ee0c4079e722341395923eaedc9f8e8,11_spark_pipeline,2026-11-17T17:30:48Z,dan phuc vu boi tram gan nhat
-outputs/tables/spark_so_dong_theo_nguon.csv,6,269,b6d160a3fc5269247a66bd215072e781189301e7bc8039372822d5ffac825f11,11_spark_pipeline,2026-11-17T17:30:48Z,so dong tho / hop le / cach ly tung nguon
-outputs/tables/spark_quarantine_tong_hop.csv,7,285,f8a3ea55b61612e22416765cf1389cc60e0565300a8b43ebc2e8d6bf6234ff35,11_spark_pipeline,2026-11-17T17:30:48Z,so dong cach ly theo nguon va ly do
-outputs/tables/spark_quarantine_mau.csv,59,8114,f68553db3c4806d6ee7ad8b7bc7d5d65bc4de8487aa8551e57ad55523e0a19a5,11_spark_pipeline,2026-11-17T17:30:48Z,"toi da 10 dong mau moi (nguon, ly do); ban day du o vung quarantine"
-outputs/tables/doi_soat_spark.csv,25,2773,88818642cc2f00f80e2fcee813da6604728b5cea2ea74ced4649c121c974f4df,11_spark_pipeline,2026-11-17T17:30:54Z,
-outputs/tables/qa_official_population.csv,34,6602,9d02e0400a8272c9a41f8161f5bb929f8390960e33211f81eb8d77b1287b550e,10_quality,2026-11-17T17:33:23Z,moc so lieu NQ 1251 chua xac dinh nam (ho so de an)
-outputs/tables/qa_summary.csv,32,2951,2cafdc70889f62d9323d649eb217d7b6baf7a727247b9e2b278394a85991824a,10_quality,2026-11-17T17:33:23Z,
-outputs/tables/tu_dien_du_lieu.csv,64,14709,662e475b741e8ecdfe3572c8851ac9771c57442f489356a52726d7aaf362ab88,10_quality,2026-11-17T17:33:23Z,
-data/raw/danh-sach-cskcb.xlsx,30,14233,62c2fbc07851993ae0ce28658a4a5d40eebc763228dee7c8e43a2fd1f2f6f814,15_tuyen_tren,2026-11-17T17:33:47Z,dau vao: danh sach CSKCB So Y te TP Da Nang (nguoi dung cung cap)
-outputs/tables/cskcb_danang.csv,30,6068,585338546b798a3319013d23f1875be5003fbefbed0f485872781142d8700ba9,15_tuyen_tren,2026-11-17T17:33:47Z,"Danh sach CSKCB So Y te TP Da Nang da lam sach (tuyen, hang, cap CMKT, toa do)"
-data/reference/tt30_2024_goi_dich_vu.csv,15,3927,d73f89d899e6e8df257ed9d3e00651730578aa5c5a90e94a9c0bf9f4307c3eb4,15_tuyen_tren,2026-11-17T17:33:47Z,dau vao: 15 nhom goi dich vu y te co ban cua TYT theo TT 30/2024/TT-BYT
-data/reference/nq1251_sap_xep.csv,11,2745,cc8ee96c86dfbd03e31882a70c9021974f565788563970df5fdf83798eab7413,15_tuyen_tren,2026-11-17T17:33:47Z,dau vao: 8 don vi gop + 3 dieu chinh mot phan theo NQ 1251/NQ-UBTVQH15 ngay 24/10/2024
-outputs/tables/doi_soat_nq1251_quy_tac.csv,5,589,d05ac7d61e315011325c36147636d8040a1ed7aeaa478121db2b711e3e2ec1cc,15_tuyen_tren,2026-11-17T17:33:47Z,Doi soat quy tac du doan gop tram voi NQ 1251 (17 xa bi gop thanh 8 don vi tu 01/01/2025)
-outputs/tables/tyt_cskcb.csv,56,20013,3a9f5fa03cb39d7fb47971c0f0db48d07d4c9282006df7c81fea62eab90a21bf,15_tuyen_tren,2026-11-17T17:33:47Z,A15: khoang cach va so CSKCB quanh moi TYT theo cap CMKT; ung_vien_A15_moi = >= 6 CSKCB/2km
-outputs/tables/tyt_cskcb_theo_nhom.csv,3,531,39211bc83c0cc454e5fe147086987f4f44106c5f5eeb2b8a143397e0d912236d,15_tuyen_tren,2026-11-17T17:33:47Z,A15: tong hop CSKCB quanh TYT theo nhom dia ban
-outputs/tables/doi_soat_nq1251_theo_xa.csv,56,7864,30ac6085839bf17685c23cce48cacdeecba7a140c867e6dbe69df4401221f16a,15_tuyen_tren,2026-11-17T17:33:47Z,Phan loai tung xa: quy tac A15 moi vs thuc te NQ 1251
-outputs/tables/ung_vien_gop_tram.csv,17,5516,94fa87b135bfccb6f92b0587be20f9b358bab5ee28fd1a4a857e0eb4abf11663,15_tuyen_tren,2026-11-17T17:33:47Z,A15 moi: ung vien RA SOAT (khong phai de nghi dong cua); nguong 6 CSKCB trong 2 km
+outputs/tables/kpi_tong_hop_spark.csv,20,1681,b8f08a34c9e1df132a23db5c8d0e50f84924aba1649fa3601477d7d57a66ffe6,11_spark_pipeline,2026-11-18T05:28:30Z,"KPI chinh + phu nam 2024, tinh bang Spark"
+outputs/tables/kpi_theo_nam_spark.csv,10,1529,67a4eca22b160590e730e82c4f5ba9d3b91aa43b58b054c56789c835014d6611,11_spark_pipeline,2026-11-18T05:28:30Z,56 tram giu nguyen qua cac nam (A14)
+outputs/tables/kpi_theo_xa_nam_spark.csv,560,70604,7dac3813c893f79a8d235984ebd402e6f5a02d6c9038af317d854d84e3b8136b,11_spark_pipeline,2026-11-18T05:28:30Z,"xa x nam, 56 tram giu nguyen (A14)"
+outputs/tables/kpi_theo_xa_spark.csv,56,10467,76d83afbd1c5057d8830b093dd0b2a28d50375bfe0f6ea2e47dfa8e135344c40,11_spark_pipeline,2026-11-18T05:28:30Z,"theo xa nam 2024, kem mang duong"
+outputs/tables/kpi_theo_nhom_spark.csv,3,593,c03914c3ebf4acc12d03efb0c2ca373cf342ec5fe09f5fa19076a3b444ba751d,11_spark_pipeline,2026-11-18T05:28:30Z,phuong / xa dong bang / xa mien nui (A7)
+outputs/tables/tram_vung_phuc_vu_spark.csv,56,5398,d8fad8c875b14bb3625e999324816c0b2ee0c4079e722341395923eaedc9f8e8,11_spark_pipeline,2026-11-18T05:28:30Z,dan phuc vu boi tram gan nhat
+outputs/tables/spark_so_dong_theo_nguon.csv,6,400,b649e887dce82a1ae26f9ad91bd9f7268b0ef9d635ef81b5c7e036ebe4574d16,11_spark_pipeline,2026-11-18T05:28:30Z,so dong tho / hop le / khong vao bang sach (= loi du lieu + ngoai pham vi) tung nguon
+outputs/tables/spark_quarantine_tong_hop.csv,7,384,acd26faf322e4bd233817d4e9c5bb177f228c88acbd86eda154552a9b9cd81b2,11_spark_pipeline,2026-11-18T05:28:30Z,"dong khong vao bang sach theo loai (LOI_DU_LIEU -> quarantine/, NGOAI_PHAM_VI -> excluded/), nguon, ly do"
+outputs/tables/spark_quarantine_mau.csv,59,8927,1bb43afe7a571c1396367861a19d9c11a1d0e4b680ed03f3c9b2f55e374d318a,11_spark_pipeline,2026-11-18T05:28:30Z,"toi da 10 dong mau moi (loai, nguon, ly do); ban day du o quarantine/ va excluded/"
+outputs/tables/doi_soat_spark.csv,27,3186,f18deaebf1252b3323fc2247ee677b5edb6a56ed469d88fcacbce8f5202ce70a,11_spark_pipeline,2026-11-18T05:28:41Z,
+data/raw/danh-sach-cskcb.xlsx,30,14233,62c2fbc07851993ae0ce28658a4a5d40eebc763228dee7c8e43a2fd1f2f6f814,15_tuyen_tren,2026-11-18T05:29:08Z,dau vao: danh sach CSKCB So Y te TP Da Nang (nguoi dung cung cap)
+outputs/tables/cskcb_danang.csv,30,6068,585338546b798a3319013d23f1875be5003fbefbed0f485872781142d8700ba9,15_tuyen_tren,2026-11-18T05:29:08Z,"Danh sach CSKCB So Y te TP Da Nang da lam sach (tuyen, hang, cap CMKT, toa do)"
+data/reference/tt30_2024_goi_dich_vu.csv,15,3927,d73f89d899e6e8df257ed9d3e00651730578aa5c5a90e94a9c0bf9f4307c3eb4,15_tuyen_tren,2026-11-18T05:29:08Z,dau vao: 15 nhom goi dich vu y te co ban cua TYT theo TT 30/2024/TT-BYT
+data/reference/nq1251_sap_xep.csv,11,2745,cc8ee96c86dfbd03e31882a70c9021974f565788563970df5fdf83798eab7413,15_tuyen_tren,2026-11-18T05:29:08Z,dau vao: 8 don vi gop + 3 dieu chinh mot phan theo NQ 1251/NQ-UBTVQH15 ngay 24/10/2024
+outputs/tables/doi_soat_nq1251_quy_tac.csv,5,589,d05ac7d61e315011325c36147636d8040a1ed7aeaa478121db2b711e3e2ec1cc,15_tuyen_tren,2026-11-18T05:29:09Z,Doi soat quy tac du doan gop tram voi NQ 1251 (17 xa bi gop thanh 8 don vi tu 01/01/2025)
+outputs/tables/tyt_cskcb.csv,56,20013,3a9f5fa03cb39d7fb47971c0f0db48d07d4c9282006df7c81fea62eab90a21bf,15_tuyen_tren,2026-11-18T05:29:09Z,A15: khoang cach va so CSKCB quanh moi TYT theo cap CMKT; ung_vien_A15_moi = >= 6 CSKCB/2km
+outputs/tables/tyt_cskcb_theo_nhom.csv,3,531,39211bc83c0cc454e5fe147086987f4f44106c5f5eeb2b8a143397e0d912236d,15_tuyen_tren,2026-11-18T05:29:09Z,A15: tong hop CSKCB quanh TYT theo nhom dia ban
+outputs/tables/doi_soat_nq1251_theo_xa.csv,56,7864,30ac6085839bf17685c23cce48cacdeecba7a140c867e6dbe69df4401221f16a,15_tuyen_tren,2026-11-18T05:29:09Z,Phan loai tung xa: quy tac A15 moi vs thuc te NQ 1251
+outputs/tables/ung_vien_gop_tram.csv,17,5516,94fa87b135bfccb6f92b0587be20f9b358bab5ee28fd1a4a857e0eb4abf11663,15_tuyen_tren,2026-11-18T05:29:09Z,A15 moi: ung vien RA SOAT (khong phai de nghi dong cua); nguong 6 CSKCB trong 2 km
+outputs/tables/qa_official_population.csv,34,6602,9d02e0400a8272c9a41f8161f5bb929f8390960e33211f81eb8d77b1287b550e,10_quality,2026-11-18T05:30:07Z,moc so lieu NQ 1251 chua xac dinh nam (ho so de an)
+outputs/tables/qa_summary.csv,32,2951,2cafdc70889f62d9323d649eb217d7b6baf7a727247b9e2b278394a85991824a,10_quality,2026-11-18T05:30:07Z,
+outputs/tables/tu_dien_du_lieu.csv,67,16347,5e377ccb3a119b861d922405593f64e0abe23b0c20d0c13c31b04685f49e8ecd,10_quality,2026-11-18T05:30:07Z,
