@@ -17,7 +17,7 @@ File này Claude Code đọc tự động mỗi khi mở dự án. Giữ ngắn,
 4. Chạy theo thứ tự 01 → `run_all.sh` (02–09, 13, 14, 10, 12, 11a) → 11 (Spark) → 15 (đọc bảng của Spark; `run_spark.sh` tự chạy). Sau bước 11 đọc `doi_soat_spark.csv`; sau bước 15 đọc dòng `Doi chieu NQ 1251` trong log. Sau mỗi bước: đọc log mới nhất trong `logs/` và các bảng `qa_*.csv`; báo mọi dòng `CẦN XEM`, `LỆCH`, `FAIL` trước khi chạy bước sau.
 5. Khi sửa code: ghi file đầu ra qua `save_csv` / `register` trong `scripts/common.py` để `run_manifest.csv` đủ. Không đổi tên cột đầu ra khi chưa hỏi.
 6. Giấy phép phải ghi trong báo cáo: WorldPop CC BY 4.0; OSM ODbL 1.0 ("© OpenStreetMap contributors", CSDL phái sinh chia sẻ lại cùng ODbL); GADM chỉ học thuật, không phân phối lại; AWS Terrain Tiles ghi nguồn.
-7. #Truthmode: WorldPop là **ước tính mô hình**, không phải đếm đầu người. Dữ liệu cách ly (quarantine) phải là dòng lỗi thật của nguồn, không tạo lỗi giả để minh hoạ. Số sau 2024 là **dự báo** (bước 08) hoặc **số chiếu** của WorldPop: luôn gọi đúng tên, kèm khoảng 80%; backtest chỉ đo khả năng tái tạo chuỗi WorldPop; baseline thắng mô hình chuẩn thì nói thẳng và dùng baseline.
+7. #Truthmode: WorldPop là **ước tính mô hình**, không phải đếm đầu người. Vùng `quarantine/` chỉ chứa lỗi dữ liệu thật; NoData của nguồn và dòng ngoài phạm vi vào `excluded/` (cột `loai` = `LOI_DU_LIEU` / `NGOAI_PHAM_VI`); không tạo lỗi giả để minh hoạ và không gọi dòng ngoài phạm vi là "lỗi". Số sau 2024 là **dự báo** (bước 08) hoặc **số chiếu** của WorldPop: luôn gọi đúng tên, kèm khoảng 80%; backtest chỉ đo khả năng tái tạo chuỗi WorldPop; baseline thắng mô hình chuẩn thì nói thẳng và dùng baseline.
 8. `tests/make_test_fixture.py` tạo dữ liệu GIẢ LẬP chỉ để thử code; không bao giờ chạy nó trong thư mục dự án thật.
 9. Trả lời người dùng bằng tiếng Việt, tách rõ **dữ liệu** và **giả định**, chỉ ra rủi ro và câu hỏi còn mở.
 
@@ -39,7 +39,7 @@ scripts/   00_check.sh, 01_download.sh, 02–15 *.py, 11a_landing.py, 11b_hdfs_y
 docs/      hướng dẫn cài đặt, hướng dẫn sử dụng, tài liệu kiến trúc
 data/raw/        dữ liệu tải về + location-tyt.xlsx     data/reference/  danh sách 56 trạm, số liệu NQ 1251
 data/interim/    parquet/geojson trung gian (pandas)    data/landing/    CSV thô cho Spark (vùng thu nhận)
-data/spark/      curated/ quarantine/ gold/ (Parquet của Spark khi không dùng HDFS)
+data/spark/      curated/ quarantine/ excluded/ gold/ (Parquet của Spark khi không dùng HDFS)
 outputs/tables/  mọi bảng kết quả (CSV)                 outputs/figures/  h1–h5, h7–h9 (PNG; h6 chỉ có khi có xã giảm tiếp cận; h8 bản đồ hành chính trước 2025, h9 trước/sau đề xuất)
 outputs/run_manifest.csv  file đầu ra + số dòng + SHA-256 + script tạo ra     logs/  nhật ký từng lần chạy
 docker/ notebooks/        cụm HDFS + YARN + JupyterLab của học phần và notebook bước 11

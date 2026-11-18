@@ -146,7 +146,7 @@ def main():
     fld(ds, "lon, lat, xa, dan_moi_duoc_phu", "số", "Vị trí đề xuất và số dân được phủ mới", "Tính bởi 09_greedy.py",
         "vị trí là ô dân cư thật; kiểm tra quỹ đất trước khi công bố", "Nội bộ – chưa công bố (có thể ảnh hưởng giá đất)")
     # ---- vung thu nhan (CSV tho cho Spark) va san pham cua Spark (11a_landing.py, 11_spark_pipeline.py) ----
-    QR = "vi phạm → vùng quarantine kèm mã lý do"
+    QR = "vi phạm → quarantine/ (lỗi dữ liệu) hoặc excluded/ (ngoài phạm vi) kèm mã lý do"
     for ds, rows in (
         ("data/landing/pop_100m_raw.csv", (
             ("year", "số nguyên", "Năm của raster WorldPop 100 m", f"∈ {YEARS[0]}–{YEARS[-1]}; {QR}", WP, "Thấp"),
@@ -155,7 +155,7 @@ def main():
         ("data/landing/cells_dim.csv", (
             ("row, col, cell_id", "số nguyên/chuỗi", "Khoá ô lưới 100 m", f"không rỗng, duy nhất; {QR}", WP, "Công khai"),
             ("lon, lat, x_m, y_m", "số thực", "Tâm ô (WGS84 và UTM 49N)", f"trong hộp bao; {QR}", WP, "Công khai"),
-            ("ma_tram", "chuỗi", "Xã/phường chứa tâm ô; rỗng = ngoài 56 xã", f"∈ 56 mã; rỗng → quarantine (NGOAI_56_XA)", "Ranh giới GADM 4.1 (A12)", "Công khai"),
+            ("ma_tram", "chuỗi", "Xã/phường chứa tâm ô; rỗng = ngoài 56 xã", f"∈ 56 mã; rỗng → excluded/ (NGOAI_56_XA, ngoài phạm vi – không phải lỗi)", "Ranh giới GADM 4.1 (A12)", "Công khai"),
             ("k1_row, k1_col", "số nguyên", "Ô 1 km chứa ô 100 m (để nối tỷ lệ 60+)", "không rỗng", WP, "Công khai"),
             ("elev_m, slope_deg", "số thực", "Độ cao, độ dốc tại tâm ô", "elev ≥ −10; rỗng coi như 0 khi phân loại A7", "AWS Terrain Tiles (Mapzen)", "Công khai"))),
         ("data/landing/age_1km_raw.csv", (
@@ -168,10 +168,17 @@ def main():
         ("data/landing/net_dist.csv", (
             ("cell_id", "chuỗi", "Khoá ô lưới", f"duy nhất, thuộc ô có dân; {QR}", "05_network.py", "Công khai"),
             ("net_dist_m, net_time_min, net_station", "số thực/chuỗi", "Đường đi ngắn nhất theo mạng đường OSM tới trạm, thời gian xe máy, trạm đích (A6)", f"≥ 0, hữu hạn; {QR}", OSM, "Thấp"))),
-        ("data/spark/quarantine/dong_loi (Parquet)", (
-            ("nguon", "chuỗi", "Tên file CSV thô chứa dòng lỗi", "không rỗng", "11_spark_pipeline.py", "Thấp"),
+        ("data/spark/quarantine/dong_loi và data/spark/excluded/ngoai_pham_vi (Parquet)", (
+            ("nguon", "chuỗi", "Tên file CSV thô chứa dòng không vào bảng sạch", "không rỗng", "11_spark_pipeline.py", "Thấp"),
+            ("loai", "chuỗi", "LOI_DU_LIEU (có ít nhất một mã lỗi → quarantine/) hoặc NGOAI_PHAM_VI (chỉ mang mã NoData/ngoài phạm vi → excluded/, không phải lỗi)",
+             "∈ 2 giá trị", "11_spark_pipeline.py", "Thấp"),
             ("ly_do", "chuỗi", "Mã lý do, nhiều lý do nối bằng ';'", "không rỗng", "11_spark_pipeline.py", "Thấp"),
-            ("khoa, ban_ghi", "chuỗi", "Khoá và nguyên văn dòng lỗi (JSON)", "không rỗng", "11_spark_pipeline.py", "Thấp"))),
+            ("khoa, ban_ghi", "chuỗi", "Khoá và nguyên văn dòng (JSON)", "không rỗng", "11_spark_pipeline.py", "Thấp"))),
+        ("outputs/tables/spark_so_dong_theo_nguon.csv", (
+            ("so_dong_tho, so_dong_hop_le, so_dong_cach_ly", "số nguyên", "Dòng thô, dòng vào bảng sạch, dòng KHÔNG vào bảng sạch (= lỗi dữ liệu + ngoài phạm vi; tên cột giữ từ bản cũ)",
+             "thô = hợp lệ + cach_ly", "11_spark_pipeline.py", "Nội bộ"),
+            ("so_dong_loi_du_lieu, so_dong_ngoai_pham_vi, ty_le_loi_du_lieu_pct", "số", "Tách dòng không vào bảng sạch thành lỗi thật và ngoài phạm vi (NoData của WorldPop, ngoài 56 xã)",
+             "cach_ly = loi + ngoai_pham_vi", "11_spark_pipeline.py", "Nội bộ"))),
         ("outputs/tables/kpi_tong_hop_spark.csv", (
             ("chi_so, gia_tri, don_vi, loai, ghi_chu", "chuỗi/số", f"KPI chính và KPI phụ năm {BASE_YEAR} tính bằng Spark", "khớp pandas trong ngưỡng đối soát", "11_spark_pipeline.py", "Công khai (số tổng hợp)"),)),
         ("outputs/tables/kpi_theo_nam_spark.csv", (

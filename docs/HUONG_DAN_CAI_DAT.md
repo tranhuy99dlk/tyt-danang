@@ -170,7 +170,7 @@ các lần sau mất 4–9 phút trên máy thử.
 
 Màn hình in dần các dòng `INFO` theo từng khâu (đọc, kiểm tra, biến đổi, ghi, đối soát).
 
-Thấy gì là đúng: có dòng `Doi soat: 25 phep, 0 LECH.` và mọi dòng có `7.` đều kết thúc bằng `ĐẠT`; sau đó có dòng `Doi chieu NQ 1251: ... KHOP` và dòng cuối là `Xong buoc 15. ...`
+Thấy gì là đúng: có dòng `Doi soat: 27 phep, 0 LECH.` và mọi dòng có `7.` đều kết thúc bằng `ĐẠT`; sau đó có dòng `Doi chieu NQ 1251: ... KHOP` và dòng cuối là `Xong buoc 15. ...`
 Cảnh báo của Spark và Java không hiện trên màn hình mà được ghi vào `logs/11_spark_stderr_*.log`.
 
 Tới đây dự án đã chạy xong và có đủ bảng kết quả. Mục 9 chỉ cần khi phải trình diễn HDFS, YARN và JupyterLab.
@@ -192,7 +192,7 @@ Lần đầu Docker tải thêm bốn image Hadoop. Bước Spark trên HDFS m�
 Thấy gì là đúng:
 
 - `11b … truoc` in `Found 6 items` dưới `/mis5007/landing`.
-- Bước Spark in dòng đầu có `landing=hdfs://namenode:9000/mis5007/landing` và dòng cuối `Doi soat: 25 phep, 0 LECH.`
+- Bước Spark in dòng đầu có `landing=hdfs://namenode:9000/mis5007/landing` và dòng cuối `Doi soat: 27 phep, 0 LECH.`
 - `11b … sau` in `Status: HEALTHY`, `Under-replicated blocks: 0` và `Total Nodes:1`.
 - Mở được http://localhost:9871 (HDFS), http://localhost:8088 (YARN), http://localhost:8888 (JupyterLab; mật khẩu ở dòng `JUPYTER_TOKEN` trong `docker/docker-compose.yml`).
 

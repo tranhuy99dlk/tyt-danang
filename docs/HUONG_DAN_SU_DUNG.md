@@ -68,7 +68,7 @@ Sau mỗi lần chạy, đọc ba bảng này trước khi dùng bất kỳ con 
 |---|---|---|---|
 | `qa_summary.csv` | `dat` | Phần lớn `ĐẠT`; một số `CẦN XEM` đã biết (xem dưới) | Xuất hiện `CẦN XEM` mới |
 | `doi_soat_spark.csv` | `ket_qua` | Mọi dòng `ĐẠT` | Có dòng `LỆCH` |
-| `spark_so_dong_theo_nguon.csv` | `so_dong_cach_ly` | Pixel dân số và lưới 1 km có tỷ lệ cách ly cao vì NoData và vùng ngoài 56 xã | `stations_raw` có ít hơn 56 dòng hợp lệ |
+| `spark_so_dong_theo_nguon.csv` | `so_dong_loi_du_lieu`, `so_dong_ngoai_pham_vi` | Lỗi dữ liệu chỉ có 9 dòng ở `stations_raw` (8 dòng tên quận, 1 dòng tiêu đề của file Excel); ngoài phạm vi rất nhiều ở pixel dân số, lưới 1 km, ô lưới (NoData của WorldPop, ngoài 56 xã) – bình thường | Lỗi dữ liệu xuất hiện ở nguồn khác, hoặc `stations_raw` có ít hơn 56 dòng hợp lệ |
 | log mới nhất `logs/15_tuyen_tren_*.log` | dòng `Doi chieu NQ 1251` | `... code va file tham chieu KHOP`; `CSKCB doc duoc: 30 co so` | Có chữ `LECH` (danh sách xã gộp trong code khác `nq1251_sap_xep.csv`) hoặc `CAN XEM` (CSKCB không đọc được toạ độ) |
 
 Các mục `CẦN XEM` đang tồn tại và đã được ghi nhận là hạn chế của dữ liệu:
@@ -78,8 +78,16 @@ Các mục `CẦN XEM` đang tồn tại và đã được ghi nhận là hạn 
 - Phường có ranh giới OSM khác GADM (OSM đã vẽ theo bản đồ sau sáp nhập).
 - WorldPop lệch khoảng 21% so với số liệu NQ 1251.
 
-Muốn xem dòng nào bị cách ly: `spark_quarantine_tong_hop.csv` (đếm theo lý do), `spark_quarantine_mau.csv` (tối đa 10 dòng mẫu mỗi lý do).
-Bản đầy đủ là Parquet ở `data/spark/quarantine/dong_loi` hoặc `/mis5007/quarantine/dong_loi` trên HDFS. Ý nghĩa mã lý do: [KIEN_TRUC.md](KIEN_TRUC.md#6-pipeline-spark-bước-11).
+Dòng không vào bảng sạch chia hai loại (cột `loai`):
+
+| Loại | Vùng lưu trữ | Ý nghĩa | Lần chạy 18/11/2026 |
+|---|---|---|---|
+| `LOI_DU_LIEU` | `quarantine/dong_loi` | Lỗi thật: sai kiểu, thiếu hoặc trùng khoá, toạ độ sai… | 9 dòng, đều là dòng tiêu đề/tên quận trong `location-tyt.xlsx` |
+| `NGOAI_PHAM_VI` | `excluded/ngoai_pham_vi` | Không phải lỗi: mã NoData −99999 WorldPop dùng cho ô không có dân, pixel ngoài 56 xã, năm ngoài phạm vi | 2.936.766 dòng |
+
+Xem số dòng theo loại và lý do ở `spark_quarantine_tong_hop.csv`, dòng mẫu ở `spark_quarantine_mau.csv` (tối đa 10 dòng mỗi lý do).
+Bản đầy đủ là Parquet ở `data/spark/quarantine/`, `data/spark/excluded/` hoặc `/mis5007/quarantine`, `/mis5007/excluded` trên HDFS.
+Ý nghĩa và loại của từng mã lý do: [KIEN_TRUC.md](KIEN_TRUC.md#6-pipeline-spark-bước-11).
 
 ## 4. Việc thường làm
 
@@ -127,7 +135,11 @@ Sau khi đổi: chạy lại `run_all.sh` rồi Spark. Đổi `YEARS` thì phả
 ### Thêm một quy tắc kiểm tra trong Spark
 
 Trong `scripts/11_spark_pipeline.py`, tìm lời gọi `split(...)` của nguồn cần thêm và chèn một cặp `("MA_LY_DO", điều_kiện)` vào danh sách.
-Điều kiện phải trả về `true` cho dòng **vi phạm**. Chạy lại Spark; số dòng cách ly theo mã mới xuất hiện trong `spark_quarantine_tong_hop.csv`.
+Điều kiện phải trả về `true` cho dòng **vi phạm**. Mã mới được tính là lỗi dữ liệu (`quarantine/`); nếu nó chỉ đánh dấu dữ liệu ngoài phạm vi chứ không phải lỗi, thêm mã vào bộ `MA_NGOAI_PHAM_VI` ở đầu file để dòng vào `excluded/`. Chạy lại Spark; số dòng theo mã mới xuất hiện trong `spark_quarantine_tong_hop.csv`.
+
+### Xem Spark thực thi truy vấn thế nào
+
+Mỗi lần chạy, bước 11 ghi kế hoạch thực thi (`explain("formatted")`) của truy vấn KPI chính toàn 56 xã vào `logs/plan_kpi_2024.txt`: các phép nối chéo broadcast, tổng hợp, quét Parquet đã lưu. Thư mục `logs/` không được đưa lên GitHub; muốn nộp làm minh chứng thì chép file ra ngoài.
 
 ### Sửa code và giữ khả năng truy vết
 
@@ -149,6 +161,7 @@ Các tham số phân tích nằm trong `common.py` (bảng ở trên). Các bi�
 | `SPARK_SHUFFLE_PARTITIONS` | `11_spark_pipeline.py` | `16` | Số phân vùng khi shuffle |
 | `SPARK_MASTER` | `11_spark_pipeline.py` | `local[*]` | Địa chỉ master của Spark |
 | `SPARK_UI` | `11_spark_pipeline.py` | `false` | `true` bật Spark UI trong lúc pipeline chạy |
+| `SPARK_PARTITION_OVERWRITE` | `11_spark_pipeline.py` | `static` | `dynamic` chỉ ghi đè các phân vùng năm có trong dữ liệu mới. Chỉ dùng khi cập nhật vài năm; nếu thu hẹp `YEARS` mà vẫn dùng `dynamic`, năm cũ còn lại và đối soát báo `LỆCH` |
 | `HDFS_REPLICATION` | `11_spark_pipeline.py` | `1` | Hệ số nhân bản khi ghi lên HDFS |
 
 Các biến của `11_spark_pipeline.py` được đọc **bên trong container**, nên đặt chúng trước `bash scripts/run_spark.sh` không có tác dụng:
@@ -200,6 +213,7 @@ Spark chạy `local[*]` trong container JupyterLab và đọc/ghi HDFS. YARN ch�
 | `01_download.sh` báo `FAIL` | Mạng chập chờn hoặc máy chủ Overpass bận | Chạy lại lệnh; file đã tải được bỏ qua |
 | Một bước Python báo `No such file` ở `data/interim/` | Chưa chạy bước trước nó | Chạy `run_all.sh` từ đầu |
 | `AssertionError: Thieu file 100 m nam co so` | Chưa tải đủ raster | Chạy `bash scripts/01_download.sh` |
+| Bước 11 dừng với `RuntimeError: Thieu .../_SUCCESS` | Một lần ghi Parquet trước đó bị ngắt giữa chừng (Parquet không có giao dịch), bảng còn rỗng hoặc dở dang | Chạy lại bước 11 từ đầu; không đọc bảng đó bằng công cụ khác cho tới khi chạy xong |
 | `ModuleNotFoundError` khi chạy bước Python | Chưa kích hoạt môi trường ảo | `source .venv/bin/activate` |
 | `doi_soat_spark.csv` có dòng `LỆCH` | Chạy Spark trên CSV thô cũ hơn kết quả pandas | Chạy lại `run_all.sh` rồi Spark; trên HDFS thêm `11b_hdfs_yarn_cli.sh truoc` |
 | `docker: Cannot connect to the Docker daemon` | Docker Desktop chưa mở | Mở Docker Desktop, chờ biểu tượng báo đang chạy |
@@ -215,6 +229,8 @@ Spark chạy `local[*]` trong container JupyterLab và đọc/ghi HDFS. YARN ch�
 Không tìm ra nguyên nhân: mở file log mới nhất của bước bị lỗi trong `logs/`.
 
 ## 7. Khi đưa số liệu vào báo cáo
+
+- Không viết "cách ly 2.936.775 dòng lỗi". Viết đúng: lỗi dữ liệu là 9 dòng (dòng tiêu đề và tên quận trong file toạ độ nhập tay); 2.936.766 dòng còn lại là ngoài phạm vi – mã NoData WorldPop dùng cho ô không có dân và pixel ngoài 56 xã – không phải dữ liệu hỏng (`spark_quarantine_tong_hop.csv`, cột `loai`).
 
 - Mỗi con số phải dẫn về một file trong `outputs/tables/` hoặc `logs/`. Chưa có file thì ghi "chưa có số".
 - WorldPop là ước tính mô hình; ghi rõ điều này cạnh mọi con số dân.

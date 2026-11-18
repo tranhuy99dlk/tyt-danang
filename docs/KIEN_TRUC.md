@@ -34,7 +34,7 @@ pipeline Spark phải đọc với schema, kiểm tra, tách lỗi, làm sạch,
 │ GADM 4.1         │ │  .tif/.xlsx → CSV  │ ├─────────────────────┤ │  05 mạng đường       │ │ 11 (bước 7)       │ │ run_manifest.csv │
 │ AWS Terrain Tiles│ │  thô, không sửa    │ │ landing    CSV thô  │ │  06 KPI, 07, 09, 13  │ │  doi_soat_spark   │ │  SHA-256 mỗi file│
 │ location-tyt.xlsx│ │                    │ │ curated    Parquet  │ ├──────────────────────┤ │  bảo toàn số dòng,│ │ notebook đã chạy │
-│  (toạ độ nhập tay)│ │ 11b …_cli.sh      │ │ quarantine Parquet  │ │ Spark (trong Docker) │ │  tổng dân;        │ │ logs/*.log       │
+│  (toạ độ nhập tay)│ │ 11b …_cli.sh      │ │ quarantine, excluded│ │ Spark (trong Docker) │ │  tổng dân;        │ │ logs/*.log       │
 │ NQ 1251 (dân số) │ │  hdfs dfs -put     │ │ gold       Parquet  │ │  11_spark_pipeline   │ │  Spark ↔ pandas   │ │                  │
 └──────────────────┘ └────────────────────┘ │ (data/spark/ │ HDFS) │ └──────────────────────┘ └───────────────────┘ └──────────────────┘
                                             └─────────────────────┘
@@ -53,8 +53,8 @@ Có hai động cơ xử lý chạy nối tiếp nhau:
 | Xử lý không gian | Python 3.11, pandas, rasterio, shapely, pyproj, scipy | Ranh giới, lưới dân số, trạm, mạng đường, KPI, chẩn đoán, đề xuất | `scripts/02`–`07`, `09`, `13` |
 | Kiểm tra chất lượng | pandas | 4 nhóm kiểm tra + từ điển dữ liệu | `scripts/10_quality.py` |
 | Thu nhận cho Spark | rasterio, pandas, openpyxl | Đổ raster và Excel ra CSV thô | `scripts/11a_landing.py` |
-| Pipeline Spark | PySpark 3.5 | Schema, kiểm tra, quarantine, biến đổi, tổng hợp, đối soát | `scripts/11_spark_pipeline.py` |
-| Lưu trữ phân tán | HDFS 3.2.1 (1 NameNode, 1 DataNode) | Các vùng landing / curated / quarantine / gold | cụm Docker |
+| Pipeline Spark | PySpark 3.5 | Schema, kiểm tra, tách lỗi (quarantine) và dòng ngoài phạm vi (excluded), biến đổi, tổng hợp, đối soát | `scripts/11_spark_pipeline.py` |
+| Lưu trữ phân tán | HDFS 3.2.1 (1 NameNode, 1 DataNode) | Các vùng landing / curated / quarantine / excluded / gold | cụm Docker |
 | Quản lý tài nguyên | YARN (ResourceManager, NodeManager) | Xem trạng thái cụm qua CLI | cụm Docker |
 | Giao diện làm việc | JupyterLab + PySpark | Chạy notebook bước 11 nối HDFS | `notebooks/buoc11_pyspark_hdfs.ipynb` |
 | Tham số dùng chung | Python | Năm, ngưỡng km, hộp bao, tốc độ, đường dẫn | `scripts/common.py` |
@@ -78,7 +78,7 @@ Có hai động cơ xử lý chạy nối tiếp nhau:
 | 12 | `12_export_csv.py` | `grid_access.parquet` | `dan_cu_luoi_100m.csv`, `tiep_can_luoi_100m.csv` | Xuất lưới ra CSV kèm giải thích cột |
 | 11a | `11a_landing.py` | raster, Excel, parquet | `data/landing/*.csv` | CSV thô cho Spark, giữ nguyên cả giá trị lỗi |
 | 11b | `11b_hdfs_yarn_cli.sh` | `data/landing/` | HDFS `/mis5007/landing`, log CLI | `hdfs dfs -put`, `fsck`, `yarn node -list` … |
-| 11 | `11_spark_pipeline.py` | landing | curated, quarantine, gold, `*_spark.csv`, `doi_soat_spark.csv` | Xem mục 6 |
+| 11 | `11_spark_pipeline.py` | landing | curated, quarantine, excluded, gold, `*_spark.csv`, `doi_soat_spark.csv`, `logs/plan_kpi_2024.txt` | Xem mục 6 |
 | 15 | `15_tuyen_tren.py` | `danh-sach-cskcb.xlsx`, `tt30_2024_goi_dich_vu.csv`, `nq1251_sap_xep.csv`, trạm, `tram_vung_phuc_vu_spark.csv`, `kpi_theo_xa_spark.csv` | `cskcb_danang.csv`, `tyt_cskcb*.csv`, `ung_vien_gop_tram.csv`, `doi_soat_nq1251_*.csv` | Đặt TYT cạnh 30 CSKCB theo cấp chuyên môn; ứng viên rà soát gộp trạm (A15) và đối chiếu với NQ 1251; chạy trên máy **sau** bước 11 |
 
 Lưới 1 km các năm 2025–2030 của WorldPop là số chiếu; chỉ bước 08 đọc chúng, để đối chiếu và để phân bố dân 2030 trong từng xã (giả định A9). Spark (bước 11) không tính dự báo.
@@ -92,7 +92,8 @@ Lưới 1 km các năm 2025–2030 của WorldPop là số chiếu; chỉ bướ
 | interim | `data/interim/` | – | Parquet/GeoJSON trung gian của pandas | 02–06 |
 | landing | `data/landing/` | `/mis5007/landing` | 6 file CSV thô | 11a (và 11b đưa lên HDFS) |
 | curated | `data/spark/curated/` | `/mis5007/curated` | Bảng đã sạch: sự kiện ô × năm, danh mục ô, trạm, xã | 11 |
-| quarantine | `data/spark/quarantine/` | `/mis5007/quarantine` | Dòng lỗi kèm lý do, phân vùng theo nguồn | 11 |
+| quarantine | `data/spark/quarantine/` | `/mis5007/quarantine` | Chỉ **lỗi dữ liệu thật** (`loai = LOI_DU_LIEU`) kèm lý do, phân vùng theo nguồn | 11 |
+| excluded | `data/spark/excluded/` | `/mis5007/excluded` | Dòng **ngoài phạm vi**, không phải lỗi (`loai = NGOAI_PHAM_VI`): NoData của WorldPop, pixel ngoài 56 xã | 11 |
 | gold | `data/spark/gold/` | `/mis5007/gold` | 6 bảng KPI | 11 |
 | outputs | `outputs/tables/`, `outputs/figures/` | – | CSV và hình cho báo cáo | mọi bước |
 
@@ -112,25 +113,32 @@ không làm hỏng lần đọc mà rơi vào cột `_corrupt_record`.
 | `net_dist.csv` | một ô: đường đi ngắn nhất tới trạm | cell_id |
 | `dm_56_tram.csv` | một trạm/xã trong danh mục | ma_tram |
 
-**Kiểm tra và tách lỗi** – hàm `split()` áp danh sách quy tắc cho từng nguồn. Dòng vi phạm ít nhất một quy tắc được ghi vào vùng
-quarantine với `nguon`, `ly_do` (nhiều mã nối bằng `;`), `khoa`, `ban_ghi` (nguyên văn dạng JSON).
+**Kiểm tra và tách lỗi** – hàm `split()` áp danh sách quy tắc cho từng nguồn. Dòng vi phạm ít nhất một quy tắc mang `nguon`,
+`loai`, `ly_do` (nhiều mã nối bằng `;`), `khoa`, `ban_ghi` (nguyên văn dạng JSON) và được xếp vào một trong hai vùng:
 
-| Mã lý do | Ý nghĩa | Áp cho |
-|---|---|---|
-| `SAI_KIEU_HOAC_SO_COT` | Không đọc được theo schema | mọi nguồn |
-| `THIEU_KHOA`, `TRUNG_KHOA` | Thiếu hoặc trùng khoá | mọi nguồn |
-| `THIEU_GIA_TRI`, `GIA_TRI_AM_NODATA` | Rỗng, hoặc âm (mã NoData −99999 của WorldPop) | dân số 100 m, 1 km |
-| `NAM_NGOAI_PHAM_VI` | Năm ngoài 2015–2024 | dân số 100 m, 1 km |
-| `NGOAI_56_XA`, `MA_XA_KHONG_CO_TRONG_DANH_MUC` | Pixel không thuộc xã nào trong phạm vi | ô lưới, dân số |
-| `SAI_TOA_DO_NGOAI_HOP_BAO`, `NGOAI_HOP_BAO` | Toạ độ ngoài Đà Nẵng cũ | ô lưới, trạm |
-| `KHONG_PHAI_BAN_GHI_TRAM`, `SAI_DINH_DANG_TOA_DO`, `TEN_KHONG_KHOP_DANH_MUC`, `TRUNG_TRAM` | Dòng tiêu đề/tên quận, toạ độ sai dạng, tên lạ, trùng trạm | trạm |
-| `KHONG_TOI_DUOC_HOAC_AM`, `KHONG_THUOC_O_CO_DAN` | Không có đường tới, hoặc ô không thuộc lưới | mạng đường |
-| `THIEU_TOA_DO` | Ô lưới thiếu kinh độ, vĩ độ hoặc toạ độ mét | ô lưới |
-| `KHONG_CO_O_LUOI`, `O_LUOI_BI_CACH_LY` | Pixel dân số không có trong danh mục ô lưới, hoặc thuộc một ô đã bị cách ly | dân số 100 m |
-| `BIEN_KHONG_HOP_LE` | Tên biến không phải `pop` hay một trong 7 nhóm tuổi `t_60` … `t_90` | lưới 1 km |
+- `loai = NGOAI_PHAM_VI` → `excluded/`: dòng **chỉ** mang các mã trong `MA_NGOAI_PHAM_VI` (cột "Loại" bên dưới). Đây là giá trị nguồn
+  công bố hoặc dữ liệu nằm ngoài vùng nghiên cứu, **không phải lỗi**.
+- `loai = LOI_DU_LIEU` → `quarantine/`: dòng có ít nhất một mã lỗi.
 
-Lần chạy 17/11/2026 chỉ phát sinh bốn mã: `GIA_TRI_AM_NODATA`, `NGOAI_56_XA`, `KHONG_PHAI_BAN_GHI_TRAM`, `SAI_DINH_DANG_TOA_DO`
-(`outputs/tables/spark_quarantine_tong_hop.csv`). Các mã còn lại là quy tắc đang bật nhưng chưa có dòng nào vi phạm.
+| Mã lý do | Ý nghĩa | Loại | Áp cho |
+|---|---|---|---|
+| `GIA_TRI_AM_NODATA` | Giá trị âm – mã NoData −99999 WorldPop dùng cho ô không có dân | ngoài phạm vi | dân số 100 m, 1 km |
+| `NGOAI_56_XA` | Pixel không thuộc xã nào trong 56 xã | ngoài phạm vi | ô lưới, dân số |
+| `NAM_NGOAI_PHAM_VI` | Năm ngoài 2015–2024 | ngoài phạm vi | dân số 100 m, 1 km |
+| `KHONG_THUOC_O_CO_DAN` | Ô có khoảng cách mạng đường nhưng không thuộc lưới có dân | ngoài phạm vi | mạng đường |
+| `SAI_KIEU_HOAC_SO_COT` | Không đọc được theo schema | lỗi | mọi nguồn |
+| `THIEU_KHOA`, `TRUNG_KHOA` | Thiếu hoặc trùng khoá | lỗi | mọi nguồn |
+| `THIEU_GIA_TRI` | Ô giá trị rỗng | lỗi | dân số 100 m, 1 km |
+| `MA_XA_KHONG_CO_TRONG_DANH_MUC` | Mã xã của ô không có trong danh mục 56 trạm | lỗi | ô lưới |
+| `SAI_TOA_DO_NGOAI_HOP_BAO`, `NGOAI_HOP_BAO`, `THIEU_TOA_DO` | Toạ độ ngoài Đà Nẵng cũ hoặc thiếu | lỗi | ô lưới, trạm |
+| `KHONG_PHAI_BAN_GHI_TRAM`, `SAI_DINH_DANG_TOA_DO`, `TEN_KHONG_KHOP_DANH_MUC`, `TRUNG_TRAM` | Dòng tiêu đề/tên quận, toạ độ sai dạng, tên lạ, trùng trạm | lỗi | trạm |
+| `KHONG_TOI_DUOC_HOAC_AM` | Không có đường tới hoặc khoảng cách âm | lỗi | mạng đường |
+| `KHONG_CO_O_LUOI`, `O_LUOI_BI_CACH_LY` | Pixel dân số không có trong danh mục ô lưới, hoặc thuộc một ô bị loại vì lỗi | lỗi | dân số 100 m |
+| `BIEN_KHONG_HOP_LE` | Tên biến không phải `pop` hay một trong 7 nhóm tuổi `t_60` … `t_90` | lỗi | lưới 1 km |
+
+Lần chạy 18/11/2026 (`outputs/tables/spark_quarantine_tong_hop.csv`): `quarantine/` có **9 dòng**, đều ở file toạ độ nhập tay
+(8 dòng tên quận và 1 dòng tiêu đề – không có bản ghi trạm nào sai; 56/56 trạm hợp lệ). `excluded/` có 2.936.766 dòng:
+2.493.001 dòng mang mã NoData và 443.765 dòng chỉ nằm ngoài 56 xã. Các mã lỗi khác là quy tắc đang bật nhưng chưa có dòng nào vi phạm.
 
 **Làm sạch** – bỏ trùng; tách chuỗi "vĩ độ, kinh độ" thành hai số; chuẩn hoá tên xã để ghép với danh mục; chiếu toạ độ trạm sang UTM 49N;
 bỏ ô có dân bằng 0 ở mọi năm.
@@ -150,9 +158,17 @@ cửa sổ cộng dồn, cùng định nghĩa với bản pandas.
 **Ghi** – mỗi bảng curated được ghi ra vùng lưu trữ rồi đọc lại trước khi dùng tiếp. Cách này cắt chuỗi phụ thuộc của Spark
 và bảo đảm tầng gold được tính từ dữ liệu đã lưu.
 
-**Đối soát** – 25 phép, ghi vào `doi_soat_spark.csv`:
+- Parquet không có giao dịch: `mode("overwrite")` xoá thư mục cũ rồi mới ghi, nên một job chết giữa chừng để lại thư mục rỗng hoặc dở dang.
+  Vì vậy mọi lần đọc một bảng đã ghi đều đi qua hàm `doc()`, hàm này kiểm tra file `_SUCCESS` trước và dừng ngay nếu thiếu.
+- Mặc định `spark.sql.sources.partitionOverwriteMode=static` (ghi đè cả bảng). Chỉ khi cập nhật vài năm mới đặt
+  `SPARK_PARTITION_OVERWRITE=dynamic` để chỉ ghi đè các năm có trong dữ liệu mới. Nếu `YEARS` bị thu hẹp mà vẫn dùng `dynamic`,
+  phân vùng năm cũ còn lại và phép đối soát "đọc lại = trước khi ghi" báo `LỆCH`. Hai vùng `quarantine/`, `excluded/` luôn ghi đè cả bảng.
+- Kế hoạch thực thi (`explain("formatted")`) của truy vấn KPI chính toàn 56 xã được ghi vào `logs/plan_kpi_2024.txt`.
 
-- Bảo toàn: số dòng thô = hợp lệ + cách ly; tổng dân thô = hợp lệ + cách ly; số dòng đọc lại = số dòng đã ghi.
+**Đối soát** – 27 phép, ghi vào `doi_soat_spark.csv`:
+
+- Bảo toàn: số dòng ở `quarantine/` = tổng lỗi dữ liệu; số dòng ở `excluded/` = tổng ngoài phạm vi; tổng dân thô = hợp lệ + không vào bảng sạch;
+  số dòng đọc lại = số dòng đã ghi; mọi bảng Parquet đã ghi đều có `_SUCCESS`.
 - Spark so với pandas: tổng dân theo xã × năm, khoảng cách tới trạm gần nhất, toạ độ trạm sau chiếu, KPI theo xã, theo nhóm, toàn 56 xã.
 
 ## 7. Hạ tầng Docker
@@ -177,13 +193,14 @@ File cấu hình: `docker/docker-compose.yml`, tên dự án compose là `mis500
 |---|---|---|
 | Hình học và Dijkstra làm bằng pandas/scipy, không làm trong Spark | Spark không có sẵn phép điểm-trong-đa-giác và đường đi ngắn nhất; dữ liệu đủ nhỏ để chạy trên một máy | Hai động cơ, phải đối soát với nhau |
 | Spark tính lại KPI từ CSV thô thay vì chỉ đọc kết quả pandas | Đáp ứng yêu cầu pipeline Spark đầy đủ; có hai cách tính độc lập để kiểm tra chéo | Logic bị lặp ở hai nơi; sửa công thức phải sửa cả hai |
-| CSV thô giữ nguyên mã NoData và pixel ngoài phạm vi | Dữ liệu quarantine là lỗi thật của nguồn, không phải lỗi tạo ra để minh hoạ | File landing lớn hơn (3 triệu dòng pixel) |
+| CSV thô giữ nguyên mã NoData và pixel ngoài phạm vi; pipeline tự tách chúng sang `excluded/`, chỉ để lỗi thật ở `quarantine/` | Không tạo lỗi giả để minh hoạ; người đọc không hiểu nhầm NoData là dữ liệu hỏng | File landing lớn hơn (3 triệu dòng pixel) |
 | Không dùng API chỉ đường; tự dựng đồ thị từ OSM và chạy Dijkstra | Miễn phí, chạy lại được, không vướng hạn mức và giấy phép | Không có ùn tắc, đường một chiều; tốc độ là giả định (A6) |
 | Ranh giới xã lấy từ GADM 4.1 | OSM mốc 31/12/2024 đã vẽ theo bản đồ sau sáp nhập, chỉ khớp 45/56 xã (A12) | GADM thô hơn và không được phân phối lại |
 | Toạ độ trạm do nhóm nhập tay, kiểm tra theo Cổng dữ liệu Đà Nẵng (congdulieu.vn), dữ liệu cập nhật 12/12/2024 | OSM chỉ có 4/56 trạm | Nhập thủ công nên có thể gõ nhầm; chưa kiểm chứng thực địa (A13) |
 | Spark chạy `local[*]`, không chạy trên YARN | Image NodeManager của học phần không cài Python nên không chạy được executor PySpark | YARN chỉ được dùng qua CLI để xem trạng thái cụm |
 | Tên container có tiền tố `mis5007-`, cổng 9871 và 4041 | Chạy song song được với cụm khác dùng tên `namenode` và cổng 9870, 4040 | Khác tên/cổng trong tài liệu chung của lớp |
 | Hệ số nhân bản HDFS = 1 | Cụm chỉ có một DataNode | Không có bản sao dự phòng |
+| Kiểm tra `_SUCCESS` trước khi đọc; ghi đè phân vùng `static` mặc định | Parquet không có giao dịch; `dynamic` để lại phân vùng cũ khi phạm vi năm thay đổi | Cập nhật vài năm vẫn phải ghi lại cả bảng, trừ khi chủ động đặt `dynamic` |
 | Mọi tham số nằm trong `common.py` | Đổi năm hay ngưỡng ở một chỗ, tên file và nhãn tự đổi theo | Đổi năm cơ sở làm đổi tên cột (`pop_2024`) |
 
 ## 9. Truy vết và chất lượng
@@ -195,7 +212,8 @@ File cấu hình: `docker/docker-compose.yml`, tên dự án compose là `mis500
 | Một lần chạy đã in ra gì | `logs/<tên bước>_<giờ UTC>.log` |
 | Dữ liệu có vấn đề gì | `outputs/tables/qa_summary.csv` và các bảng `qa_*.csv` |
 | Spark và pandas có khớp không | `outputs/tables/doi_soat_spark.csv` |
-| Dòng nào bị loại và vì sao | `spark_quarantine_tong_hop.csv`, `spark_quarantine_mau.csv`, vùng quarantine |
+| Dòng nào bị loại và vì sao | `spark_quarantine_tong_hop.csv`, `spark_quarantine_mau.csv` (cột `loai`), vùng `quarantine/` và `excluded/` |
+| Spark thực thi truy vấn KPI chính thế nào | `logs/plan_kpi_2024.txt` |
 | Ý nghĩa từng trường | `outputs/tables/tu_dien_du_lieu.csv`, `giai_thich_csv_luoi.csv` |
 
 ## 10. Hạn chế đã biết

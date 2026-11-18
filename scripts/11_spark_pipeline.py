@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
-"""11 - PIPELINE SPARK: doc CSV tho voi schema -> kiem tra -> tach loi (quarantine) -> lam sach
+"""11 - PIPELINE SPARK: doc CSV tho voi schema -> kiem tra -> tach loi (quarantine) va dong ngoai pham vi (excluded) -> lam sach
 -> bien doi / join -> tong hop KPI -> ghi ket qua -> doi soat.
 
 Dau vao  : data/landing/*.csv (do 11a_landing.py tao tu raster WorldPop, Excel nhap tay, 05_network.py)
            hoac <HDFS_URI>/landing/*.csv neu dat bien moi truong HDFS_URI.
-Cac vung : landing (CSV tho) -> curated (Parquet da sach) + quarantine (dong loi kem ly do) -> gold (KPI).
+Cac vung : landing (CSV tho) -> curated (Parquet da sach) + quarantine (LOI DU LIEU that, kem ly do)
+           + excluded (dong NGOAI PHAM VI: NoData cua WorldPop, ngoai 56 xa... - khong phai loi) -> gold (KPI).
            Khong co HDFS_URI: cac vung nam o data/spark/; co HDFS_URI: nam tren HDFS.
 Cac buoc :
   1. DOC voi schema khai bao (StructType, che do PERMISSIVE: dong sai kieu / sai so cot vao _corrupt_record).
-  2. KIEM TRA tung dong theo quy tac; dong vi pham -> QUARANTINE kem ma ly do (mot dong co the nhieu ly do).
+  2. KIEM TRA tung dong theo quy tac; dong vi pham kem ma ly do (mot dong co the nhieu ly do), phan 2 loai:
+       LOI_DU_LIEU (co it nhat 1 ma loi) -> quarantine/; NGOAI_PHAM_VI (chi mang ma trong MA_NGOAI_PHAM_VI) -> excluded/.
   3. LAM SACH: bo trung, doi ten/kieu, chuan hoa ten xa, doi "lat, lon" thanh so, chieu UTM 49N.
   4. BIEN DOI / JOIN (co y nghia nghiep vu):
        T1 gop 7 nhom tuoi 60-90+ (luoi 1 km) -> ty le 60+ -> dan 60+ tung o 100 m (gia dinh A3)
@@ -16,15 +18,18 @@ Cac buoc :
        T3 noi khoang cach mang duong -> he so vong (muc do thuan tien duong di, A6)
        T4 phan loai xa: Phuong / Xa dong bang-ven do / Xa mien nui theo dia hinh (A7)
   5. TONG HOP: KPI chinh (ty le dan trong 3 km) + KPI phu theo tung nam trong YEARS, theo xa, theo nhom, theo tram.
-  6. GHI: Parquet (curated, quarantine, gold) + CSV trong outputs/tables/.
-  7. DOI SOAT: bao toan so dong va tong dan (tho = hop le + cach ly); Spark so voi pandas (buoc 03-06).
+  6. GHI: Parquet (curated, quarantine, excluded, gold) + CSV trong outputs/tables/. Parquet khong co giao dich:
+     moi lan doc mot bang da ghi deu kiem tra co _SUCCESS truoc. Ke hoach thuc thi cua truy van KPI chinh
+     ghi vao logs/plan_kpi_<nam co so>.txt.
+  7. DOI SOAT: bao toan so dong va tong dan (tho = hop le + loi + ngoai pham vi); Spark so voi pandas (buoc 03-06).
 
 Chay trong container Spark (tu thu muc du an):
     bash scripts/run_spark.sh
 Hoac trong cum cua hoc phan (JupyterLab / spark-notebook), co HDFS:
     HDFS_URI=hdfs://namenode:9000/mis5007 python scripts/11_spark_pipeline.py
 Bien moi truong (doc BEN TRONG container): HDFS_URI (tuy chon), HDFS_REPLICATION (mac dinh 1), SPARK_MASTER (mac dinh local[*]),
-SPARK_DRIVER_MEMORY (mac dinh 3g), SPARK_SHUFFLE_PARTITIONS (mac dinh 16), SPARK_UI (mac dinh false).
+SPARK_DRIVER_MEMORY (mac dinh 3g), SPARK_SHUFFLE_PARTITIONS (mac dinh 16), SPARK_UI (mac dinh false),
+SPARK_PARTITION_OVERWRITE (mac dinh static; dynamic CHI khi cap nhat vai nam - xem ghi chu o cau hinh Spark).
 Cach dat: docs/HUONG_DAN_SU_DUNG.md muc 4.
 """
 import math
@@ -39,7 +44,7 @@ SCRIPTS = str(Path(__file__).resolve().parent)
 sys.path.insert(0, SCRIPTS)
 os.environ["PYTHONPATH"] = SCRIPTS + os.pathsep + os.environ.get("PYTHONPATH", "")   # de worker Python import duoc common
 from common import (INTERIM, TAB, LANDING, SPARK_OUT, BBOX, BASE_YEAR, YEARS, THRESH_KM, MAIN_KM, WHITE_KM,  # noqa: E402
-                    AGE60_BANDS, norm_name, get_logger, save_csv)
+                    AGE60_BANDS, LOGS, norm_name, get_logger, save_csv)
 
 S = "11_spark_pipeline"
 log = get_logger(S)
@@ -51,6 +56,10 @@ RW = WHITE_KM * 1000
 CORRUPT = "_corrupt_record"
 RE_LATLON = r"^\s*(-?\d+(?:\.\d+)?)\s*[,;]\s*(-?\d+(?:\.\d+)?)\s*$"
 N_PHUONG, N_NUI, N_DB = "Phường", "Xã miền núi (địa hình)", "Xã đồng bằng/ven đô"
+# Ma ly do KHONG phai loi du lieu: gia tri NoData do nguon cong bo cho o khong co dan, va dong nam ngoai pham vi nghien cuu.
+# Dong chi mang cac ma nay -> excluded/ (loai NGOAI_PHAM_VI); co them bat ky ma nao khac -> quarantine/ (loai LOI_DU_LIEU).
+MA_NGOAI_PHAM_VI = ("GIA_TRI_AM_NODATA", "NGOAI_56_XA", "NAM_NGOAI_PHAM_VI", "KHONG_THUOC_O_CO_DAN")
+LOI, NGOAI = "LOI_DU_LIEU", "NGOAI_PHAM_VI"
 
 
 def utm49n(lon, lat):
@@ -100,6 +109,10 @@ def main():
              .config("spark.sql.maxPlanStringLength", "2000")      # ke hoach nhieu join: khong dung chuoi mo ta dai
              .config("spark.ui.enabled", os.environ.get("SPARK_UI", "false"))
              .config("spark.hadoop.dfs.replication", os.environ.get("HDFS_REPLICATION", "1"))   # cum chi co 1 DataNode
+             # static (mac dinh): overwrite xoa ca thu muc roi ghi lai - dung cho moi lan chay day du.
+             # dynamic: chi ghi de cac phan vung nam co trong du lieu moi - CHI dung khi cap nhat vai nam; neu YEARS bi thu hep,
+             # phan vung cu se con lai va phep doi soat "doc lai = truoc khi ghi" se bao LECH.
+             .config("spark.sql.sources.partitionOverwriteMode", os.environ.get("SPARK_PARTITION_OVERWRITE", "static"))
              .getOrCreate())
     spark.sparkContext.setLogLevel("ERROR")
     zone = hdfs.rstrip("/") if hdfs else "file://" + str(SPARK_OUT)
@@ -129,12 +142,54 @@ def main():
         return df
 
     counts, quarantines, checks = [], [], []
+    jvm, hconf = spark.sparkContext._jvm, spark.sparkContext._jsc.hadoopConfiguration()
+    da_ghi = []                                   # moi duong dan Parquet da ghi trong lan chay nay
+
+    def co_success(path):
+        """Parquet khong co giao dich: _SUCCESS chi xuat hien khi job ghi xong tron ven."""
+        p = jvm.org.apache.hadoop.fs.Path(f"{path}/_SUCCESS")
+        return bool(p.getFileSystem(hconf).exists(p))
+
+    def ghi(df, path, part=None, che_do_phan_vung=None):
+        w = df.write.mode("overwrite")
+        if che_do_phan_vung:
+            w = w.option("partitionOverwriteMode", che_do_phan_vung)
+        (w.partitionBy(part) if part else w).parquet(f"{zone}/{path}")
+        da_ghi.append(f"{zone}/{path}")
+
+    def doc(path, schema=None):
+        """Chi doc bang da ghi xong: thieu _SUCCESS (job truoc chet giua chung, thu muc rong/do dang) -> dung ngay."""
+        full = f"{zone}/{path}"
+        if not co_success(full):
+            raise RuntimeError(f"Thieu {full}/_SUCCESS: lan ghi chua xong hoac bi ngat - khong doc du lieu do dang. Chay lai buoc 11.")
+        r = spark.read if schema is None else spark.read.schema(schema)
+        return r.parquet(full)
 
     def persist(df, path, part=None):
-        """Ghi mot bang ra vung luu tru roi DOC LAI: cat chuoi phu thuoc, cac buoc sau tinh tu du lieu da luu."""
-        w = df.write.mode("overwrite")
-        (w.partitionBy(part) if part else w).parquet(f"{zone}/{path}")
-        return spark.read.parquet(f"{zone}/{path}")
+        """Ghi mot bang ra vung luu tru roi DOC LAI (sau khi kiem tra _SUCCESS): cat chuoi phu thuoc,
+        cac buoc sau tinh tu du lieu da luu."""
+        ghi(df, path, part)
+        return doc(path)
+
+    def ghi_ke_hoach(df, ten_file, mo_ta):
+        """Ghi ke hoach thuc thi (explain formatted) cua mot truy van vao logs/ - day du, khong bi cat."""
+        import contextlib
+        import io
+        cu = spark.conf.get("spark.sql.maxPlanStringLength")
+        try:
+            spark.conf.set("spark.sql.maxPlanStringLength", "100000000")
+        except Exception:                          # cau hinh khong doi duoc luc chay: van ghi ban (co the bi cat)
+            pass
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            df.explain("formatted")
+        try:
+            spark.conf.set("spark.sql.maxPlanStringLength", cu)
+        except Exception:
+            pass
+        f = LOGS / ten_file
+        f.write_text(f"# {mo_ta}\n# Spark {spark.version}, ghi luc {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n" + buf.getvalue(), encoding="utf-8")
+        log.info("5. Ke hoach thuc thi cua %s: %s (%d dong)", mo_ta, f.relative_to(LOGS.parent), buf.getvalue().count("\n"))
 
     def add(phep, s, p, dat, ghi=""):
         checks.append(dict(phep_doi_soat=phep, spark=s, pandas_hoac_nguon=p, ket_qua="ĐẠT" if dat else "LỆCH", ghi_chu=ghi))
@@ -147,15 +202,20 @@ def main():
     def split(df, name, raw_cols, key_cols, rules):
         """rules = [(ma_ly_do, dieu_kien)]. Tra ve bang hop le; dong vi pham ghi vao danh sach quarantine."""
         flagged = df.withColumn("_ly_do", F.concat_ws(";", *[F.when(c, F.lit(code)) for code, c in rules])).cache()
-        bad = flagged.filter(F.col("_ly_do") != "")
+        bad = flagged.filter(F.col("_ly_do") != "").withColumn(
+            "_loai", F.when(F.exists(F.split("_ly_do", ";"), lambda x: ~x.isin(*MA_NGOAI_PHAM_VI)), F.lit(LOI)).otherwise(F.lit(NGOAI)))
         good = flagged.filter(F.col("_ly_do") == "").drop("_ly_do", CORRUPT)
-        q = bad.select(F.lit(name).alias("nguon"), F.col("_ly_do").alias("ly_do"),
+        q = bad.select(F.lit(name).alias("nguon"), F.col("_loai").alias("loai"), F.col("_ly_do").alias("ly_do"),
                        F.concat_ws("|", *[F.coalesce(F.col(k).cast("string"), F.lit("")) for k in key_cols]).alias("khoa"),
                        F.to_json(F.struct(*[F.col(c) for c in raw_cols + [CORRUPT]])).alias("ban_ghi"))
-        n_raw, n_bad = flagged.count(), bad.count()
-        counts.append(dict(nguon=name, so_dong_tho=n_raw, so_dong_hop_le=n_raw - n_bad, so_dong_cach_ly=n_bad))
+        n_raw = flagged.count()
+        theo_loai = dict(bad.groupBy("_loai").count().collect())
+        n_loi, n_ngoai = int(theo_loai.get(LOI, 0)), int(theo_loai.get(NGOAI, 0))
+        n_bad = n_loi + n_ngoai
+        counts.append(dict(nguon=name, so_dong_tho=n_raw, so_dong_hop_le=n_raw - n_bad, so_dong_cach_ly=n_bad,
+                           so_dong_loi_du_lieu=n_loi, so_dong_ngoai_pham_vi=n_ngoai))
         quarantines.append(q)
-        log.info("2. %-13s tho %8d | hop le %8d | cach ly %8d", name, n_raw, n_raw - n_bad, n_bad)
+        log.info("2. %-13s tho %8d | hop le %8d | loi du lieu %5d | ngoai pham vi %8d", name, n_raw, n_raw - n_bad, n_loi, n_ngoai)
         return good, flagged
 
     bad_type = F.col(CORRUPT).isNotNull()
@@ -360,9 +420,11 @@ def main():
                                F.count("*").alias("so_o_luoi")), "ma_tram", "left").fillna(0, ["dan_phuc_vu", "dan60_phuc_vu", "so_o_luoi"]),
                     ["ma_tram"])
     # G6: tong hop nam co so
-    tp = kpi_agg(a, []).crossJoin(wmedian(a, [], "dist_m", "kc_trung_vi_m")).crossJoin(net_agg(a, [])) \
+    kpi_df = kpi_agg(a, []).crossJoin(wmedian(a, [], "dist_m", "kc_trung_vi_m")).crossJoin(net_agg(a, [])) \
         .crossJoin(wmedian(a.filter("dist_m > 500"), [], "detour", "he_so_vong_trung_vi")) \
-        .crossJoin(wmedian(a, [], "net_time_min", "thoi_gian_trung_vi_phut")).toPandas().iloc[0]
+        .crossJoin(wmedian(a, [], "net_time_min", "thoi_gian_trung_vi_phut"))
+    ghi_ke_hoach(kpi_df, f"plan_kpi_{BASE_YEAR}.txt", f"truy van KPI chinh toan 56 xa nam {BASE_YEAR}")
+    tp = kpi_df.toPandas().iloc[0]
     nh = k_nh_pd.set_index("nhom")
     gap = (nh.loc[N_PHUONG, "ty_le_trong_3km_pct"] - nh.loc[N_NUI, "ty_le_trong_3km_pct"]) if N_NUI in nh.index else float("nan")
     gap_dt = (nh.loc[N_PHUONG, "ty_le_trong_3km_mang_duong_pct"] - nh.loc[N_NUI, "ty_le_trong_3km_mang_duong_pct"]) if N_NUI in nh.index else float("nan")
@@ -398,17 +460,23 @@ def main():
     for q in quarantines[1:]:
         qall = qall.unionByName(q)
     qall = qall.cache()
-    qall.write.mode("overwrite").partitionBy("nguon").parquet(f"{zone}/quarantine/dong_loi")
+    # quarantine/ chi giu LOI DU LIEU that; excluded/ giu dong ngoai pham vi (NoData, ngoai 56 xa...) - khong phai loi.
+    # Luon ghi de toan bo (static) ke ca khi chon SPARK_PARTITION_OVERWRITE=dynamic: nguon het loi phai mat phan vung cu.
+    ghi(qall.filter(F.col("loai") == LOI), "quarantine/dong_loi", "nguon", "static")
+    ghi(qall.filter(F.col("loai") == NGOAI), "excluded/ngoai_pham_vi", "nguon", "static")
     for name, pdf in (("kpi_tong_hop", kq_pd.astype({"gia_tri": "float64"})), ("kpi_theo_nam", k_nam_pd), ("kpi_theo_xa_nam", k_xn_pd),
                       ("kpi_theo_xa", k_xa_pd), ("kpi_theo_nhom", k_nh_pd), ("tram_vung_phuc_vu", k_tr_pd)):
-        spark.createDataFrame(pdf).coalesce(1).write.mode("overwrite").parquet(f"{zone}/gold/{name}")
-    n_qback = spark.read.parquet(f"{zone}/quarantine/dong_loi").count()
+        ghi(spark.createDataFrame(pdf).coalesce(1), f"gold/{name}")
+    n_qback = doc("quarantine/dong_loi", qall.schema).count()      # doc theo schema: van dung khi vung rong
+    n_eback = doc("excluded/ngoai_pham_vi", qall.schema).count()
+    n_success = sum(co_success(p) for p in da_ghi)
 
-    q_sum = to_pd(qall.groupBy("nguon", "ly_do").count().withColumnRenamed("count", "so_dong"), ["nguon", "ly_do"])
-    q_mau = to_pd(qall.withColumn("_r", F.row_number().over(Window.partitionBy("nguon", "ly_do").orderBy("khoa")))
-                  .filter("_r <= 10").drop("_r"), ["nguon", "ly_do", "khoa"])
+    q_sum = to_pd(qall.groupBy("loai", "nguon", "ly_do").count().withColumnRenamed("count", "so_dong"), ["loai", "nguon", "ly_do"])
+    q_mau = to_pd(qall.withColumn("_r", F.row_number().over(Window.partitionBy("loai", "nguon", "ly_do").orderBy("khoa")))
+                  .filter("_r <= 10").drop("_r"), ["loai", "nguon", "ly_do", "khoa"])
     cnt_pd = pd.DataFrame(counts)
     cnt_pd["ty_le_cach_ly_pct"] = (100 * cnt_pd.so_dong_cach_ly / cnt_pd.so_dong_tho).round(3)
+    cnt_pd["ty_le_loi_du_lieu_pct"] = (100 * cnt_pd.so_dong_loi_du_lieu / cnt_pd.so_dong_tho).round(3)
     rd = {c: 3 for c in k_nam_pd.columns if c.endswith("_pct")}
     save_csv(kq_pd, TAB / "kpi_tong_hop_spark.csv", S, note=f"KPI chinh + phu nam {B}, tinh bang Spark")
     save_csv(k_nam_pd.round(rd).round({"kc_trung_vi_m": 1}), TAB / "kpi_theo_nam_spark.csv", S, note="56 tram giu nguyen qua cac nam (A14)")
@@ -416,15 +484,21 @@ def main():
     save_csv(k_xa_pd.round(3), TAB / "kpi_theo_xa_spark.csv", S, note=f"theo xa nam {B}, kem mang duong")
     save_csv(k_nh_pd.round(3), TAB / "kpi_theo_nhom_spark.csv", S, note="phuong / xa dong bang / xa mien nui (A7)")
     save_csv(k_tr_pd.round(1), TAB / "tram_vung_phuc_vu_spark.csv", S, note="dan phuc vu boi tram gan nhat")
-    save_csv(cnt_pd, TAB / "spark_so_dong_theo_nguon.csv", S, note="so dong tho / hop le / cach ly tung nguon")
-    save_csv(q_sum, TAB / "spark_quarantine_tong_hop.csv", S, note="so dong cach ly theo nguon va ly do")
-    save_csv(q_mau, TAB / "spark_quarantine_mau.csv", S, note="toi da 10 dong mau moi (nguon, ly do); ban day du o vung quarantine")
-    log.info("6. Da ghi curated / quarantine / gold tai %s va 9 bang CSV", zone)
+    save_csv(cnt_pd, TAB / "spark_so_dong_theo_nguon.csv", S,
+             note="so dong tho / hop le / khong vao bang sach (= loi du lieu + ngoai pham vi) tung nguon")
+    save_csv(q_sum, TAB / "spark_quarantine_tong_hop.csv", S,
+             note="dong khong vao bang sach theo loai (LOI_DU_LIEU -> quarantine/, NGOAI_PHAM_VI -> excluded/), nguon, ly do")
+    save_csv(q_mau, TAB / "spark_quarantine_mau.csv", S, note="toi da 10 dong mau moi (loai, nguon, ly do); ban day du o quarantine/ va excluded/")
+    log.info("6. Da ghi curated / quarantine / excluded / gold tai %s (%d bang Parquet) va 9 bang CSV", zone, len(da_ghi))
 
     # ================= 7. DOI SOAT =================
-    # (a) bao toan so dong: tho = hop le + cach ly (theo dinh nghia) va doc lai tu vung luu tru
-    add("Số dòng cách ly ghi ra vùng quarantine = tổng số dòng cách ly các nguồn", n_qback, int(cnt_pd.so_dong_cach_ly.sum()),
-        n_qback == int(cnt_pd.so_dong_cach_ly.sum()), f"{zone}/quarantine/dong_loi")
+    # (a) bao toan so dong: tho = hop le + loi + ngoai pham vi (theo dinh nghia) va doc lai tu vung luu tru
+    add("Số dòng lỗi dữ liệu ghi ra vùng quarantine = tổng lỗi dữ liệu các nguồn", n_qback, int(cnt_pd.so_dong_loi_du_lieu.sum()),
+        n_qback == int(cnt_pd.so_dong_loi_du_lieu.sum()), f"{zone}/quarantine/dong_loi")
+    add("Số dòng ngoài phạm vi ghi ra vùng excluded = tổng ngoài phạm vi các nguồn", n_eback, int(cnt_pd.so_dong_ngoai_pham_vi.sum()),
+        n_eback == int(cnt_pd.so_dong_ngoai_pham_vi.sum()), f"{zone}/excluded/ngoai_pham_vi (NoData của WorldPop, ngoài 56 xã – không phải lỗi)")
+    add("Số bảng Parquet có cờ _SUCCESS = số bảng đã ghi", n_success, len(da_ghi), n_success == len(da_ghi),
+        "Parquet không có giao dịch: thiếu _SUCCESS nghĩa là lần ghi bị ngắt")
     n_pop_ok = int(cnt_pd.set_index("nguon").loc["pop_100m_raw", "so_dong_hop_le"])
     add("Pixel × năm hợp lệ = dòng bảng sự kiện + dòng thuộc ô toàn 0", n_fact + n_zero_rows, n_pop_ok, n_fact + n_zero_rows == n_pop_ok)
     add("Số dòng bảng sự kiện đọc lại từ vùng curated = trước khi ghi", n_fact, n_fact_truoc, n_fact == n_fact_truoc, f"{zone}/curated/fact_dan_so_o_nam")
@@ -433,8 +507,8 @@ def main():
     s_ok, s_bad = float(pf.loc[pf.ok, "s"].sum()), float(pf.loc[~pf.ok, "s"].sum())
     s_raw = float(pop_raw.filter("pop_raw >= 0").agg(F.sum("pop_raw")).first()[0])
     s_fact = float(fact.agg(F.sum("pop")).first()[0])
-    add("Tổng dân thô (pixel ≥ 0, mọi năm) = hợp lệ + cách ly", s_ok + s_bad, s_raw, abs(s_ok + s_bad - s_raw) <= REL_TOL * s_raw,
-        f"hợp lệ {s_ok:.0f}; cách ly (ngoài 56 xã) {s_bad:.0f}")
+    add("Tổng dân thô (pixel ≥ 0, mọi năm) = hợp lệ + không vào bảng sạch", s_ok + s_bad, s_raw, abs(s_ok + s_bad - s_raw) <= REL_TOL * s_raw,
+        f"hợp lệ {s_ok:.0f}; ngoài phạm vi (ngoài 56 xã) {s_bad:.0f}")
     add("Tổng dân bảng sự kiện = tổng dân hợp lệ", s_fact, s_ok, abs(s_fact - s_ok) <= REL_TOL * s_ok)
     # (c) Spark vs pandas
     add("Số trạm hợp lệ", n_st, 56, n_st == 56)

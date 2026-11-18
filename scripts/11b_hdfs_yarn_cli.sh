@@ -4,7 +4,7 @@
 # Chay TREN MAY (khong phai trong container), sau khi cum cua du an da len:
 #     docker compose -f docker/docker-compose.yml up -d
 #     bash scripts/11b_hdfs_yarn_cli.sh truoc    # truoc khi chay Spark: tao vung, dua CSV tho len
-#     bash scripts/11b_hdfs_yarn_cli.sh sau      # sau khi chay Spark: liet ke curated / quarantine / gold
+#     bash scripts/11b_hdfs_yarn_cli.sh sau      # sau khi chay Spark: liet ke curated / quarantine / excluded / gold
 # Moi lenh va ket qua duoc ghi vao logs/11b_hdfs_yarn_cli_*.log lam minh chung.
 # =============================================================================
 set -u
@@ -18,7 +18,7 @@ run(){ echo "\$ $*" | tee -a "$LOG"; "$@" 2>&1 | tee -a "$LOG"; echo | tee -a "$
 if [ "$MODE" = "truoc" ]; then
   [ -s data/landing/pop_100m_raw.csv ] || { echo "Thieu data/landing/*.csv - chay scripts/11a_landing.py truoc" | tee -a "$LOG"; exit 1; }
   run docker exec "$NN" hdfs dfsadmin -safemode wait
-  run docker exec "$NN" hdfs dfs -mkdir -p "$H/landing" "$H/curated" "$H/quarantine" "$H/gold"
+  run docker exec "$NN" hdfs dfs -mkdir -p "$H/landing" "$H/curated" "$H/quarantine" "$H/excluded" "$H/gold"
   run docker exec "$NN" rm -rf /tmp/landing
   run docker cp data/landing "$NN":/tmp/landing
   run docker exec "$NN" bash -c "hdfs dfs -put -f /tmp/landing/*.csv $H/landing/"
@@ -26,8 +26,8 @@ if [ "$MODE" = "truoc" ]; then
   run docker exec "$NN" hdfs dfs -count -h "$H/landing"
 else
   run docker exec "$NN" hdfs dfs -setrep -R 1 "$H"       # cum 1 DataNode: dua moi file ve he so nhan ban 1
-  run docker exec "$NN" hdfs dfs -ls -h "$H" "$H/landing" "$H/curated" "$H/quarantine" "$H/gold"
-  run docker exec "$NN" hdfs dfs -ls -h "$H/curated/fact_dan_so_o_nam" "$H/quarantine/dong_loi"
+  run docker exec "$NN" hdfs dfs -ls -h "$H" "$H/landing" "$H/curated" "$H/quarantine" "$H/excluded" "$H/gold"
+  run docker exec "$NN" hdfs dfs -ls -h "$H/curated/fact_dan_so_o_nam" "$H/quarantine/dong_loi" "$H/excluded/ngoai_pham_vi"
   run docker exec "$NN" hdfs dfs -du -h "$H"
 fi
 run docker exec "$NN" hdfs dfsadmin -report

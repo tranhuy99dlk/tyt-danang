@@ -42,7 +42,7 @@ source .venv/bin/activate && bash scripts/run_all.sh                  # phần p
 bash scripts/run_spark.sh                                             # pipeline Spark, rồi bước 15 (TYT và CSKCB)
 ```
 
-Chạy đúng thì lệnh cuối in ra `Doi soat: 25 phep, 0 LECH.`, rồi dòng `Doi chieu NQ 1251: ... KHOP` và `Xong buoc 15.`
+Chạy đúng thì lệnh cuối in ra `Doi soat: 27 phep, 0 LECH.`, rồi dòng `Doi chieu NQ 1251: ... KHOP` và `Xong buoc 15.`
 Trên máy thử, hai lệnh cuối mất 2–3 phút và 4–9 phút (chưa tính thời gian tải dữ liệu và image Docker ở lần đầu).
 Mở `outputs/tables/kpi_tong_hop_spark.csv` để xem KPI chính.
 
@@ -67,7 +67,7 @@ data/raw/         dữ liệu nguồn tải về + location-tyt.xlsx (toạ đ�
 data/reference/   danh sách 56 trạm, dân số NQ 1251, 8 đơn vị gộp theo NQ 1251, 15 gói dịch vụ TT 30/2024
 data/interim/     file trung gian của pandas
 data/landing/     CSV thô cho Spark
-data/spark/       curated / quarantine / gold khi không dùng HDFS
+data/spark/       curated / quarantine (lỗi thật) / excluded (ngoài phạm vi) / gold khi không dùng HDFS
 outputs/tables/   mọi bảng kết quả (CSV)        outputs/figures/   hình h1–h5, h7–h9
 outputs/run_manifest.csv   mỗi file kết quả: script tạo ra, số dòng, SHA-256
 logs/             nhật ký từng lần chạy
