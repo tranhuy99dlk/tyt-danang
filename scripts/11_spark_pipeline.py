@@ -18,6 +18,8 @@ Cac buoc :
        T3 noi khoang cach mang duong -> he so vong (muc do thuan tien duong di, A6)
        T4 phan loai xa: Phuong / Xa dong bang-ven do / Xa mien nui theo dia hinh (A7)
   5. TONG HOP: KPI chinh (ty le dan trong 3 km) + KPI phu theo tung nam trong YEARS, theo xa, theo nhom, theo tram.
+     KPI theo nhom viet them mot lan bang Spark SQL (spark.sql tren temp view) va doi soat voi ban DataFrame API;
+     ke hoach thuc thi ghi vao logs/plan_kpi_<nam>.txt (DataFrame) va logs/plan_kpi_sql_<nam>.txt (Spark SQL).
   6. GHI: Parquet (curated, quarantine, excluded, gold) + CSV trong outputs/tables/. Parquet khong co giao dich:
      moi lan doc mot bang da ghi deu kiem tra co _SUCCESS truoc. Ke hoach thuc thi cua truy van KPI chinh
      ghi vao logs/plan_kpi_<nam co so>.txt.
@@ -413,6 +415,21 @@ def main():
     k_nh_pd = to_pd(kpi_agg(a, ["nhom"]).join(wmedian(a, ["nhom"], "dist_m", "kc_trung_vi_m"), "nhom")
                     .join(net_agg(a, ["nhom"]), "nhom")
                     .join(a.groupBy("nhom").agg(F.countDistinct("ma_tram").alias("so_xa")), "nhom"), ["nhom"])
+    # G4b: cung KPI theo nhom, viet bang Spark SQL tren temp view (muc tieu hoc phan: DataFrame API VA Spark SQL).
+    # Hai cach viet cung di qua bo toi uu Catalyst -> ket qua phai trung nhau; doi soat o muc 7.
+    a.createOrReplaceTempView("o_luoi_tiep_can")
+    sql_nhom = f"""
+        SELECT nhom,
+               SUM(pop)                                                                AS dan,
+               SUM(CASE WHEN dist_m       <= {R} THEN pop ELSE 0 END) / SUM(pop) * 100 AS ty_le_trong_3km_pct,
+               SUM(CASE WHEN net_dist_m   <= {R} THEN pop ELSE 0 END) / SUM(pop) * 100 AS ty_le_trong_3km_mang_duong_pct,
+               SUM(CASE WHEN net_time_min <= 15   THEN pop ELSE 0 END) / SUM(pop) * 100 AS ty_le_toi_tram_15_phut_pct,
+               COUNT(DISTINCT ma_tram)                                                 AS so_xa
+        FROM o_luoi_tiep_can
+        GROUP BY nhom"""
+    k_nh_sql = spark.sql(sql_nhom)
+    ghi_ke_hoach(k_nh_sql, f"plan_kpi_sql_{BASE_YEAR}.txt", f"KPI theo nhom nam {BASE_YEAR} viet bang Spark SQL")
+    k_nh_sql_pd = to_pd(k_nh_sql, ["nhom"])
     # G5: vung phuc vu tung tram
     k_tr_pd = to_pd(st.select("ma_tram", "ten_tram", "quan_huyen", "loai_dv")
                     .join(a.groupBy(F.col("tram_gan_nhat").alias("ma_tram"))
@@ -483,13 +500,15 @@ def main():
     save_csv(k_xn_pd.round(3), TAB / "kpi_theo_xa_nam_spark.csv", S, note="xa x nam, 56 tram giu nguyen (A14)")
     save_csv(k_xa_pd.round(3), TAB / "kpi_theo_xa_spark.csv", S, note=f"theo xa nam {B}, kem mang duong")
     save_csv(k_nh_pd.round(3), TAB / "kpi_theo_nhom_spark.csv", S, note="phuong / xa dong bang / xa mien nui (A7)")
+    save_csv(k_nh_sql_pd.round(3), TAB / "kpi_theo_nhom_spark_sql.csv", S,
+             note="KPI theo nhom viet bang Spark SQL (spark.sql) - doi soat voi kpi_theo_nhom_spark.csv")
     save_csv(k_tr_pd.round(1), TAB / "tram_vung_phuc_vu_spark.csv", S, note="dan phuc vu boi tram gan nhat")
     save_csv(cnt_pd, TAB / "spark_so_dong_theo_nguon.csv", S,
              note="so dong tho / hop le / khong vao bang sach (= loi du lieu + ngoai pham vi) tung nguon")
     save_csv(q_sum, TAB / "spark_quarantine_tong_hop.csv", S,
              note="dong khong vao bang sach theo loai (LOI_DU_LIEU -> quarantine/, NGOAI_PHAM_VI -> excluded/), nguon, ly do")
     save_csv(q_mau, TAB / "spark_quarantine_mau.csv", S, note="toi da 10 dong mau moi (loai, nguon, ly do); ban day du o quarantine/ va excluded/")
-    log.info("6. Da ghi curated / quarantine / excluded / gold tai %s (%d bang Parquet) va 9 bang CSV", zone, len(da_ghi))
+    log.info("6. Da ghi curated / quarantine / excluded / gold tai %s (%d bang Parquet) va 10 bang CSV", zone, len(da_ghi))
 
     # ================= 7. DOI SOAT =================
     # (a) bao toan so dong: tho = hop le + loi + ngoai pham vi (theo dinh nghia) va doc lai tu vung luu tru
@@ -542,6 +561,13 @@ def main():
     kgm = k_nh_pd.merge(kg, on="nhom", suffixes=("_s", "_p"))
     d = float((kgm.ty_le_trong_3km_pct_s - kgm.ty_le_trong_3km_pct_p).abs().max())
     add("Theo nhóm phường/xã – tỷ lệ 3 km: Spark vs pandas, lệch lớn nhất (điểm %)", round(d, 4), 0.0, len(kgm) == len(kg) and d <= PCT_TOL)
+    ks = k_nh_pd.merge(k_nh_sql_pd, on="nhom", suffixes=("_df", "_sql"))
+    d_pct = max(float((ks[f"{c}_df"] - ks[f"{c}_sql"]).abs().max())
+                for c in ("ty_le_trong_3km_pct", "ty_le_trong_3km_mang_duong_pct", "ty_le_toi_tram_15_phut_pct"))
+    d_dan = float(((ks.dan_df - ks.dan_sql).abs() / ks.dan_df.abs()).max())
+    add("Theo nhóm – KPI viết bằng Spark SQL vs DataFrame API, lệch lớn nhất (điểm %)", d_pct, 0.0,
+        len(ks) == len(k_nh_pd) and d_pct <= 1e-9 and d_dan <= REL_TOL and (ks.so_xa_df == ks.so_xa_sql).all(),
+        f"cùng qua bộ tối ưu Catalyst; tổng dân lệch tương đối {d_dan:.1e}; kế hoạch: logs/plan_kpi_sql_{B}.txt")
     ko = pd.read_csv(TAB / "kpi_overview.csv", encoding="utf-8-sig").set_index("chi_so").gia_tri
     for lab, val, tol in (("Tỷ lệ dân trong 3 km (đường chim bay)", tp.ty_le_trong_3km_pct, PCT_TOL),
                           ("Tỷ lệ dân 60+ trong 3 km", tp.ty_le_60_trong_3km_pct, PCT_TOL),

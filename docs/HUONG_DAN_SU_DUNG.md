@@ -13,7 +13,7 @@ Mọi lệnh chạy từ thư mục gốc của dự án (thư mục chứa `REA
 | Tải dữ liệu nguồn (chạy lại chỉ tải file còn thiếu) | `bash scripts/01_download.sh` | tuỳ mạng |
 | Chạy toàn bộ phần pandas và tạo CSV thô cho Spark | `source .venv/bin/activate && bash scripts/run_all.sh` | 2–3 phút |
 | Chạy một bước lẻ | `cd scripts && ../.venv/bin/python 06_kpi.py` | – |
-| Chạy Spark rồi bước 15, không cần cụm HDFS | `bash scripts/run_spark.sh` | 4–9 phút |
+| Chạy Spark (bước 11, 16) rồi bước 15, không cần cụm HDFS | `bash scripts/run_spark.sh` | 4–9 phút |
 | Chạy Spark trên HDFS rồi bước 15 | xem mục 5 | 4–9 phút |
 | Chạy riêng bước 15 (TYT và CSKCB) | `.venv/bin/python scripts/15_tuyen_tren.py` | vài giây |
 
@@ -68,7 +68,7 @@ Sau mỗi lần chạy, đọc ba bảng này trước khi dùng bất kỳ con 
 |---|---|---|---|
 | `qa_summary.csv` | `dat` | Phần lớn `ĐẠT`; một số `CẦN XEM` đã biết (xem dưới) | Xuất hiện `CẦN XEM` mới |
 | `doi_soat_spark.csv` | `ket_qua` | Mọi dòng `ĐẠT` | Có dòng `LỆCH` |
-| `spark_so_dong_theo_nguon.csv` | `so_dong_loi_du_lieu`, `so_dong_ngoai_pham_vi` | Lỗi dữ liệu chỉ có 9 dòng ở `stations_raw` (8 dòng tên quận, 1 dòng tiêu đề của file Excel); ngoài phạm vi rất nhiều ở pixel dân số, lưới 1 km, ô lưới (NoData của WorldPop, ngoài 56 xã) – bình thường | Lỗi dữ liệu xuất hiện ở nguồn khác, hoặc `stations_raw` có ít hơn 56 dòng hợp lệ |
+| `spark_so_dong_theo_nguon.csv` | `so_dong_loi_du_lieu`, `so_dong_ngoai_pham_vi` | Lỗi dữ liệu chỉ có 9 dòng ở `stations_raw` (7 dòng tên quận/huyện, 2 dòng tiêu đề của file Excel); ngoài phạm vi rất nhiều ở pixel dân số, lưới 1 km, ô lưới (NoData của WorldPop, ngoài 56 xã) – bình thường | Lỗi dữ liệu xuất hiện ở nguồn khác, hoặc `stations_raw` có ít hơn 56 dòng hợp lệ |
 | log mới nhất `logs/15_tuyen_tren_*.log` | dòng `Doi chieu NQ 1251` | `... code va file tham chieu KHOP`; `CSKCB doc duoc: 30 co so` | Có chữ `LECH` (danh sách xã gộp trong code khác `nq1251_sap_xep.csv`) hoặc `CAN XEM` (CSKCB không đọc được toạ độ) |
 
 Các mục `CẦN XEM` đang tồn tại và đã được ghi nhận là hạn chế của dữ liệu:
@@ -139,7 +139,7 @@ Trong `scripts/11_spark_pipeline.py`, tìm lời gọi `split(...)` của nguồ
 
 ### Xem Spark thực thi truy vấn thế nào
 
-Mỗi lần chạy, bước 11 ghi kế hoạch thực thi (`explain("formatted")`) của truy vấn KPI chính toàn 56 xã vào `logs/plan_kpi_2024.txt`: các phép nối chéo broadcast, tổng hợp, quét Parquet đã lưu. Thư mục `logs/` không được đưa lên GitHub; muốn nộp làm minh chứng thì chép file ra ngoài.
+Mỗi lần chạy, bước 11 ghi kế hoạch thực thi (`explain("formatted")`) của truy vấn KPI chính toàn 56 xã vào `logs/plan_kpi_2024.txt` (đọc qua `cache()`, nên **không** có `PartitionFilters`), và của KPI theo nhóm viết bằng Spark SQL vào `logs/plan_kpi_sql_2024.txt`. Bước 16 ghi `logs/plan_pruning_2024.txt`: cùng một truy vấn trên Parquet phân vùng, CSV phẳng, CSV phân vùng và Parquet qua `cache()`; số file, số byte quét của từng cách nằm trong `outputs/tables/so_sanh_parquet_csv.csv`. Thư mục `logs/` không được đưa lên GitHub; muốn nộp làm minh chứng thì chép file ra ngoài.
 
 ### Sửa code và giữ khả năng truy vết
 
@@ -179,6 +179,8 @@ docker compose -f docker/docker-compose.yml up -d        # dựng 5 container (l
 bash scripts/11b_hdfs_yarn_cli.sh truoc                   # tạo các vùng trên HDFS, đưa 6 file CSV thô lên
 docker exec -w /home/jovyan/work/mis5007_tram_y_te -e HDFS_URI=hdfs://namenode:9000/mis5007 \
   mis5007-spark-notebook python scripts/11_spark_pipeline.py
+docker exec -w /home/jovyan/work/mis5007_tram_y_te -e HDFS_URI=hdfs://namenode:9000/mis5007 \
+  mis5007-spark-notebook python scripts/16_so_sanh_dinh_dang.py   # bước 16: so sánh Parquet/CSV, đọc curated của bước 11
 bash scripts/11b_hdfs_yarn_cli.sh sau                     # liệt kê kết quả trên HDFS, fsck, trạng thái YARN
 .venv/bin/python scripts/15_tuyen_tren.py                 # bước 15, chạy trên máy sau khi Spark xong
 ```

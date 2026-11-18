@@ -185,6 +185,21 @@ def main():
             ("year, dan, dan_60, ty_le_trong_*km_pct, dan_tren_5km, kc_trung_vi_m, dan_binh_quan_moi_tram", "số", f"KPI toàn 56 xã từng năm {YEARS[0]}–{YEARS[-1]}, giữ nguyên 56 trạm (A14)", "0–100 với tỷ lệ; ≥ 0", "11_spark_pipeline.py", "Công khai (số tổng hợp)"),)),
         ("outputs/tables/doi_soat_spark.csv", (
             ("phep_doi_soat, spark, pandas_hoac_nguon, ket_qua, ghi_chu", "chuỗi/số", "Phép đối soát: bảo toàn số dòng/tổng dân và Spark so với pandas", "mọi dòng phải ĐẠT", "11_spark_pipeline.py", "Nội bộ"),)),
+        ("outputs/tables/kpi_theo_nhom_spark_sql.csv", (
+            ("nhom, dan, ty_le_trong_3km_pct, ty_le_trong_3km_mang_duong_pct, ty_le_toi_tram_15_phut_pct, so_xa", "chuỗi/số",
+             f"KPI theo nhóm năm {BASE_YEAR} viết bằng Spark SQL (spark.sql trên temp view)", "trùng kpi_theo_nhom_spark.csv (phép đối soát Spark SQL vs DataFrame)",
+             "11_spark_pipeline.py", "Công khai (số tổng hợp)"),)),
+        ("outputs/tables/so_sanh_parquet_csv.csv", (
+            ("phuong_an, mo_ta, dinh_dang, chia_thu_muc_theo_nam", "chuỗi/logic", "4 cách lưu cùng một bảng sự kiện: Parquet phân vùng, CSV phẳng, CSV phân vùng, Parquet qua cache()",
+             "đúng 4 dòng", "16_so_sanh_dinh_dang.py", "Nội bộ"),
+            ("dung_luong_ca_10_nam_byte, so_file_quet, dung_luong_file_quet_byte, so_dong_ra_tu_buoc_quet", "số nguyên",
+             "Dung lượng cả bảng; số file, dung lượng file Spark chọn để quét và số dòng bước quét trả ra khi lọc một năm", "≥ 0; rỗng khi đọc từ bộ nhớ đệm",
+             "16_so_sanh_dinh_dang.py (chỉ số Spark numFiles, filesSize, numOutputRows)", "Nội bộ"),
+            ("partition_filters, pushed_filters, loai_join, so_exchange, doc_qua_bo_nho_dem", "chuỗi/số/logic",
+             "Dấu hiệu rút từ explain(): lọc phân vùng, bộ lọc đẩy xuống, kiểu join, số lần shuffle", "đọc kèm logs/plan_pruning_<năm>.txt",
+             "16_so_sanh_dinh_dang.py", "Nội bộ"),
+            ("ty_le_3km_*, khop_kpi_theo_nhom_spark", "số/logic", "Kết quả truy vấn của từng cách lưu; phải trùng nhau và khớp bảng gold",
+             "khop_kpi_theo_nhom_spark = True cho cả 4 dòng", "16_so_sanh_dinh_dang.py", "Công khai (số tổng hợp)"))),
         ("outputs/tables/cskcb_danang.csv", (
             ("ma_cs, ten_cs, tuyen, hang, cap, diem, dia_chi, lat, lon", "chuỗi/số", "30 cơ sở khám chữa bệnh: tuyến, hạng, cấp chuyên môn kỹ thuật (Luật KCB 15/2023, Điều 104), toạ độ", "toạ độ đọc được; cap ∈ ban đầu / cơ bản / chuyên sâu", "data/raw/danh-sach-cskcb.xlsx – người dùng cung cấp (A17)", "Công khai"),)),
         ("outputs/tables/tyt_cskcb.csv", (

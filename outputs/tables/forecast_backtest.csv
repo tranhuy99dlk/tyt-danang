@@ -1,10 +1,10 @@
 ﻿bien,goc,mo_hinh,MAPE_pct,APE_trung_vi_pct,APE_p90_pct
 Dân số,hoc 2015-2019,Drift (baseline),0.85,0.756,1.623
-Dân số,hoc 2015-2019,"Holt tắt dần ETS(A,Ad,N)",0.296,0.219,0.617
+Dân số,hoc 2015-2019,"Holt tắt dần ETS(A,Ad,N)",0.301,0.228,0.639
 Dân số,hoc 2015-2019,Naive (baseline),2.505,2.567,3.858
 Dân số,hoc 2015-2019,Tuyến tính OLS,0.965,0.873,1.757
 Dân số,hoc 2015-2021,Drift (baseline),0.619,0.602,1.007
-Dân số,hoc 2015-2021,"Holt tắt dần ETS(A,Ad,N)",0.18,0.155,0.359
+Dân số,hoc 2015-2021,"Holt tắt dần ETS(A,Ad,N)",0.173,0.15,0.353
 Dân số,hoc 2015-2021,Naive (baseline),1.463,1.458,2.153
 Dân số,hoc 2015-2021,Tuyến tính OLS,0.797,0.774,1.203
 Dân 60+,hoc 2015-2019,Drift (baseline),2.648,2.322,4.352

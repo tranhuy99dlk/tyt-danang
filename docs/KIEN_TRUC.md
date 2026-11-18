@@ -78,7 +78,8 @@ Có hai động cơ xử lý chạy nối tiếp nhau:
 | 12 | `12_export_csv.py` | `grid_access.parquet` | `dan_cu_luoi_100m.csv`, `tiep_can_luoi_100m.csv` | Xuất lưới ra CSV kèm giải thích cột |
 | 11a | `11a_landing.py` | raster, Excel, parquet | `data/landing/*.csv` | CSV thô cho Spark, giữ nguyên cả giá trị lỗi |
 | 11b | `11b_hdfs_yarn_cli.sh` | `data/landing/` | HDFS `/mis5007/landing`, log CLI | `hdfs dfs -put`, `fsck`, `yarn node -list` … |
-| 11 | `11_spark_pipeline.py` | landing | curated, quarantine, excluded, gold, `*_spark.csv`, `doi_soat_spark.csv`, `logs/plan_kpi_2024.txt` | Xem mục 6 |
+| 11 | `11_spark_pipeline.py` | landing | curated, quarantine, excluded, gold, `*_spark.csv`, `kpi_theo_nhom_spark_sql.csv`, `doi_soat_spark.csv`, `logs/plan_kpi_2024.txt`, `logs/plan_kpi_sql_2024.txt` | Xem mục 6 |
+| 16 | `16_so_sanh_dinh_dang.py` | curated `fact_o_nam_khoang_cach`, `dim_xa` của bước 11 | `so_sanh_parquet_csv.csv`, `logs/plan_pruning_2024.txt`, bản sao CSV ở `thu_nghiem/` | Cùng một truy vấn KPI trên 4 cách lưu (Parquet phân vùng, CSV phẳng, CSV phân vùng, Parquet qua `cache()`): đo số file, số byte quét, đọc kế hoạch thực thi; chạy trong container Spark **sau** bước 11 |
 | 15 | `15_tuyen_tren.py` | `danh-sach-cskcb.xlsx`, `tt30_2024_goi_dich_vu.csv`, `nq1251_sap_xep.csv`, trạm, `tram_vung_phuc_vu_spark.csv`, `kpi_theo_xa_spark.csv` | `cskcb_danang.csv`, `tyt_cskcb*.csv`, `ung_vien_gop_tram.csv`, `doi_soat_nq1251_*.csv` | Đặt TYT cạnh 30 CSKCB theo cấp chuyên môn; ứng viên rà soát gộp trạm (A15) và đối chiếu với NQ 1251; chạy trên máy **sau** bước 11 |
 
 Lưới 1 km các năm 2025–2030 của WorldPop là số chiếu; chỉ bước 08 đọc chúng, để đối chiếu và để phân bố dân 2030 trong từng xã (giả định A9). Spark (bước 11) không tính dự báo.
@@ -137,7 +138,7 @@ không làm hỏng lần đọc mà rơi vào cột `_corrupt_record`.
 | `BIEN_KHONG_HOP_LE` | Tên biến không phải `pop` hay một trong 7 nhóm tuổi `t_60` … `t_90` | lỗi | lưới 1 km |
 
 Lần chạy 18/11/2026 (`outputs/tables/spark_quarantine_tong_hop.csv`): `quarantine/` có **9 dòng**, đều ở file toạ độ nhập tay
-(8 dòng tên quận và 1 dòng tiêu đề – không có bản ghi trạm nào sai; 56/56 trạm hợp lệ). `excluded/` có 2.936.766 dòng:
+(7 dòng tên quận/huyện và 2 dòng tiêu đề của file Excel – không có bản ghi trạm nào sai; 56/56 trạm hợp lệ; xem `spark_quarantine_mau.csv`). `excluded/` có 2.936.766 dòng:
 2.493.001 dòng mang mã NoData và 443.765 dòng chỉ nằm ngoài 56 xã. Các mã lỗi khác là quy tắc đang bật nhưng chưa có dòng nào vi phạm.
 
 **Làm sạch** – bỏ trùng; tách chuỗi "vĩ độ, kinh độ" thành hai số; chuẩn hoá tên xã để ghép với danh mục; chiếu toạ độ trạm sang UTM 49N;
@@ -163,13 +164,19 @@ và bảo đảm tầng gold được tính từ dữ liệu đã lưu.
 - Mặc định `spark.sql.sources.partitionOverwriteMode=static` (ghi đè cả bảng). Chỉ khi cập nhật vài năm mới đặt
   `SPARK_PARTITION_OVERWRITE=dynamic` để chỉ ghi đè các năm có trong dữ liệu mới. Nếu `YEARS` bị thu hẹp mà vẫn dùng `dynamic`,
   phân vùng năm cũ còn lại và phép đối soát "đọc lại = trước khi ghi" báo `LỆCH`. Hai vùng `quarantine/`, `excluded/` luôn ghi đè cả bảng.
-- Kế hoạch thực thi (`explain("formatted")`) của truy vấn KPI chính toàn 56 xã được ghi vào `logs/plan_kpi_2024.txt`.
+- Kế hoạch thực thi (`explain("formatted")`) của truy vấn KPI chính toàn 56 xã được ghi vào `logs/plan_kpi_2024.txt`. Truy vấn này đọc bảng
+  `o_luoi_tiep_can_2024` (đã cắt sẵn một năm lúc ghi, không phân vùng) **qua `cache()`**, nên kế hoạch không có `PartitionFilters` và không có
+  `BroadcastHashJoin` (chỉ có `BroadcastNestedLoopJoin` do ghép các kết quả một dòng bằng `crossJoin`). Bằng chứng cho cắt tỉa phân vùng và
+  broadcast hash join nằm ở bước 16 (`logs/plan_pruning_2024.txt`, `so_sanh_parquet_csv.csv`).
+- KPI theo nhóm được viết thêm một lần bằng **Spark SQL** (`spark.sql` trên temp view `o_luoi_tiep_can`) và đối soát với bản DataFrame API;
+  kết quả `kpi_theo_nhom_spark_sql.csv`, kế hoạch `logs/plan_kpi_sql_2024.txt`.
 
-**Đối soát** – 27 phép, ghi vào `doi_soat_spark.csv`:
+**Đối soát** – 28 phép, ghi vào `doi_soat_spark.csv`:
 
 - Bảo toàn: số dòng ở `quarantine/` = tổng lỗi dữ liệu; số dòng ở `excluded/` = tổng ngoài phạm vi; tổng dân thô = hợp lệ + không vào bảng sạch;
   số dòng đọc lại = số dòng đã ghi; mọi bảng Parquet đã ghi đều có `_SUCCESS`.
 - Spark so với pandas: tổng dân theo xã × năm, khoảng cách tới trạm gần nhất, toạ độ trạm sau chiếu, KPI theo xã, theo nhóm, toàn 56 xã.
+- Hai cách viết trong Spark: KPI theo nhóm bằng Spark SQL so với DataFrame API.
 
 ## 7. Hạ tầng Docker
 
@@ -213,7 +220,8 @@ File cấu hình: `docker/docker-compose.yml`, tên dự án compose là `mis500
 | Dữ liệu có vấn đề gì | `outputs/tables/qa_summary.csv` và các bảng `qa_*.csv` |
 | Spark và pandas có khớp không | `outputs/tables/doi_soat_spark.csv` |
 | Dòng nào bị loại và vì sao | `spark_quarantine_tong_hop.csv`, `spark_quarantine_mau.csv` (cột `loai`), vùng `quarantine/` và `excluded/` |
-| Spark thực thi truy vấn KPI chính thế nào | `logs/plan_kpi_2024.txt` |
+| Spark thực thi truy vấn KPI chính thế nào | `logs/plan_kpi_2024.txt` (DataFrame), `logs/plan_kpi_sql_2024.txt` (Spark SQL) |
+| Parquet khác CSV thế nào khi quét, cắt tỉa phân vùng có chạy không | `outputs/tables/so_sanh_parquet_csv.csv`, `logs/plan_pruning_2024.txt` (bước 16) |
 | Ý nghĩa từng trường | `outputs/tables/tu_dien_du_lieu.csv`, `giai_thich_csv_luoi.csv` |
 
 ## 10. Hạn chế đã biết

@@ -14,7 +14,7 @@ File này Claude Code đọc tự động mỗi khi mở dự án. Giữ ngắn,
 1. **Không bịa số.** Mọi con số trong câu trả lời và báo cáo phải trích một file cụ thể: `outputs/tables/*.csv`, `logs/*.log`, `data/manifest_raw.csv`, `outputs/run_manifest.csv`. Chưa có file → nói "chưa có số", không ước đoán, không dùng dữ liệu giả lập.
 2. Không sửa, không xoá `data/raw/` và `data/reference/`. Không tải dữ liệu ngoài `scripts/01_download.sh` khi chưa hỏi.
 3. Mọi giả định mang mã A1–A17 (bảng dưới). Giả định mới → thêm A18, A19… vào bảng này và báo người dùng.
-4. Chạy theo thứ tự 01 → `run_all.sh` (02–09, 13, 14, 10, 12, 11a) → 11 (Spark) → 15 (đọc bảng của Spark; `run_spark.sh` tự chạy). Sau bước 11 đọc `doi_soat_spark.csv`; sau bước 15 đọc dòng `Doi chieu NQ 1251` trong log. Sau mỗi bước: đọc log mới nhất trong `logs/` và các bảng `qa_*.csv`; báo mọi dòng `CẦN XEM`, `LỆCH`, `FAIL` trước khi chạy bước sau.
+4. Chạy theo thứ tự 01 → `run_all.sh` (02–09, 13, 14, 10, 12, 11a) → 11 (Spark) → 16 (so sánh định dạng Parquet/CSV, cùng container Spark) → 15 (đọc bảng của Spark; `run_spark.sh` tự chạy cả ba). Sau bước 11 đọc `doi_soat_spark.csv`; sau bước 16 đọc `so_sanh_parquet_csv.csv` (cột `khop_kpi_theo_nhom_spark`) và dòng `ĐẠT`/`LECH` trong log; sau bước 15 đọc dòng `Doi chieu NQ 1251` trong log. Sau mỗi bước: đọc log mới nhất trong `logs/` và các bảng `qa_*.csv`; báo mọi dòng `CẦN XEM`, `LỆCH`, `FAIL` trước khi chạy bước sau.
 5. Khi sửa code: ghi file đầu ra qua `save_csv` / `register` trong `scripts/common.py` để `run_manifest.csv` đủ. Không đổi tên cột đầu ra khi chưa hỏi.
 6. Giấy phép phải ghi trong báo cáo: WorldPop CC BY 4.0; OSM ODbL 1.0 ("© OpenStreetMap contributors", CSDL phái sinh chia sẻ lại cùng ODbL); GADM chỉ học thuật, không phân phối lại; AWS Terrain Tiles ghi nguồn.
 7. #Truthmode: WorldPop là **ước tính mô hình**, không phải đếm đầu người. Vùng `quarantine/` chỉ chứa lỗi dữ liệu thật; NoData của nguồn và dòng ngoài phạm vi vào `excluded/` (cột `loai` = `LOI_DU_LIEU` / `NGOAI_PHAM_VI`); không tạo lỗi giả để minh hoạ và không gọi dòng ngoài phạm vi là "lỗi". Số sau 2024 là **dự báo** (bước 08) hoặc **số chiếu** của WorldPop: luôn gọi đúng tên, kèm khoảng 80%; backtest chỉ đo khả năng tái tạo chuỗi WorldPop; baseline thắng mô hình chuẩn thì nói thẳng và dùng baseline.
@@ -27,7 +27,7 @@ bash scripts/00_check.sh                  # kiểm tra máy: công cụ, Docker,
 source .venv/bin/activate                 # môi trường ảo (Python 3.11, uv; cài từ requirements.lock.txt)
 bash scripts/01_download.sh               # tải dữ liệu (~1 GB, gồm lưới 1 km các năm chiếu 2025–2030 cho bước 08)
 bash scripts/run_all.sh                   # 02–09, 13, 14, 10, 12, 11a (pandas + tạo CSV thô cho Spark)
-bash scripts/run_spark.sh                 # bước 11 (Spark trong container, các vùng ở data/spark/) rồi bước 15 trên máy
+bash scripts/run_spark.sh                 # bước 11 rồi 16 (Spark trong container, các vùng ở data/spark/), rồi bước 15 trên máy
 bash scripts/11b_hdfs_yarn_cli.sh truoc   # (cụm Docker của dự án) đưa CSV thô lên HDFS; "sau" để liệt kê kết quả
 ```
 Chạy lẻ một bước: `cd scripts && python 06_kpi.py`. Bước 11 trên HDFS và mọi hướng dẫn khác: `docs/HUONG_DAN_SU_DUNG.md`.
@@ -35,11 +35,11 @@ Tài liệu: `docs/HUONG_DAN_CAI_DAT.md` (máy mới), `docs/HUONG_DAN_SU_DUNG.m
 
 ## Cấu trúc
 ```
-scripts/   00_check.sh, 01_download.sh, 02–15 *.py, 11a_landing.py, 11b_hdfs_yarn_cli.sh, common.py, run_all.sh, run_spark.sh
+scripts/   00_check.sh, 01_download.sh, 02–16 *.py, 11a_landing.py, 11b_hdfs_yarn_cli.sh, common.py, run_all.sh, run_spark.sh
 docs/      hướng dẫn cài đặt, hướng dẫn sử dụng, tài liệu kiến trúc
 data/raw/        dữ liệu tải về + location-tyt.xlsx     data/reference/  danh sách 56 trạm, số liệu NQ 1251
 data/interim/    parquet/geojson trung gian (pandas)    data/landing/    CSV thô cho Spark (vùng thu nhận)
-data/spark/      curated/ quarantine/ excluded/ gold/ (Parquet của Spark khi không dùng HDFS)
+data/spark/      curated/ quarantine/ excluded/ gold/ (Parquet của Spark khi không dùng HDFS); thu_nghiem/ = bản sao CSV của bước 16
 outputs/tables/  mọi bảng kết quả (CSV)                 outputs/figures/  h1–h5, h7–h9 (PNG; h6 chỉ có khi có xã giảm tiếp cận; h8 bản đồ hành chính trước 2025, h9 trước/sau đề xuất)
 outputs/run_manifest.csv  file đầu ra + số dòng + SHA-256 + script tạo ra     logs/  nhật ký từng lần chạy
 docker/ notebooks/        cụm HDFS + YARN + JupyterLab của học phần và notebook bước 11

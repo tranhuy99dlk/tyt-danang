@@ -39,7 +39,7 @@ bash scripts/00_check.sh                                              # máy đ�
 uv venv --python 3.11 .venv && uv pip install --python .venv/bin/python -r requirements.lock.txt
 bash scripts/01_download.sh                                           # tải khoảng 1 GB dữ liệu nguồn mở
 source .venv/bin/activate && bash scripts/run_all.sh                  # phần pandas + CSV thô cho Spark
-bash scripts/run_spark.sh                                             # pipeline Spark, rồi bước 15 (TYT và CSKCB)
+bash scripts/run_spark.sh                                             # pipeline Spark (bước 11, 16), rồi bước 15 (TYT và CSKCB)
 ```
 
 Chạy đúng thì lệnh cuối in ra `Doi soat: 27 phep, 0 LECH.`, rồi dòng `Doi chieu NQ 1251: ... KHOP` và `Xong buoc 15.`
@@ -58,7 +58,7 @@ Mở `outputs/tables/kpi_tong_hop_spark.csv` để xem KPI chính.
 ## Cấu trúc thư mục
 
 ```
-scripts/      00_check.sh, 01_download.sh, 02–15 *.py, 11a_landing.py, 11b_hdfs_yarn_cli.sh,
+scripts/      00_check.sh, 01_download.sh, 02–16 *.py, 11a_landing.py, 11b_hdfs_yarn_cli.sh,
               run_all.sh, run_spark.sh, common.py (mọi tham số)
 docs/         hướng dẫn cài đặt, hướng dẫn sử dụng, tài liệu kiến trúc
 docker/       docker-compose.yml – cụm HDFS + YARN + JupyterLab

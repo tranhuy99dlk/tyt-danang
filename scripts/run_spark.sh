@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Chay buoc 11 (Spark) trong MOT container Spark, che do local[*]; cac vung luu tru nam o data/spark/.
+# Chay buoc 11 (Spark) roi buoc 16 (so sanh dinh dang Parquet/CSV, doc vung curated cua buoc 11) trong MOT container
+# Spark, che do local[*]; cac vung luu tru nam o data/spark/.
 # Sau do chay buoc 15 (TYT va CSKCB) tren may, vi buoc 15 doc ket qua cua Spark
 # (tram_vung_phuc_vu_spark.csv, kpi_theo_xa_spark.csv).
 # Khong can dung cum HDFS/YARN. Image mac dinh la image cong khai ma cum cua du an cung dung
@@ -13,8 +14,10 @@ PY="${PYTHON:-.venv/bin/python}"
 mkdir -p logs
 ERR="logs/11_spark_stderr_$(date -u +%Y%m%dT%H%M%SZ).log"
 echo "Chay Spark trong image $IMG (lan dau Docker phai tai image, co the mat nhieu phut)..."
-if docker run --rm -v "$PWD":/work -w /work "$IMG" python scripts/11_spark_pipeline.py 2>"$ERR"; then
-  echo "Xong buoc 11. Ket qua: outputs/tables/*_spark.csv, doi_soat_spark.csv; canh bao cua Spark: $ERR"
+if docker run --rm -v "$PWD":/work -w /work "$IMG" \
+     bash -c "python scripts/11_spark_pipeline.py && python scripts/16_so_sanh_dinh_dang.py" 2>"$ERR"; then
+  echo "Xong buoc 11 va 16. Ket qua: outputs/tables/*_spark.csv, doi_soat_spark.csv, so_sanh_parquet_csv.csv;"
+  echo "ke hoach thuc thi: logs/plan_kpi_*.txt, logs/plan_kpi_sql_*.txt, logs/plan_pruning_*.txt; canh bao cua Spark: $ERR"
 else
   rc=$?
   echo "LOI (ma thoat $rc). 30 dong cuoi cua $ERR:"
