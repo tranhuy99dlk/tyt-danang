@@ -32,6 +32,8 @@ Hoac trong cum cua hoc phan (JupyterLab / spark-notebook), co HDFS:
 Bien moi truong (doc BEN TRONG container): HDFS_URI (tuy chon), HDFS_REPLICATION (mac dinh 1), SPARK_MASTER (mac dinh local[*]),
 SPARK_DRIVER_MEMORY (mac dinh 3g), SPARK_SHUFFLE_PARTITIONS (mac dinh 16), SPARK_UI (mac dinh false),
 SPARK_PARTITION_OVERWRITE (mac dinh static; dynamic CHI khi cap nhat vai nam - xem ghi chu o cau hinh Spark).
+Chay executor tren YARN: bash scripts/11c_yarn_python_env.sh (mot lan), roi dat them SPARK_MASTER=yarn canh HDFS_URI;
+tuy chon SPARK_EXECUTOR_INSTANCES (2), SPARK_EXECUTOR_CORES (2), SPARK_EXECUTOR_MEMORY (1536m), YARN_PY_ARCHIVE.
 Cach dat: docs/HUONG_DAN_SU_DUNG.md muc 4.
 """
 import math
@@ -102,12 +104,32 @@ def main():
         os.environ.setdefault("HADOOP_USER_NAME", "root")   # cum HDFS cua lop bat kiem tra quyen
     from pyspark.sql import SparkSession, Window, functions as F, types as T
 
-    spark = (SparkSession.builder.appName("mis5007_tram_y_te")
-             .master(os.environ.get("SPARK_MASTER", "local[*]"))
-             .config("spark.sql.session.timeZone", "UTC")
-             .config("spark.driver.memory", os.environ.get("SPARK_DRIVER_MEMORY", "3g"))
-             .config("spark.sql.shuffle.partitions", os.environ.get("SPARK_SHUFFLE_PARTITIONS", "16"))
-             .config("spark.executorEnv.PYTHONPATH", SCRIPTS)
+    master = os.environ.get("SPARK_MASTER", "local[*]")
+    tren_yarn = master.startswith("yarn")
+    if tren_yarn and not hdfs:
+        raise SystemExit("SPARK_MASTER=yarn can HDFS_URI: executor tren NodeManager khong doc duoc file tren may nay.")
+    if tren_yarn:
+        # Spark tren YARN (client mode): driver o day, executor trong container cua NodeManager.
+        # NodeManager khong co Python -> gui kem moi truong Python dong goi (scripts/11c_yarn_python_env.sh) qua spark.archives;
+        # PYSPARK_PYTHON tro vao trinh thong dich trong goi do (tai lieu Spark, muc "Python Package Management").
+        conf_dir = os.environ.setdefault("HADOOP_CONF_DIR", str(Path(SCRIPTS).parent / "docker" / "hadoop-conf"))
+        os.environ.setdefault("YARN_CONF_DIR", conf_dir)
+        os.environ["PYSPARK_PYTHON"] = "./pyenv/bin/python"
+    b = (SparkSession.builder.appName("mis5007_tram_y_te")
+         .master(master)
+         .config("spark.sql.session.timeZone", "UTC")
+         .config("spark.driver.memory", os.environ.get("SPARK_DRIVER_MEMORY", "2g" if tren_yarn else "3g"))
+         .config("spark.sql.shuffle.partitions", os.environ.get("SPARK_SHUFFLE_PARTITIONS", "16")))
+    if tren_yarn:
+        b = (b.config("spark.archives", os.environ.get("YARN_PY_ARCHIVE",
+                                                       "hdfs://namenode:9000/mis5007/apps/pyspark_env.tar.gz#pyenv"))
+             .config("spark.executor.instances", os.environ.get("SPARK_EXECUTOR_INSTANCES", "2"))
+             .config("spark.executor.cores", os.environ.get("SPARK_EXECUTOR_CORES", "2"))
+             .config("spark.executor.memory", os.environ.get("SPARK_EXECUTOR_MEMORY", "1536m"))
+             .config("spark.yarn.am.memory", "512m"))
+    else:
+        b = b.config("spark.executorEnv.PYTHONPATH", SCRIPTS)
+    spark = (b
              .config("spark.sql.maxPlanStringLength", "2000")      # ke hoach nhieu join: khong dung chuoi mo ta dai
              .config("spark.ui.enabled", os.environ.get("SPARK_UI", "false"))
              .config("spark.hadoop.dfs.replication", os.environ.get("HDFS_REPLICATION", "1"))   # cum chi co 1 DataNode
@@ -117,9 +139,15 @@ def main():
              .config("spark.sql.sources.partitionOverwriteMode", os.environ.get("SPARK_PARTITION_OVERWRITE", "static"))
              .getOrCreate())
     spark.sparkContext.setLogLevel("ERROR")
+    if tren_yarn:
+        spark.sparkContext.addPyFile(str(Path(SCRIPTS) / "common.py"))   # UDF norm_name nam trong common.py
     zone = hdfs.rstrip("/") if hdfs else "file://" + str(SPARK_OUT)
     land = f"{zone}/landing" if hdfs else "file://" + str(LANDING)
     log.info("Spark %s, master=%s | landing=%s | cac vung=%s", spark.version, spark.sparkContext.master, land, zone)
+    if tren_yarn:
+        log.info("YARN: ung dung %s, %s executor x %s nhan x %s (Python cho executor: %s)", spark.sparkContext.applicationId,
+                 spark.conf.get("spark.executor.instances"), spark.conf.get("spark.executor.cores"),
+                 spark.conf.get("spark.executor.memory"), spark.conf.get("spark.archives"))
 
     I, D, St = T.IntegerType(), T.DoubleType(), T.StringType()
 

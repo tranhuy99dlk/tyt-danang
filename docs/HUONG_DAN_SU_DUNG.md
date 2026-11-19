@@ -13,17 +13,17 @@ Mọi lệnh chạy từ thư mục gốc của dự án (thư mục chứa `REA
 | Tải dữ liệu nguồn (chạy lại chỉ tải file còn thiếu) | `bash scripts/01_download.sh` | tuỳ mạng |
 | Chạy toàn bộ phần pandas và tạo CSV thô cho Spark | `source .venv/bin/activate && bash scripts/run_all.sh` | 2–3 phút |
 | Chạy một bước lẻ | `cd scripts && ../.venv/bin/python 06_kpi.py` | – |
-| Chạy Spark (bước 11, 16) rồi bước 15, không cần cụm HDFS | `bash scripts/run_spark.sh` | 4–9 phút |
-| Chạy Spark trên HDFS rồi bước 15 | xem mục 5 | 4–9 phút |
+| Chạy Spark (bước 11, 16), bước 15 và chốt số liệu (17), không cần cụm HDFS | `bash scripts/run_spark.sh` | 4–9 phút |
+| Chạy Spark trên HDFS rồi bước 15, 17 | xem mục 5 | 4–9 phút |
 | Chạy riêng bước 15 (TYT và CSKCB) | `.venv/bin/python scripts/15_tuyen_tren.py` | vài giây |
 
-Thứ tự bắt buộc: `01_download.sh` → `run_all.sh` → Spark → bước 15. `run_all.sh` dừng ngay ở bước đầu tiên bị lỗi.
-`run_spark.sh` tự chạy bước 15 sau khi Spark xong; khi chạy Spark trên cụm HDFS thì phải tự chạy bước 15 (mục 5).
+Thứ tự bắt buộc: `01_download.sh` → `run_all.sh` → bước 11 → bước 16 → bước 15 → bước 17. `run_all.sh` dừng ngay ở bước đầu tiên bị lỗi.
+`run_spark.sh` tự chạy bước 11, 16, 15 và 17; khi chạy Spark trên cụm HDFS thì tự chạy 16, kiểm tra HDFS, rồi chạy 15 và 17 (mục 5).
 
-Các bước phụ thuộc nhau theo chuỗi 02 → 03 → 04 → 05 → 06 → (07, 08, 09 → 13, 14) → 10 → 12 → 11a → 11 → 15.
+Các bước phụ thuộc nhau theo chuỗi 02 → 03 → 04 → 05 → 06 → (07, 08, 09 → 13, 14) → 10 → 12 → 11a → 11 → 16 → 15 → 17.
 Bước 13 và 14 đọc `greedy_sites.csv` của bước 09 nên phải chạy sau 09. Bước 15 đọc hai bảng của Spark
 (`tram_vung_phuc_vu_spark.csv`, `kpi_theo_xa_spark.csv`) nên phải chạy sau bước 11. Sửa đầu vào của một bước thì phải chạy lại
-từ bước đó tới hết, rồi chạy lại Spark và bước 15; nếu không, bảng đối soát sẽ báo `LỆCH` hoặc bước 15 dùng số cũ.
+từ bước đó tới hết, rồi chạy lại Spark và các bước 15, 17; nếu không, bảng đối soát sẽ báo `LỆCH` hoặc các bảng sau dùng số cũ.
 
 ## 2. Câu hỏi nào, xem file nào
 
@@ -159,7 +159,9 @@ Các tham số phân tích nằm trong `common.py` (bảng ở trên). Các bi�
 | `HDFS_URI` | `11_spark_pipeline.py` | không đặt | Đặt thì đọc và ghi các vùng trên HDFS; không đặt thì dùng `data/landing/` và `data/spark/` |
 | `SPARK_DRIVER_MEMORY` | `11_spark_pipeline.py` | `3g` | Bộ nhớ cấp cho driver Spark |
 | `SPARK_SHUFFLE_PARTITIONS` | `11_spark_pipeline.py` | `16` | Số phân vùng khi shuffle |
-| `SPARK_MASTER` | `11_spark_pipeline.py` | `local[*]` | Địa chỉ master của Spark |
+| `SPARK_MASTER` | `11_spark_pipeline.py` | `local[*]` | `yarn` để chạy executor trên YARN (cần `HDFS_URI` và đã chạy `11c_yarn_python_env.sh`, xem mục 5) |
+| `SPARK_EXECUTOR_INSTANCES`, `SPARK_EXECUTOR_CORES`, `SPARK_EXECUTOR_MEMORY` | `11_spark_pipeline.py` | `2`, `2`, `1536m` | Số executor, số nhân và bộ nhớ mỗi executor khi chạy trên YARN |
+| `YARN_PY_ARCHIVE` | `11_spark_pipeline.py` | `hdfs://namenode:9000/mis5007/apps/pyspark_env.tar.gz#pyenv` | Gói Python gửi kèm cho executor trên YARN |
 | `SPARK_UI` | `11_spark_pipeline.py` | `false` | `true` bật Spark UI trong lúc pipeline chạy |
 | `SPARK_PARTITION_OVERWRITE` | `11_spark_pipeline.py` | `static` | `dynamic` chỉ ghi đè các phân vùng năm có trong dữ liệu mới. Chỉ dùng khi cập nhật vài năm; nếu thu hẹp `YEARS` mà vẫn dùng `dynamic`, năm cũ còn lại và đối soát báo `LỆCH` |
 | `HDFS_REPLICATION` | `11_spark_pipeline.py` | `1` | Hệ số nhân bản khi ghi lên HDFS |
@@ -183,6 +185,7 @@ docker exec -w /home/jovyan/work/mis5007_tram_y_te -e HDFS_URI=hdfs://namenode:9
   mis5007-spark-notebook python scripts/16_so_sanh_dinh_dang.py   # bước 16: so sánh Parquet/CSV, đọc curated của bước 11
 bash scripts/11b_hdfs_yarn_cli.sh sau                     # liệt kê kết quả trên HDFS, fsck, trạng thái YARN
 .venv/bin/python scripts/15_tuyen_tren.py                 # bước 15, chạy trên máy sau khi Spark xong
+.venv/bin/python scripts/17_chot_so_lieu.py               # bước 17, kiểm tra SHA-256 và lập bảng số liệu chốt
 ```
 
 Hoặc chạy bước 11 trong JupyterLab: mở http://localhost:8888, nhập mật khẩu ghi ở dòng `JUPYTER_TOKEN` trong `docker/docker-compose.yml`,
@@ -206,7 +209,30 @@ Quản lý cụm:
 | `docker compose -f docker/docker-compose.yml start` | Chạy lại |
 | `docker compose -f docker/docker-compose.yml down -v` | Gỡ hẳn và **xoá toàn bộ dữ liệu HDFS** của cụm |
 
-Spark chạy `local[*]` trong container JupyterLab và đọc/ghi HDFS. YARN chỉ được dùng qua CLI; danh sách ứng dụng YARN luôn rỗng.
+### Chạy executor trên YARN
+
+Mặc định Spark chạy `local[*]` trong container JupyterLab (driver và executor cùng một tiến trình) và đọc/ghi HDFS.
+Muốn executor chạy trong container NodeManager do YARN cấp phát:
+
+```bash
+bash scripts/11c_yarn_python_env.sh                       # một lần: đóng gói Python cho executor, đưa lên HDFS /mis5007/apps
+docker exec -w /home/jovyan/work/mis5007_tram_y_te -e HDFS_URI=hdfs://namenode:9000/mis5007 -e SPARK_MASTER=yarn \
+  mis5007-spark-notebook python scripts/11_spark_pipeline.py
+bash scripts/11b_hdfs_yarn_cli.sh sau                     # yarn application -list hiện ứng dụng mis5007_tram_y_te, FINISHED / SUCCEEDED
+docker exec -w /home/jovyan/work/mis5007_tram_y_te -e HDFS_URI=hdfs://namenode:9000/mis5007 \
+  mis5007-spark-notebook python scripts/16_so_sanh_dinh_dang.py
+.venv/bin/python scripts/15_tuyen_tren.py
+.venv/bin/python scripts/17_chot_so_lieu.py
+```
+
+Vì sao cần bước `11c`: image NodeManager của học phần (Debian 9, Java 8) không cài Python nên executor PySpark không khởi động được.
+Thay vì sửa image, `11c_yarn_python_env.sh` dùng `conda-pack` đóng gói một môi trường Python cùng phiên bản với driver (3.11) kèm `numpy`
+(khoảng 97 MB), đưa lên HDFS; mỗi lần chạy, Spark gửi gói này cho từng executor qua `spark.archives` và trỏ `PYSPARK_PYTHON` vào
+trình thông dịch trong gói. Driver vẫn chạy trong container JupyterLab (client mode) và đọc cấu hình cụm từ `docker/hadoop-conf/`.
+
+Mặc định 2 executor × 2 nhân × 1536 MB; YARN cấp 3 container (thêm ApplicationMaster), tổng 5.120 MB trên 8.192 MB của NodeManager.
+Lần chạy 19/11/2026 (`application_1795023901576_0001`) mất khoảng 6,5 phút, đối soát 28/28 `ĐẠT`; KPI chỉ lệch từ chữ số thập phân thứ 9
+so với chạy `local[*]` do thứ tự cộng số thực. Chạy lại `11c` (với `REBUILD=1`) khi đổi image JupyterLab hay phiên bản Python của driver.
 
 ## 6. Xử lý sự cố
 
@@ -225,6 +251,10 @@ Spark chạy `local[*]` trong container JupyterLab và đọc/ghi HDFS. YARN ch�
 | `hdfs dfsadmin -report` có "Under replicated blocks" | File ghi với hệ số nhân bản 3 trên cụm 1 DataNode | `bash scripts/11b_hdfs_yarn_cli.sh sau` (tự đưa về 1) |
 | `Name node is in safe mode` | NameNode vừa khởi động | Chờ khoảng một phút; `11b_hdfs_yarn_cli.sh truoc` tự chờ |
 | Bước 11 trên HDFS báo `Path does not exist: .../landing/...` | Chưa đưa CSV thô lên HDFS | `bash scripts/11b_hdfs_yarn_cli.sh truoc` |
+| `SPARK_MASTER=yarn` mà executor báo `Cannot run program "./pyenv/bin/python"` hoặc lỗi không tìm thấy `pyspark_env.tar.gz` | Chưa đóng gói Python cho executor | `bash scripts/11c_yarn_python_env.sh` |
+| `SPARK_MASTER=yarn` mà ứng dụng đứng mãi ở `ACCEPTED` | YARN không đủ bộ nhớ cấp container (còn ứng dụng khác chiếm, hoặc xin quá 8 GB) | `yarn application -list`, `yarn application -kill <id>`; hoặc giảm `SPARK_EXECUTOR_MEMORY`, `SPARK_EXECUTOR_INSTANCES` |
+| Container executor bị huỷ với thông báo `running beyond virtual memory limits` | NodeManager bật kiểm tra bộ nhớ ảo (hệ số 2,1) | Giảm số nhân mỗi executor; hoặc thêm `YARN_CONF_yarn_nodemanager_vmem___check___enabled=false` vào mục `nodemanager` trong `docker/docker-compose.yml` rồi `docker compose ... up -d nodemanager` |
+| `SystemExit: SPARK_MASTER=yarn can HDFS_URI` | Executor trên NodeManager không đọc được file trên máy | Thêm `-e HDFS_URI=hdfs://namenode:9000/mis5007` |
 | Bước 15 báo `No such file ... tram_vung_phuc_vu_spark.csv` | Chưa chạy Spark | Chạy `bash scripts/run_spark.sh` (tự chạy bước 15) |
 | Log bước 15 có `LECH: danh sach xa gop trong code vs file tham chieu` | `data/reference/nq1251_sap_xep.csv` và danh sách `NQ1251_GROUPS` trong `15_tuyen_tren.py` khác nhau | Sửa cho khớp; danh sách trong code cũng phải khớp `07_diagnose.py` |
 

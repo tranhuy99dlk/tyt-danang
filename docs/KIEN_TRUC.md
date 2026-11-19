@@ -55,7 +55,7 @@ Có hai động cơ xử lý chạy nối tiếp nhau:
 | Thu nhận cho Spark | rasterio, pandas, openpyxl | Đổ raster và Excel ra CSV thô | `scripts/11a_landing.py` |
 | Pipeline Spark | PySpark 3.5 | Schema, kiểm tra, tách lỗi (quarantine) và dòng ngoài phạm vi (excluded), biến đổi, tổng hợp, đối soát | `scripts/11_spark_pipeline.py` |
 | Lưu trữ phân tán | HDFS 3.2.1 (1 NameNode, 1 DataNode) | Các vùng landing / curated / quarantine / excluded / gold | cụm Docker |
-| Quản lý tài nguyên | YARN (ResourceManager, NodeManager) | Xem trạng thái cụm qua CLI | cụm Docker |
+| Quản lý tài nguyên | YARN (ResourceManager, NodeManager) | Cấp container cho executor Spark khi chạy `SPARK_MASTER=yarn`; xem trạng thái cụm qua CLI | cụm Docker |
 | Giao diện làm việc | JupyterLab + PySpark | Chạy notebook bước 11 nối HDFS | `notebooks/buoc11_pyspark_hdfs.ipynb` |
 | Tham số dùng chung | Python | Năm, ngưỡng km, hộp bao, tốc độ, đường dẫn | `scripts/common.py` |
 
@@ -81,6 +81,7 @@ Có hai động cơ xử lý chạy nối tiếp nhau:
 | 11 | `11_spark_pipeline.py` | landing | curated, quarantine, excluded, gold, `*_spark.csv`, `kpi_theo_nhom_spark_sql.csv`, `doi_soat_spark.csv`, `logs/plan_kpi_2024.txt`, `logs/plan_kpi_sql_2024.txt` | Xem mục 6 |
 | 16 | `16_so_sanh_dinh_dang.py` | curated `fact_o_nam_khoang_cach`, `dim_xa` của bước 11 | `so_sanh_parquet_csv.csv`, `logs/plan_pruning_2024.txt`, bản sao CSV ở `thu_nghiem/` | Cùng một truy vấn KPI trên 4 cách lưu (Parquet phân vùng, CSV phẳng, CSV phân vùng, Parquet qua `cache()`): đo số file, số byte quét, đọc kế hoạch thực thi; chạy trong container Spark **sau** bước 11 |
 | 15 | `15_tuyen_tren.py` | `danh-sach-cskcb.xlsx`, `tt30_2024_goi_dich_vu.csv`, `nq1251_sap_xep.csv`, trạm, `tram_vung_phuc_vu_spark.csv`, `kpi_theo_xa_spark.csv` | `cskcb_danang.csv`, `tyt_cskcb*.csv`, `ung_vien_gop_tram.csv`, `doi_soat_nq1251_*.csv` | Đặt TYT cạnh 30 CSKCB theo cấp chuyên môn; ứng viên rà soát gộp trạm (A15) và đối chiếu với NQ 1251; chạy trên máy **sau** bước 11 |
+| 17 | `17_chot_so_lieu.py` | `outputs/`, `data/interim/`, `run_manifest.csv` | `kiem_tra_run_manifest.csv`, `so_lieu_chot.csv` | Đối chiếu SHA-256 và lập bảng số liệu báo cáo có đường dẫn nguồn; chạy trên máy sau bước 15 |
 
 Lưới 1 km các năm 2025–2030 của WorldPop là số chiếu; chỉ bước 08 đọc chúng, để đối chiếu và để phân bố dân 2030 trong từng xã (giả định A9). Spark (bước 11) không tính dự báo.
 
@@ -96,6 +97,7 @@ Lưới 1 km các năm 2025–2030 của WorldPop là số chiếu; chỉ bướ
 | quarantine | `data/spark/quarantine/` | `/mis5007/quarantine` | Chỉ **lỗi dữ liệu thật** (`loai = LOI_DU_LIEU`) kèm lý do, phân vùng theo nguồn | 11 |
 | excluded | `data/spark/excluded/` | `/mis5007/excluded` | Dòng **ngoài phạm vi**, không phải lỗi (`loai = NGOAI_PHAM_VI`): NoData của WorldPop, pixel ngoài 56 xã | 11 |
 | gold | `data/spark/gold/` | `/mis5007/gold` | 6 bảng KPI | 11 |
+| apps | `data/yarn/` (không đưa lên GitHub) | `/mis5007/apps` | Gói Python `pyspark_env.tar.gz` cho executor trên YARN | 11c |
 | outputs | `outputs/tables/`, `outputs/figures/` | – | CSV và hình cho báo cáo | mọi bước |
 
 Bước 11 chỉ dùng một trong hai cột: không đặt `HDFS_URI` thì ghi vào `data/spark/`, đặt `HDFS_URI` thì đọc và ghi trên HDFS.
@@ -204,7 +206,7 @@ File cấu hình: `docker/docker-compose.yml`, tên dự án compose là `mis500
 | Không dùng API chỉ đường; tự dựng đồ thị từ OSM và chạy Dijkstra | Miễn phí, chạy lại được, không vướng hạn mức và giấy phép | Không có ùn tắc, đường một chiều; tốc độ là giả định (A6) |
 | Ranh giới xã lấy từ GADM 4.1 | OSM mốc 31/12/2024 đã vẽ theo bản đồ sau sáp nhập, chỉ khớp 45/56 xã (A12) | GADM thô hơn và không được phân phối lại |
 | Toạ độ trạm do nhóm nhập tay, kiểm tra theo Cổng dữ liệu Đà Nẵng (congdulieu.vn), dữ liệu cập nhật 12/12/2024 | OSM chỉ có 4/56 trạm | Nhập thủ công nên có thể gõ nhầm; chưa kiểm chứng thực địa (A13) |
-| Spark chạy `local[*]`, không chạy trên YARN | Image NodeManager của học phần không cài Python nên không chạy được executor PySpark | YARN chỉ được dùng qua CLI để xem trạng thái cụm |
+| Spark có hai chế độ: `local[*]` (mặc định) và YARN client mode (`SPARK_MASTER=yarn`) | Image NodeManager của học phần không cài Python nên executor PySpark không khởi động được; thay vì sửa image, đóng gói Python 3.11 + numpy bằng `conda-pack` (`11c_yarn_python_env.sh`), đưa lên HDFS và gửi kèm qua `spark.archives` | Mỗi lần chạy trên YARN phải tải thêm gói Python (97 MB) và thư viện Spark (khoảng 320 MB) xuống NodeManager; executor chạy Java 8 của NodeManager trong khi driver chạy Java 17 |
 | Tên container có tiền tố `mis5007-`, cổng 9871 và 4041 | Chạy song song được với cụm khác dùng tên `namenode` và cổng 9870, 4040 | Khác tên/cổng trong tài liệu chung của lớp |
 | Hệ số nhân bản HDFS = 1 | Cụm chỉ có một DataNode | Không có bản sao dự phòng |
 | Kiểm tra `_SUCCESS` trước khi đọc; ghi đè phân vùng `static` mặc định | Parquet không có giao dịch; `dynamic` để lại phân vùng cũ khi phạm vi năm thay đổi | Cập nhật vài năm vẫn phải ghi lại cả bảng, trừ khi chủ động đặt `dynamic` |

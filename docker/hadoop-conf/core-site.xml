@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Cau hinh Hadoop phia client cho Spark trong container mis5007-spark-notebook khi chay SPARK_MASTER=yarn.
+     Khop voi bien CORE_CONF_* cua cac container Hadoop trong docker/docker-compose.yml. -->
+<configuration>
+  <property><name>fs.defaultFS</name><value>hdfs://namenode:9000</value></property>
+</configuration>

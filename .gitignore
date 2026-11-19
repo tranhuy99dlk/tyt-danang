@@ -23,3 +23,6 @@ _luu_tru_pham_vi_2015_2030/
 
 # Ket qua cua cac phien ban script cu (khong dung cho bao cao)
 _luu_tru_ban_cu/
+
+# Moi truong Python dong goi cho executor tren YARN (tao lai bang scripts/11c_yarn_python_env.sh)
+data/yarn/

@@ -10,7 +10,7 @@ bash scripts/00_check.sh                                              # máy đ�
 uv venv --python 3.11 .venv && uv pip install --python .venv/bin/python -r requirements.lock.txt
 bash scripts/01_download.sh                                           # tải dữ liệu nguồn
 source .venv/bin/activate && bash scripts/run_all.sh                  # phần pandas + CSV thô cho Spark
-bash scripts/run_spark.sh                                             # pipeline Spark
+bash scripts/run_spark.sh                                             # Spark (11, 16), đối chiếu CSKCB (15), kiểm tra/chốt số (17)
 ```
 
 ## 1. Máy cần gì
@@ -165,12 +165,12 @@ Thấy gì là đúng:
 bash scripts/run_spark.sh
 ```
 
-Lệnh này chạy bước 11 trong một container Spark, rồi chạy bước 15 (TYT và cơ sở khám chữa bệnh) bằng Python trong `.venv`. Lần đầu Docker tải image `jupyter/pyspark-notebook` (khoảng 7 GB sau khi giải nén) nên sẽ lâu;
+Lệnh này chạy các bước 11 và 16 trong container Spark, rồi chạy bước 15 (TYT và cơ sở khám chữa bệnh) và 17 (kiểm tra/chốt số liệu) bằng Python trong `.venv`. Lần đầu Docker tải image `jupyter/pyspark-notebook` (khoảng 7 GB sau khi giải nén) nên sẽ lâu;
 các lần sau mất 4–9 phút trên máy thử.
 
 Màn hình in dần các dòng `INFO` theo từng khâu (đọc, kiểm tra, biến đổi, ghi, đối soát).
 
-Thấy gì là đúng: có dòng `Doi soat: 27 phep, 0 LECH.` và mọi dòng có `7.` đều kết thúc bằng `ĐẠT`; sau đó có dòng `Doi chieu NQ 1251: ... KHOP` và dòng cuối là `Xong buoc 15. ...`
+Thấy gì là đúng: có dòng `Doi soat: 28 phep, 0 LECH.` và mọi dòng có `7.` đều kết thúc bằng `ĐẠT`; sau đó có dòng `Doi chieu NQ 1251: ... KHOP`, bước 17 báo các file trong manifest đều `ĐẠT`, và dòng cuối chỉ tới `so_lieu_chot.csv`.
 Cảnh báo của Spark và Java không hiện trên màn hình mà được ghi vào `logs/11_spark_stderr_*.log`.
 
 Tới đây dự án đã chạy xong và có đủ bảng kết quả. Mục 9 chỉ cần khi phải trình diễn HDFS, YARN và JupyterLab.
@@ -192,9 +192,20 @@ Lần đầu Docker tải thêm bốn image Hadoop. Bước Spark trên HDFS m�
 Thấy gì là đúng:
 
 - `11b … truoc` in `Found 6 items` dưới `/mis5007/landing`.
-- Bước Spark in dòng đầu có `landing=hdfs://namenode:9000/mis5007/landing` và dòng cuối `Doi soat: 27 phep, 0 LECH.`
+- Bước Spark in dòng đầu có `landing=hdfs://namenode:9000/mis5007/landing` và dòng cuối `Doi soat: 28 phep, 0 LECH.`
 - `11b … sau` in `Status: HEALTHY`, `Under-replicated blocks: 0` và `Total Nodes:1`.
 - Mở được http://localhost:9871 (HDFS), http://localhost:8088 (YARN), http://localhost:8888 (JupyterLab; mật khẩu ở dòng `JUPYTER_TOKEN` trong `docker/docker-compose.yml`).
+
+Tuỳ chọn – chạy executor trên YARN thay vì `local[*]` (cần thêm khoảng 100 MB tải gói Python ở lần đầu):
+
+```bash
+bash scripts/11c_yarn_python_env.sh
+docker exec -w /home/jovyan/work/mis5007_tram_y_te -e HDFS_URI=hdfs://namenode:9000/mis5007 -e SPARK_MASTER=yarn \
+  mis5007-spark-notebook python scripts/11_spark_pipeline.py
+```
+
+Thấy gì là đúng: dòng thứ hai in `YARN: ung dung application_..., 2 executor x 2 nhan x 1536m`, dòng cuối `Doi soat: ... 0 LECH.`,
+và trang http://localhost:8088 có ứng dụng `mis5007_tram_y_te` trạng thái `FINISHED`, `SUCCEEDED`.
 
 Dùng xong: `docker compose -f docker/docker-compose.yml stop`.
 
