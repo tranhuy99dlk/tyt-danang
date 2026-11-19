@@ -1,17 +1,17 @@
 ﻿phep_doi_soat,spark,pandas_hoac_nguon,ket_qua,ghi_chu
-Số dòng lỗi dữ liệu ghi ra vùng quarantine = tổng lỗi dữ liệu các nguồn,9.0,9.0,ĐẠT,file:///home/claude/repo/mis5007_tram_y_te/data/spark/quarantine/dong_loi
-Số dòng ngoài phạm vi ghi ra vùng excluded = tổng ngoài phạm vi các nguồn,2936766.0,2936766.0,ĐẠT,"file:///home/claude/repo/mis5007_tram_y_te/data/spark/excluded/ngoai_pham_vi (NoData của WorldPop, ngoài 56 xã – không phải lỗi)"
+Số dòng lỗi dữ liệu ghi ra vùng quarantine = tổng lỗi dữ liệu các nguồn,9.0,9.0,ĐẠT,file:///work/data/spark/quarantine/dong_loi
+Số dòng ngoài phạm vi ghi ra vùng excluded = tổng ngoài phạm vi các nguồn,2936766.0,2936766.0,ĐẠT,"file:///work/data/spark/excluded/ngoai_pham_vi (NoData của WorldPop, ngoài 56 xã – không phải lỗi)"
 Số bảng Parquet có cờ _SUCCESS = số bảng đã ghi,16.0,16.0,ĐẠT,Parquet không có giao dịch: thiếu _SUCCESS nghĩa là lần ghi bị ngắt
 Pixel × năm hợp lệ = dòng bảng sự kiện + dòng thuộc ô toàn 0,408264.0,408264.0,ĐẠT,
-Số dòng bảng sự kiện đọc lại từ vùng curated = trước khi ghi,408224.0,408224.0,ĐẠT,file:///home/claude/repo/mis5007_tram_y_te/data/spark/curated/fact_dan_so_o_nam
-"Tổng dân thô (pixel ≥ 0, mọi năm) = hợp lệ + không vào bảng sạch",14344694.516283652,14344694.51628364,ĐẠT,hợp lệ 11335050; ngoài phạm vi (ngoài 56 xã) 3009645
-Tổng dân bảng sự kiện = tổng dân hợp lệ,11335049.857399365,11335049.857399365,ĐẠT,
+Số dòng bảng sự kiện đọc lại từ vùng curated = trước khi ghi,408224.0,408224.0,ĐẠT,file:///work/data/spark/curated/fact_dan_so_o_nam
+"Tổng dân thô (pixel ≥ 0, mọi năm) = hợp lệ + không vào bảng sạch",14344694.51628365,14344694.516283646,ĐẠT,hợp lệ 11335050; ngoài phạm vi (ngoài 56 xã) 3009645
+Tổng dân bảng sự kiện = tổng dân hợp lệ,11335049.857399365,11335049.857399363,ĐẠT,
 Số trạm hợp lệ,56.0,56.0,ĐẠT,
 "Toạ độ trạm sau chiếu UTM: Spark vs pandas/pyproj, lệch lớn nhất (m)",0.0,0.0,ĐẠT,
 Số ô lưới có dân trong 56 xã,41221.0,41221.0,ĐẠT,
 "Số cặp (xã, năm) khớp khoá",560.0,560.0,ĐẠT,
 Tổng pop theo xã × năm: sai số tương đối lớn nhất,1.998039728334342e-16,0.0,ĐẠT,
-Tổng pop60 theo xã × năm: sai số tương đối lớn nhất,2.7233419462242425e-15,0.0,ĐẠT,
+Tổng pop60 theo xã × năm: sai số tương đối lớn nhất,2.4865296030743084e-15,0.0,ĐẠT,
 "Khoảng cách tới trạm gần nhất: Spark (nối chéo) vs pandas (KDTree), lệch lớn nhất (m)",0.0,0.0,ĐẠT,
 Tỷ lệ ô có cùng trạm gần nhất (%),100.0,100.0,ĐẠT,khác nhau chỉ khi hai trạm cách đều
 "Theo xã năm 2024 – ty_le_trong_3km_pct: Spark vs pandas, lệch lớn nhất",0.0045,0.0,ĐẠT,ngưỡng 0.011
