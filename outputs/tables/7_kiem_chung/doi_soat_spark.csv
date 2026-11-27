@@ -1,0 +1,49 @@
+﻿phep_doi_soat,spark,pandas_hoac_nguon,ket_qua,ghi_chu
+So dong quarantine doc lai = tong loi du lieu cac nguon,9.0,9.0,ĐẠT,
+So dong excluded doc lai = tong ngoai pham vi cac nguon,3030871.0,3030871.0,ĐẠT,"NoData cua WorldPop, ngoai 56 xa - khong phai loi"
+Tong dan tho (pixel >= 0) = sach + bi loai,14344695.0,14344695.0,ĐẠT,sach 11335050; ngoai 56 xa 3009645
+Dan so sach = dong bang su kien + dong thuoc o toan 0,408264.0,408264.0,ĐẠT,
+So dong bang su kien doc lai = truoc khi ghi,408224.0,408224.0,ĐẠT,silver/fact_dan_so_o_nam
+Tong dan bang su kien = tong dan sach,11335050.0,11335050.0,ĐẠT,
+"Toa do tram UTM: cong thuc tu viet vs pyproj, lech lon nhat (m)",0.0,0.0,ĐẠT,
+"Khoang cach toi tram gan nhat: Spark (broadcast join) vs KDTree, lech lon nhat (m)",0.0,0.0,ĐẠT,
+Ty le o co cung tram gan nhat (%),100.0,100.0,ĐẠT,khac nhau chi khi hai tram cach deu
+So o co duong di ngan hon duong chim bay,0.0,0.0,ĐẠT,bat dang thuc tam giac
+"KPI theo nhom: Spark SQL vs DataFrame API, lech lon nhat (diem %)",0.0,0.0,ĐẠT,ke hoach: logs/plan_kpi_sql_2024.txt
+Danh sach xa gop NQ 1251: code vs data/reference/nq1251_sap_xep.csv,17.0,17.0,ĐẠT,
+"So voi 19/11/2026 – Tổng dân 56 xã/phường năm 2024 (WorldPop, ước tính)",1177774.0,1177774.0,ĐẠT,nguong 1.0
+So voi 19/11/2026 – Tổng dân 60+ năm 2024,134755.0,134755.0,ĐẠT,nguong 1.0
+So voi 19/11/2026 – Số trạm y tế,56.0,56.0,ĐẠT,nguong 0.011
+So voi 19/11/2026 – Tỷ lệ dân trong 3 km đường chim bay tới trạm gần nhất,98.69,98.69,ĐẠT,nguong 0.011
+So voi 19/11/2026 – Tỷ lệ dân trong 3 km theo mạng đường,96.1,96.1,ĐẠT,nguong 0.011
+So voi 19/11/2026 – Tỷ lệ dân tới trạm trong 15 phút xe máy,99.71,99.71,ĐẠT,nguong 0.011
+"So voi 19/11/2026 – Hệ số vòng đường trung vị (mạng đường / chim bay, ô cách trạm > 500 m)",1.366,1.366,ĐẠT,nguong 0.011
+So voi 19/11/2026 – Thời gian trung vị tới trạm (xe máy),2.6,2.6,ĐẠT,nguong 0.011
+So voi 19/11/2026 – Tỷ lệ dân trong 2 km,95.18,95.18,ĐẠT,nguong 0.011
+So voi 19/11/2026 – Tỷ lệ dân trong 5 km,99.78,99.78,ĐẠT,nguong 0.011
+So voi 19/11/2026 – Dân bình quân mỗi trạm,21032.0,21032.0,ĐẠT,nguong 1.0
+So voi 19/11/2026 – Khoảng cách trung vị (theo dân) tới trạm gần nhất,611.0,611.0,ĐẠT,nguong 1.0
+So voi 19/11/2026 – Dân cách trạm gần nhất trên 5 km (vùng trắng),2624.0,2624.0,ĐẠT,nguong 1.0
+So voi 19/11/2026 – Dân 60+ cách trạm trên 5 km,305.0,305.0,ĐẠT,nguong 1.0
+So voi 19/11/2026 – Tỷ lệ dân 60+ trong 3 km,98.67,98.67,ĐẠT,nguong 0.011
+So voi 19/11/2026 – Tỷ lệ dân trong 3 km – Phường,99.71,99.71,ĐẠT,nguong 0.011
+So voi 19/11/2026 – Tỷ lệ dân trong 3 km – Xã đồng bằng/ven đô,94.38,94.38,ĐẠT,nguong 0.011
+So voi 19/11/2026 – Tỷ lệ dân trong 3 km – Xã miền núi (địa hình),47.87,47.87,ĐẠT,nguong 0.011
+"So voi 19/11/2026 – Chênh lệch phường – xã miền núi (3 km, chim bay)",51.84,51.84,ĐẠT,nguong 0.011
+"So voi 19/11/2026 – Chênh lệch phường – xã miền núi (3 km, mạng đường)",60.81,60.81,ĐẠT,nguong 0.011
+"So voi 19/11/2026 – kpi_theo_nam_spark.csv: ty_le_trong_3km_pct, lech lon nhat",0.0,0.0,ĐẠT,10 dong; nguong 0.001
+"So voi 19/11/2026 – kpi_theo_nam_spark.csv: dan, lech lon nhat",0.0,0.0,ĐẠT,10 dong; nguong 1.0
+"So voi 19/11/2026 – kpi_theo_xa_spark.csv: ty_le_trong_3km_pct, lech lon nhat",0.0,0.0,ĐẠT,56 dong; nguong 0.001
+"So voi 19/11/2026 – kpi_theo_xa_spark.csv: ty_le_trong_3km_mang_duong_pct, lech lon nhat",0.0,0.0,ĐẠT,56 dong; nguong 0.001
+"So voi 19/11/2026 – tram_vung_phuc_vu_spark.csv: dan_phuc_vu, lech lon nhat",0.0,0.0,ĐẠT,56 dong; nguong 0.15
+"So voi 19/11/2026 – greedy_before_after.csv: ty_le_3km, lech lon nhat",0.0,0.0,ĐẠT,5 dong; nguong 0.011
+"So voi 19/11/2026 – greedy_before_after.csv: ty_le_3km_mang_duong, lech lon nhat",0.0,0.0,ĐẠT,5 dong; nguong 0.011
+"So voi 19/11/2026 – access_2030_change.csv: ty_le_3km_2030, lech lon nhat",0.0,0.0,ĐẠT,56 dong; nguong 0.011
+"So voi 19/11/2026 – tyt_cskcb.csv: cskcb_2km, lech lon nhat",0.0,0.0,ĐẠT,56 dong; nguong 0.0
+"So voi 19/11/2026 – tyt_cskcb.csv: kc_cskcb_gan_nhat_m, lech lon nhat",0.0,0.0,ĐẠT,56 dong; nguong 1.0
+"So voi 19/11/2026 – forecast_commune_2030.csv: dan_2030, lech tuong doi lon nhat (%)",0.338,0.0,ĐẠT,nguong = bien do khoang 80% (0.748%); ETS nhay voi sai so lam tron 1e-10 nen khong lap lai dung so cu
+So voi 19/11/2026 – danh sach ung vien ra soat gop tram (A15),17.0,17.0,ĐẠT,
+So voi 19/11/2026 – so cum vung trang > 5 km,98.0,98.0,ĐẠT,
+So voi 19/11/2026 – cum vung trang mang ca dia hinh,91.0,91.0,ĐẠT,
+4 cach luu cho cung ket qua va khop kpi_theo_nhom_spark.csv,4.0,4.0,ĐẠT,
+So bang Parquet co _SUCCESS = so bang da ghi,25.0,25.0,ĐẠT,Parquet khong co giao dich

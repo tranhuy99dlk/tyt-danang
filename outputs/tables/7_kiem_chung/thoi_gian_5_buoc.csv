@@ -1,0 +1,6 @@
+﻿buoc,ten_buoc,viec_chinh,thoi_gian_giay,so_bang_csv_vao_hang_cho,so_bang_gold_vao_hang_cho,so_bang_parquet_da_ghi,so_job_spark,ty_le_thoi_gian_pct
+1,Doc,doc Bronze voi schema tuong minh,4.3,1,0,0,34,9.1
+2,Kiem tra & lam sach,"Null, kieu, mien gia tri, trung; quarantine / excluded",14.6,4,0,2,94,31.1
+3,Bien doi,"chuan hoa, noi da nguon, cot nghiep vu -> Silver",8.5,4,0,9,105,18.1
+4,Tong hop,"KPI groupBy/cua so, vung lom, khuyen nghi, du bao, doi soat",13.6,27,14,0,144,28.9
+5,Ghi,"Gold Parquet phan vung, bang CSV, kiem tra ghi",6.0,0,0,14,62,12.8

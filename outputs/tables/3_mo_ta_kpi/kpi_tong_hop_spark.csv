@@ -1,0 +1,29 @@
+﻿chi_so,gia_tri,don_vi,loai,ghi_chu
+"Tổng dân 56 xã/phường năm 2024 (WorldPop, ước tính)",1177774.0,người,nền,A2
+Tổng dân 60+ năm 2024,134755.0,người,nền,A3
+Số trạm y tế,56.0,trạm,nền,toạ độ nhập tay (A13)
+Tỷ lệ dân trong 3 km đường chim bay tới trạm gần nhất,98.69,%,KPI chính,ngưỡng 3 km là giả định A1
+Tỷ lệ dân trong 3 km theo mạng đường,96.1,%,KPI chính (đường đi),A6
+Tỷ lệ dân tới trạm trong 15 phút xe máy,99.71,%,KPI chính (thời gian),A6
+"Hệ số vòng đường trung vị (mạng đường / chim bay, ô cách trạm > 500 m)",1.366,lần,thuận tiện đường đi,A6
+Thời gian trung vị tới trạm (xe máy),2.6,phút,thuận tiện đường đi,A6
+Tỷ lệ dân trong 2 km,95.18,%,độ nhạy,A1
+Tỷ lệ dân trong 5 km,99.78,%,độ nhạy,A1
+Dân bình quân mỗi trạm,21032.0,người/trạm,KPI phụ,
+Khoảng cách trung vị (theo dân) tới trạm gần nhất,611.0,m,KPI phụ,
+Dân cách trạm gần nhất trên 5 km (vùng trắng),2624.0,người,KPI phụ,
+Dân 60+ cách trạm trên 5 km,305.0,người,KPI phụ,
+Tỷ lệ dân 60+ trong 3 km,98.67,%,KPI phụ,A3
+Tỷ lệ dân trong 3 km – Phường,99.71,%,KPI phụ,45 đơn vị; A7
+Tỷ lệ dân trong 3 km – Xã đồng bằng/ven đô,94.38,%,KPI phụ,9 đơn vị; A7
+Tỷ lệ dân trong 3 km – Xã miền núi (địa hình),47.87,%,KPI phụ,2 đơn vị; A7
+"Chênh lệch phường – xã miền núi (3 km, chim bay)",51.84,điểm %,KPI phụ,A7
+"Chênh lệch phường – xã miền núi (3 km, mạng đường)",60.81,điểm %,KPI phụ,"A6, A7"
+Khoảng cách p95 (theo dân) tới trạm gần nhất,1984.0,m,KPI phụ (mới),đuôi phân bố: 5% dân ở xa hơn mức này
+Khoảng cách p95 (theo dân) tới trạm theo mạng đường,2817.0,m,KPI phụ (mới),A6
+Tỷ lệ dân cần trên 20 phút xe máy tới trạm (vùng lõm),0.15,%,KPI phụ (mới),"A6, A18"
+Dân cần trên 20 phút xe máy tới trạm,1790.0,người,KPI phụ (mới),"A6, A18"
+Khoảng cách trung vị (theo dân) tới CSKCB gần nhất,914.0,m,KPI phụ (mới),"30 CSKCB, sàn dưới (A17)"
+Khoảng cách p95 (theo dân) tới CSKCB gần nhất,5680.0,m,KPI phụ (mới),A17
+Tỷ lệ dân trong 3 km tới CSKCB gần nhất (chim bay),82.76,%,KPI phụ (mới),A17
+Tỷ lệ dân trong 3 km tới CSKCB gần nhất (mạng đường),77.02,%,KPI phụ (mới),"A6, A17"

@@ -1,11 +1,12 @@
-# Python 3.11 hoac 3.12 (macOS Intel x86_64 co san wheel cho tat ca goi duoi day)
-numpy>=1.26
-pandas>=2.1
-scipy>=1.11
-shapely>=2.0
-pyproj>=3.6
-rasterio>=1.3
-statsmodels>=0.14
-pyarrow>=14
-matplotlib>=3.8
-openpyxl>=3.1    # doc data/raw/location-tyt.xlsx (04_stations.py)
+# Python 3.11 (uv tu tai). Ban da khoa phien ban: requirements.lock.txt
+numpy>=1.26        # tinh toan mang
+pandas>=2.1        # bang du lieu
+scipy>=1.11        # Dijkstra, KDTree, gom cum, kiem dinh sieu boi
+shapely>=2.0       # hinh hoc: diem trong da giac (01c)
+pyproj>=3.6        # doi he toa do WGS84 -> UTM 49N (01c)
+rasterio>=1.3      # doc raster GeoTIFF WorldPop, do cao (01b, 01c)
+statsmodels>=0.14  # mo hinh du bao ETS (Giai doan IV)
+pyarrow>=14        # Parquet, chuyen bang pandas <-> Spark
+matplotlib>=3.8    # ve hinh (09)
+openpyxl>=3.1      # doc file Excel toa do tram, danh sach CSKCB (01b)
+pyspark==3.5.*     # Spark chay tren may (can Java 17: brew install openjdk@17)

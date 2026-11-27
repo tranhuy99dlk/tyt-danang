@@ -1,0 +1,105 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "cwd": "${workspaceFolder}",
+    "env": {
+      "PYTHON": "${workspaceFolder}/.venv/bin/python",
+      "JAVA_HOME": "/opt/homebrew/opt/openjdk@17"
+    }
+  },
+  "tasks": [
+    {
+      "label": "0 – Kiểm tra máy",
+      "type": "shell",
+      "command": "bash scripts/0_kiem_tra_may.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "1a – Tải dữ liệu nguồn (~1 GB, một lần)",
+      "type": "shell",
+      "command": "bash scripts/1_thu_thap/1a_tai_du_lieu.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "Chạy toàn bộ (1 thu thập → 2 Spark 5 bước → 3 báo cáo)",
+      "type": "shell",
+      "command": "bash scripts/chay_toan_bo.sh",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "1b – Chuyển đổi đa nguồn vào Bronze",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python scripts/1_thu_thap/1b_chuyen_doi_bronze.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "1c – Tra cứu không gian",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python scripts/1_thu_thap/1c_tra_cuu_khong_gian.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "2 – Pipeline Spark 5 bước (Đọc → Kiểm tra → Biến đổi → Tổng hợp → Ghi)",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python scripts/2_spark_5_buoc/chay_spark.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "3 – Báo cáo (hình, từ điển, chốt số)",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python scripts/3_bao_cao/bao_cao.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "Chạy file Python đang mở",
+      "type": "shell",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": ["${file}"],
+      "options": { "cwd": "${fileDirname}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker 1 – Bật cụm HDFS + YARN + JupyterLab",
+      "type": "shell",
+      "command": "docker compose -f docker/docker-compose.yml up -d && docker compose -f docker/docker-compose.yml ps",
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker 2 – Đưa Bronze lên HDFS",
+      "type": "shell",
+      "command": "bash scripts/cum_hdfs_yarn/hdfs_yarn_cli.sh truoc",
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker 3a – Chạy Spark 5 bước trên HDFS (local trong container)",
+      "type": "shell",
+      "command": "docker exec -w /home/jovyan/work/mis5007_tram_y_te -e HDFS_URI=hdfs://namenode:9000/mis5007 mis5007-spark-notebook python scripts/2_spark_5_buoc/chay_spark.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker 3b – Đóng gói Python cho YARN (làm 1 lần, ~1 phút)",
+      "type": "shell",
+      "command": "bash scripts/cum_hdfs_yarn/yarn_python_env.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker 3c – Chạy Spark 5 bước trên YARN (executor trên NodeManager)",
+      "type": "shell",
+      "command": "docker exec -w /home/jovyan/work/mis5007_tram_y_te -e HDFS_URI=hdfs://namenode:9000/mis5007 -e SPARK_MASTER=yarn mis5007-spark-notebook python scripts/2_spark_5_buoc/chay_spark.py",
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker 4 – Liệt kê HDFS, fsck, ứng dụng YARN",
+      "type": "shell",
+      "command": "bash scripts/cum_hdfs_yarn/hdfs_yarn_cli.sh sau",
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker 5 – Dừng cụm (giữ dữ liệu HDFS)",
+      "type": "shell",
+      "command": "docker compose -f docker/docker-compose.yml stop",
+      "problemMatcher": []
+    }
+  ]
+}

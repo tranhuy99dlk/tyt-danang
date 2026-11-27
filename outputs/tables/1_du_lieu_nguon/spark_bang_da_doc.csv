@@ -1,0 +1,13 @@
+﻿nguon,bang,dinh_dang,ngay_nap,so_cot_schema,kieu_doc,so_dong_doc
+danh_muc,dm_56_tram,CSV,2026-11-27,7,"schema khai báo, PERMISSIVE + _corrupt_record",56
+tra_cuu_khong_gian,o_luoi_100m,CSV,2026-11-27,14,"schema khai báo, PERMISSIVE + _corrupt_record",300672
+worldpop,pop_100m_raw,CSV,2026-11-27,4,"schema khai báo, PERMISSIVE + _corrupt_record",3006720
+worldpop,pop_1km_raw,CSV,2026-11-27,5,"schema khai báo, PERMISSIVE + _corrupt_record",454656
+co_so_y_te,tyt_raw,CSV,2026-11-27,4,"schema khai báo, PERMISSIVE + _corrupt_record",65
+co_so_y_te,cskcb_raw,CSV,2026-11-27,10,"schema khai báo, PERMISSIVE + _corrupt_record",30
+tra_cuu_khong_gian,duong_nut,CSV,2026-11-27,3,"schema khai báo, PERMISSIVE + _corrupt_record",236981
+tra_cuu_khong_gian,duong_canh,CSV,2026-11-27,4,"schema khai báo, PERMISSIVE + _corrupt_record",253466
+danh_muc,dan_so_nq1251,CSV,2026-11-27,7,mọi cột là chuỗi (bảng tham chiếu nhỏ),17
+danh_muc,nq1251_sap_xep,CSV,2026-11-27,10,mọi cột là chuỗi (bảng tham chiếu nhỏ),11
+danh_muc,tt30_goi_dich_vu,CSV,2026-11-27,5,mọi cột là chuỗi (bảng tham chiếu nhỏ),15
+tra_cuu_khong_gian,ranh_gioi_56_xa,GeoJSON,2026-11-27,,"nguyên văn (wholetext), phân tích JSON trên driver",56

@@ -1,0 +1,33 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+  "python.analysis.extraPaths": ["scripts/chung", "scripts/2_spark_5_buoc"],
+  "terminal.integrated.env.osx": {
+    "PYTHON": "${workspaceFolder}/.venv/bin/python",
+    "JAVA_HOME": "/opt/homebrew/opt/openjdk@17"
+  },
+  "files.watcherExclude": {
+    "**/.venv/**": true,
+    "**/data/raw/worldpop/**": true,
+    "**/data/raw/terrain/**": true,
+    "**/data/raw/gadm/**": true,
+    "**/data/lake/**": true,
+    "**/data/yarn/**": true,
+    "**/logs/**": true
+  },
+  "search.exclude": {
+    "**/.venv": true,
+    "**/data/raw/worldpop": true,
+    "**/data/raw/terrain": true,
+    "**/data/raw/gadm": true,
+    "**/data/raw/osm/*.json": true,
+    "**/data/lake": true,
+    "**/data/yarn": true,
+    "**/outputs/tables/**/dan_cu_luoi_100m.csv": true,
+    "**/outputs/tables/**/tiep_can_luoi_100m.csv": true
+  },
+  "files.readonlyInclude": {
+    "data/raw/**": true,
+    "data/reference/**": true
+  }
+}

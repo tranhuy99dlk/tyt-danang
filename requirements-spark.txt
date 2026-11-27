@@ -1,3 +1,0 @@
-# Chi can khi chay scripts/11_spark_pipeline.py ngay tren may (khong dung container).
-# Can them Java 17. Cach khuyen dung: bash scripts/run_spark.sh (chay trong container Spark).
-pyspark==3.5.*
