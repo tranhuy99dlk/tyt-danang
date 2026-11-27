@@ -1,0 +1,57 @@
+﻿ma_tram,ten_tram,quan_huyen,loai_dv,dan_phuc_vu,dan60_phuc_vu,kc_tb_m,so_o_luoi
+TYT01,Trạm Y tế phường Hòa An,Quận Cẩm Lệ,Phường,31380.3,3587.9,896.4,353
+TYT02,Trạm Y tế phường Khuê Trung,Quận Cẩm Lệ,Phường,41145.3,4704.4,1077.9,713
+TYT03,Trạm Y tế phường Hòa Phát,Quận Cẩm Lệ,Phường,25228.8,2884.6,1180.8,821
+TYT04,Trạm Y tế phường Hòa Thọ Tây,Quận Cẩm Lệ,Phường,12366.8,1414.0,1551.5,1035
+TYT05,Trạm Y tế phường Hòa Thọ Đông,Quận Cẩm Lệ,Phường,33471.2,3827.0,1100.3,641
+TYT06,Trạm Y tế phường Hòa Xuân,Quận Cẩm Lệ,Phường,23448.9,2678.0,1072.2,804
+TYT07,Trạm Y tế phường Mỹ An,Quận Ngũ Hành Sơn,Phường,22528.2,2575.8,695.8,381
+TYT08,Trạm Y tế phường Khuê Mỹ,Quận Ngũ Hành Sơn,Phường,14891.8,1702.7,1172.2,847
+TYT09,Trạm Y tế phường Hoà Quý,Quận Ngũ Hành Sơn,Phường,19216.9,2297.6,1235.4,1085
+TYT10,Trạm Y tế phường Hoà Hải,Quận Ngũ Hành Sơn,Phường,25745.0,2937.4,1746.0,1567
+TYT11,Trạm Y tế phường Tam Thuận,Quận Thanh Khê,Phường,19758.9,2250.4,400.7,96
+TYT12,Trạm Y tế phường Thanh Khê Tây,Quận Thanh Khê,Phường,22832.7,2603.6,618.4,139
+TYT13,Trạm Y tế phường Thanh Khê Đông,Quận Thanh Khê,Phường,35630.7,4055.4,970.8,245
+TYT14,Trạm Y tế phường Xuân Hà,Quận Thanh Khê,Phường,15240.9,1742.0,441.6,94
+TYT15,Trạm Y tế phường Tân Chính,Quận Thanh Khê,Phường,6337.2,723.0,380.4,27
+TYT16,Trạm Y tế phường Chính Gián,Quận Thanh Khê,Phường,14900.2,1703.6,538.9,119
+TYT17,Trạm Y tế phường Vĩnh Trung,Quận Thanh Khê,Phường,14661.2,1670.4,322.2,55
+TYT18,Trạm Y tế phường Thạc Gián,Quận Thanh Khê,Phường,12656.9,1447.1,621.0,76
+TYT19,Trạm Y tế phường An Khê,Quận Thanh Khê,Phường,36006.1,4116.8,515.3,188
+TYT20,Trạm Y tế phường Hòa Khê,Quận Thanh Khê,Phường,22298.2,2548.0,716.2,285
+TYT21,Trạm Y tế xã Hòa Bắc,Huyện Hòa Vang,Xã,3478.6,397.7,4837.5,1914
+TYT22,Trạm Y tế xã Hòa Liên,Huyện Hòa Vang,Xã,7542.7,862.2,1681.9,1741
+TYT23,Trạm Y tế xã Hòa Ninh,Huyện Hòa Vang,Xã,9327.4,1066.2,2883.5,3252
+TYT24,Trạm Y tế xã Hòa Sơn,Huyện Hòa Vang,Xã,18365.3,2095.4,1496.1,1449
+TYT25,Trạm Y tế xã Hòa Nhơn,Huyện Hòa Vang,Xã,13661.1,1561.9,2158.1,2620
+TYT26,Trạm Y tế xã Hòa Phú,Huyện Hòa Vang,Xã,8423.6,965.9,3546.5,3668
+TYT27,Trạm Y tế xã Hòa Phong,Huyện Hòa Vang,Xã,18225.4,2077.8,1568.0,1476
+TYT28,Trạm Y tế xã Hòa Châu,Huyện Hòa Vang,Xã,20523.0,2337.6,1076.3,797
+TYT29,Trạm Y tế xã Hòa Tiến,Huyện Hòa Vang,Xã,23472.8,2720.0,1542.4,1458
+TYT30,Trạm Y tế xã Hòa Phước,Huyện Hòa Vang,Xã,14244.3,1713.4,1357.2,906
+TYT31,Trạm Y tế xã Hòa Khương,Huyện Hòa Vang,Xã,17382.1,2006.3,1996.5,2459
+TYT32,Trạm Y tế phường Hòa Hiệp Bắc,Quận Liên Chiểu,Phường,20550.9,2350.4,2663.6,1503
+TYT33,Trạm Y tế phường Hòa Hiệp Nam,Quận Liên Chiểu,Phường,20217.9,2311.7,1283.8,962
+TYT34,Trạm Y tế phường Hòa Khánh Bắc,Quận Liên Chiểu,Phường,76953.6,8774.1,1395.1,1297
+TYT35,Trạm Y tế phường Hòa Khánh Nam,Quận Liên Chiểu,Phường,28788.2,3291.6,1576.4,1050
+TYT36,Trạm Y tế phường Hòa Minh,Quận Liên Chiểu,Phường,36287.7,4145.7,886.4,453
+TYT37,Trạm Y tế phường Thanh Bình,Quận Hải Châu,Phường,12726.5,1454.6,569.2,150
+TYT38,Trạm Y tế phường Thuận Phước,Quận Hải Châu,Phường,14555.1,1659.2,514.6,111
+TYT39,Trạm Y tế phường Thạch Thang,Quận Hải Châu,Phường,16995.7,1934.1,366.4,88
+TYT40,Trạm Y tế phường Hải Châu I,Quận Hải Châu,Phường,13324.1,1518.1,359.2,76
+TYT41,Trạm Y tế phường Hải Châu II,Quận Hải Châu,Phường,13211.6,1509.1,382.4,53
+TYT42,Trạm Y tế phường Phước Ninh,Quận Hải Châu,Phường,7609.2,870.0,239.3,44
+TYT43,Trạm Y tế phường Hòa Thuận Tây,Quận Hải Châu,Phường,24118.5,2757.6,854.1,390
+TYT44,Trạm Y tế phường Hòa Thuận Đông,Quận Hải Châu,Phường,27360.1,3128.3,619.3,221
+TYT45,Trạm Y tế phường Nam Dương,Quận Hải Châu,Phường,5854.1,669.3,305.0,27
+TYT46,Trạm Y tế phường Bình Hiên,Quận Hải Châu,Phường,18592.6,2125.8,601.2,78
+TYT47,Trạm Y tế phường Bình Thuận,Quận Hải Châu,Phường,8001.2,914.8,315.7,60
+TYT48,Trạm Y tế phường Hòa Cường Bắc,Quận Hải Châu,Phường,32060.5,3665.7,546.8,192
+TYT49,Trạm Y tế phường Hòa Cường Nam,Quận Hải Châu,Phường,20922.8,2392.2,889.4,430
+TYT50,Trạm Y tế phường Thọ Quang,Quận Sơn Trà,Phường,29636.3,3388.5,3177.3,1138
+TYT51,Trạm Y tế phường Nại Hiên Đông,Quận Sơn Trà,Phường,16819.3,1923.1,1937.3,390
+TYT52,Trạm Y tế phường Mân Thái,Quận Sơn Trà,Phường,34438.6,3932.4,941.0,315
+TYT53,Trạm Y tế phường An Hải Bắc,Quận Sơn Trà,Phường,20137.7,2290.2,564.0,194
+TYT54,Trạm Y tế phường Phước Mỹ,Quận Sơn Trà,Phường,22019.9,2506.5,600.8,212
+TYT55,Trạm Y tế phường An Hải Tây,Quận Sơn Trà,Phường,18804.7,2150.0,511.9,161
+TYT56,Trạm Y tế phường An Hải Đông,Quận Sơn Trà,Phường,33395.0,3818.3,635.7,315

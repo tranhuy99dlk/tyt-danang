@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Chạy / debug script đang mở",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "cwd": "${fileDirname}",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "env": { "JAVA_HOME": "/opt/homebrew/opt/openjdk@17" },
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Debug pipeline Spark 5 bước",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/2_spark_5_buoc/chay_spark.py",
+      "cwd": "${workspaceFolder}/scripts/2_spark_5_buoc",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "env": { "JAVA_HOME": "/opt/homebrew/opt/openjdk@17" },
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}

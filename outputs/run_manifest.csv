@@ -1,84 +1,90 @@
 file,rows,bytes,sha256,script,created_utc,note
-data/interim/communes_56.geojson,56,44208,988968ace65c6a9fc88b790096b8007b3c7c462c88f9d9d04ac679ea7891eca7,02_boundaries,2026-11-19T01:39:30Z,nguon chinh GADM
-outputs/tables/qa_boundaries.csv,56,5669,10b05b758903fea1fd79d1dac262282434c9999f0537870987a65dd5fe2374fd,02_boundaries,2026-11-19T01:39:30Z,
-data/interim/grid_100m.parquet,41221,4939554,9fe1724d3499066c58af37a5e16467a3eb2a66aad4945c1e83e3c2e7e03b5180,03_grid,2026-11-19T01:39:38Z,
-data/interim/grid_panel_2015_2024.parquet,412210,14398880,4f40076378dcc6f430e9435f5bce64556c83b9e294dd26dcba7618922f8c200f,03_grid,2026-11-19T01:39:38Z,panel o luoi x nam 2015-2024
-outputs/tables/commune_series.csv,560,67252,221020ac8ad028a77a12db2281f73c5863e3fbaa610a96435ce4774a9ebf42a6,03_grid,2026-11-19T01:39:38Z,tong theo xa tu panel
-outputs/tables/qa_grid.csv,35,1701,eaf2fc8151441a6ea6bef0235b90b9369e81a07cfc4f09dc3dc7dbb5bb5f135a,03_grid,2026-11-19T01:39:38Z,
-outputs/tables/validation_downscale_A4.csv,9,337,bbe4b654564acae83158768796cf1f69e3e45dc91694a96b1c481cbeb129fef0,03_grid,2026-11-19T01:39:38Z,
-outputs/tables/panel_year_source.csv,10,214,f47af39c45fb9cc946ca39bf2b258b15edf3bfb9090e2f273cd6ecd198e5ce60,03_grid,2026-11-19T01:39:38Z,
-outputs/tables/osm_health_facilities.csv,228,20832,fe3897db406a66d4c20f5ec6659af32319122d30f363333088eff7668e9b3200,04_stations,2026-11-19T01:39:41Z,moi co so y te OSM trong hop bao (2 moc)
-data/interim/stations_56.csv,56,11687,18fc43b922a5524692fed9ae52f5f9ac353ce021b49b0ca3f8c5c899b0a4b734,04_stations,2026-11-19T01:39:44Z,
-outputs/tables/qa_stations.csv,56,4589,2ab170ad0ed541ab2cc39227b09f3c096f777a0bdda1aaafa053e8043a705eae,04_stations,2026-11-19T01:39:44Z,
-outputs/tables/qa_stations_nhap_tay_bi_loai.csv,0,40,6237865c4336bf7910664f56ba928c46dd799ddcc31fac1f2eb1fec3be14a608,04_stations,2026-11-19T01:39:44Z,dong trong location-tyt.xlsx khong dung duoc (CAN XEM)
-outputs/tables/osm_tyt_khong_ghep_duoc.csv,7,637,a1558ac7e40bf84c4707b8ac1fc943c68f7a8b34fe962d387c1bd32083637c4f,04_stations,2026-11-19T01:39:44Z,tram OSM khong ghep vao 56 xa (thuong o Quang Nam/Hue)
-data/interim/road_graph.npz,253466,7652614,8c9bd2007df331373cc59e5a302c1b4a662242e93526c91b8176968fafe0c9d6,05_network,2026-11-19T01:39:55Z,do thi duong (thanh phan lien thong lon nhat)
-data/interim/grid_network.parquet,41221,1481877,a0fde4e95a87c34d97777744f0f8fe9e71d9e6e037ca1015fc7cc35dce9151dd,05_network,2026-11-19T01:39:57Z,
-outputs/tables/qa_network.csv,23,957,77c88a3965c24dce8c7f6bd6b71a6a1a1819101a44963578728526efda576d44,05_network,2026-11-19T01:39:57Z,
-outputs/tables/kpi_overview.csv,18,1273,604397c0ad8059c6ec29bed1e9a72eb7082bd03b33e1d6507197d4498e272b51,06_kpi,2026-11-19T01:40:01Z,
-outputs/tables/kpi_by_group.csv,3,459,1982c11bd4997dee10123b5463c354aac9c3df31fa8e56b7087a34e801f9077f,06_kpi,2026-11-19T01:40:02Z,
-outputs/tables/kpi_by_district.csv,7,498,6baddddedf6c388af3b63d1153262df710823e827fb2fb980d7b2ee28c901698,06_kpi,2026-11-19T01:40:02Z,
-outputs/tables/kpi_by_commune.csv,56,10177,c3591775a5d488a2f18fb27657683c34a28b3a7dc94f9a0e42cb8b70b2e542e3,06_kpi,2026-11-19T01:40:03Z,
-outputs/tables/station_catchment.csv,56,6169,c1fc907c6e35ec741e2e0cb7ef65825737fb72eb5632cee8b36b9194c85bc980,06_kpi,2026-11-19T01:40:03Z,
-data/interim/grid_access.parquet,41221,7431441,fd8def5d087d9a6a60d7ecce8a834d3f583c5f2ef9c303c11bc951541ab166b5,06_kpi,2026-11-19T01:40:03Z,
-outputs/tables/white_zones.csv,143,21596,4d1d205906cdb9567047ab7d09089ec05270fe5963764097abd22c7667e99d3e,07_diagnose,2026-11-19T01:40:11Z,
-outputs/tables/scenario_nq1251.csv,3,481,66eaad06002e5e8ced1d5679e8a9c91b495b491e6d11d1241baa18576e38374e,07_diagnose,2026-11-19T01:40:39Z,
-outputs/figures/h1_ban_do_khoang_cach.png,,217195,353a9ee2209931f035871a32039f2abac7d8718f9e1a94a58474fdd7057c0bc5,07_diagnose,2026-11-19T01:40:40Z,
-outputs/figures/h2_vung_trang_dia_hinh.png,,229817,dd5b839bd5fa1f1f306bad77ea7e1a07527453c5ee7dcb19274339aadc6c9cf6,07_diagnose,2026-11-19T01:40:41Z,
-outputs/figures/h3_ty_le_3km_theo_xa.png,,108193,29388204800ebf3c5804d07a2429dd518fc7eae3f5ff772958a0d72975282d75,07_diagnose,2026-11-19T01:40:42Z,
-outputs/figures/h4_mat_do_vs_khoang_cach.png,,75733,2f90b97e3823f770bbaea1cfea34ea55e798363b11c265490c09121f7ecc0d01,07_diagnose,2026-11-19T01:40:43Z,
-outputs/tables/forecast_backtest.csv,16,1054,bc94bd9f904e7485c28c4d65d73529e10e80b046dd12bf7daabbd4ee276c1344,08_forecast,2026-11-19T01:41:01Z,
-outputs/tables/forecast_model_choice.csv,2,131,bc78b78eea82d6cff37fed8e84800260d449a6755c25f3797676aa45d609dc74,08_forecast,2026-11-19T01:41:01Z,
-outputs/tables/forecast_commune_2030.csv,56,9991,3ea7ecade066fe1354d7a78f9c6f940467565f8a6bbb7e9a1e62d1e6d310210a,08_forecast,2026-11-19T01:41:19Z,
-outputs/tables/forecast_total_2030.csv,14,349,9a5435472ef091711acceadd8b1e4495ae311fc4675137f266a3ce95ac87f37a,08_forecast,2026-11-19T01:41:19Z,
-outputs/tables/access_2030_change.csv,56,6784,e1b16132041fbca6f458f89cf1a964c763a5db130c0bd09082718c2b1f045fa4,08_forecast,2026-11-19T01:41:19Z,
-outputs/tables/access_2030_total.csv,1,158,34059d15705fa2a7e437bfc37a098c7679abe90716632379df93ed64e9a88560,08_forecast,2026-11-19T01:41:19Z,
-data/interim/grid_2030.parquet,41221,1890167,68f4e09aef01e34bed9c9c20949516a6847189959e0b4c19868fef77222f9c5a,08_forecast,2026-11-19T01:41:19Z,
-outputs/figures/h5_du_bao_dan_so.png,,92789,31c0e06c1df0ffc66e1d7cf843707b328db807b9fa57d6bbb9cd05fbf9af9ccb,08_forecast,2026-11-19T01:41:20Z,
-outputs/tables/greedy_curve.csv,22,672,ead48c73c9a956f56d65fac00b216c9a77fc014a94dc943620902b7145a66fa8,09_greedy,2026-11-19T01:41:25Z,
-outputs/tables/greedy_sites.csv,10,1492,7fc42469a140a8e00d757865a50c68f663a37f2deb7124ec5c504c3fd1119fcb,09_greedy,2026-11-19T01:41:25Z,
-outputs/tables/greedy_before_after.csv,5,447,71985216bd0180b3687f7de9f344a76abb05bc3a5e74c86b80b4afd06e0f2bef,09_greedy,2026-11-19T01:41:26Z,
-outputs/figures/h7_de_xuat_vi_tri.png,,161868,f3d0ddaab2130c2a0f25dcef6c42caaf02e42e4a58f6e47b5061cf1734b324e9,09_greedy,2026-11-19T01:41:26Z,
-outputs/tables/tram_giao_thong.csv,56,13455,2eeaaa7471fa8bdf3d2fc39d6598976f08866d75a3728b67622497a109732e4c,13_giao_thong,2026-11-19T01:41:32Z,duong canh tram (OSM) + chi so di lai vung phuc vu (A6)
-outputs/tables/diem_de_xuat_giao_thong.csv,10,2448,33e11b5974fcfbe69ad1867a1ad5fdbabf8374e0fbccfd73ed20d8829d349e49,13_giao_thong,2026-11-19T01:41:32Z,duong canh diem de xuat (OSM) + duong di toi tram hien huu
-outputs/tables/xa_phuong_56_toa_do.csv,56,9883,cac6249f9a9ffd4aaf1a3d79cd47b420c989c4d3de8fcb22d14bb13932c119a4,14_ban_do,2026-11-19T01:41:36Z,"56 xa/phuong truoc 01/01/2025: so tren ban do h8, tam, khung toa do"
-outputs/tables/pham_vi_da_nang_cu.csv,12,959,61338a7ef6026007ecac4a1b594e3ab83409d938ba58595380d3068c09b6fd9b,14_ban_do,2026-11-19T01:41:36Z,pham vi 56 xa/phuong (dat lien) theo GADM 4.1
-outputs/figures/h8_ban_do_hanh_chinh_truoc_2025.png,,556704,8bd2959b597c38ad00b505e5a8a4ebd6b197b4dc5f157b43d6f5aff7fcd3ab92,14_ban_do,2026-11-19T01:41:43Z,ban do hanh chinh 56 xa/phuong truoc 01/01/2025
-outputs/tables/ban_do_truoc_sau_de_xuat.csv,6,350,785d781b0f4228af9cb66c58c23b10ae7e88b2dec5e425ca7d0deb66a548f5a3,14_ban_do,2026-11-19T01:41:43Z,"dan 2024 theo lop khoang cach chim bay, truoc va sau khi them 5 diem (09_greedy)"
-outputs/figures/h9_truoc_sau_de_xuat.png,,458443,df4636e24a9c9d901c862d0e64606c67ffc435ee39fb0f4c0e2e2dba8089808c,14_ban_do,2026-11-19T01:41:47Z,ban do truoc/sau khi them 5 diem de xuat
-outputs/tables/qa_official_population.csv,34,6602,9d02e0400a8272c9a41f8161f5bb929f8390960e33211f81eb8d77b1287b550e,10_quality,2026-11-19T01:41:49Z,moc so lieu NQ 1251 chua xac dinh nam (ho so de an)
-outputs/tables/qa_summary.csv,32,2951,2cafdc70889f62d9323d649eb217d7b6baf7a727247b9e2b278394a85991824a,10_quality,2026-11-19T01:41:49Z,
-outputs/tables/tu_dien_du_lieu.csv,72,18021,7f1995807e8d316bbe3fd86670d3cd8112af6f13c4db5b629dffa1e4e047d8e5,10_quality,2026-11-19T01:41:49Z,
-outputs/tables/dan_cu_luoi_100m.csv,41221,9346689,d79966f4e0ff7cc0df7b85c7c07de543a767b1a2fdc6ca5b6e1401b5fe722f43,12_export_csv,2026-11-19T01:41:53Z,"luoi dan cu 100 m tu raster WorldPop (A2, A3)"
-outputs/tables/tiep_can_luoi_100m.csv,41221,3449200,e59e1c99d6b9357edb72017fbf5b0d9dcc20eb14d3dedc848eff34e90b9c0270,12_export_csv,2026-11-19T01:41:53Z,"khoang cach chim bay + mang duong moi o (A1, A5, A6)"
-outputs/tables/giai_thich_csv_luoi.csv,22,3522,beaf20a86e2b79b2078112b4d9cd1800b9c2c482d527f618fdb04ab79791dea8,12_export_csv,2026-11-19T01:41:53Z,giai thich cot cua 2 file luoi CSV
-data/landing/pop_100m_raw.csv,3006720,71357558,bdce0084878c81a435efd7d6c8281dcdd1fd5f429fe910a7a7d98a996a35cff2,11a_landing,2026-11-19T01:42:03Z,"pixel 100 m x nam, gia tri tho (co NoData -99999)"
-data/landing/cells_dim.csv,300672,36877908,52ef8e591a3db26a6b84112dea82cb2af0608c35eb42832cf32e7884d9a84b30,11a_landing,2026-11-19T01:42:09Z,moi pixel 100 m trong hop bao; ma_tram rong = ngoai 56 xa
-data/landing/age_1km_raw.csv,284160,8251604,9f1fb23f1d9f92817c6dc5c4241ff889fda27f941404677c34c3b02f449e6b4f,11a_landing,2026-11-19T01:42:10Z,"luoi 1 km: pop + 7 nhom tuoi 60-90+, gia tri tho"
-data/landing/stations_raw.csv,65,4002,a4126c652a1195b0d81cbcea6a698ea08ca0135b6a6d53e3e35358619d368912,11a_landing,2026-11-19T01:42:10Z,"nguyen van location-tyt.xlsx (ca dong tieu de, dong ten quan)"
-data/landing/net_dist.csv,41221,2970977,df3b8abb2bbe10f59936f9ab6453263e7c915b69bff1affb8543b2a8f7b4de2e,11a_landing,2026-11-19T01:42:11Z,duong di ngan nhat (Dijkstra) tu o toi tram - san pham 05_network.py
-data/landing/dm_56_tram.csv,56,5944,56f0d9fefb1a92e1092e1236aaab623f4371e4d35ff41553b6a83a2263836e8e,11a_landing,2026-11-19T01:42:11Z,danh muc 56 tram / xa
-outputs/tables/kpi_tong_hop_spark.csv,20,1681,b8f08a34c9e1df132a23db5c8d0e50f84924aba1649fa3601477d7d57a66ffe6,11_spark_pipeline,2026-11-19T01:48:44Z,"KPI chinh + phu nam 2024, tinh bang Spark"
-outputs/tables/kpi_theo_nam_spark.csv,10,1529,67a4eca22b160590e730e82c4f5ba9d3b91aa43b58b054c56789c835014d6611,11_spark_pipeline,2026-11-19T01:48:44Z,56 tram giu nguyen qua cac nam (A14)
-outputs/tables/kpi_theo_xa_nam_spark.csv,560,70604,7dac3813c893f79a8d235984ebd402e6f5a02d6c9038af317d854d84e3b8136b,11_spark_pipeline,2026-11-19T01:48:44Z,"xa x nam, 56 tram giu nguyen (A14)"
-outputs/tables/kpi_theo_xa_spark.csv,56,10467,76d83afbd1c5057d8830b093dd0b2a28d50375bfe0f6ea2e47dfa8e135344c40,11_spark_pipeline,2026-11-19T01:48:44Z,"theo xa nam 2024, kem mang duong"
-outputs/tables/kpi_theo_nhom_spark.csv,3,593,c03914c3ebf4acc12d03efb0c2ca373cf342ec5fe09f5fa19076a3b444ba751d,11_spark_pipeline,2026-11-19T01:48:44Z,phuong / xa dong bang / xa mien nui (A7)
-outputs/tables/kpi_theo_nhom_spark_sql.csv,3,265,2f6ead3241592718f73033c2e7f2c42207f909c53fb8608f20c0e9b01b5154cd,11_spark_pipeline,2026-11-19T01:48:44Z,KPI theo nhom viet bang Spark SQL (spark.sql) - doi soat voi kpi_theo_nhom_spark.csv
-outputs/tables/tram_vung_phuc_vu_spark.csv,56,5398,d8fad8c875b14bb3625e999324816c0b2ee0c4079e722341395923eaedc9f8e8,11_spark_pipeline,2026-11-19T01:48:44Z,dan phuc vu boi tram gan nhat
-outputs/tables/spark_so_dong_theo_nguon.csv,6,400,b649e887dce82a1ae26f9ad91bd9f7268b0ef9d635ef81b5c7e036ebe4574d16,11_spark_pipeline,2026-11-19T01:48:44Z,so dong tho / hop le / khong vao bang sach (= loi du lieu + ngoai pham vi) tung nguon
-outputs/tables/spark_quarantine_tong_hop.csv,7,384,acd26faf322e4bd233817d4e9c5bb177f228c88acbd86eda154552a9b9cd81b2,11_spark_pipeline,2026-11-19T01:48:44Z,"dong khong vao bang sach theo loai (LOI_DU_LIEU -> quarantine/, NGOAI_PHAM_VI -> excluded/), nguon, ly do"
-outputs/tables/spark_quarantine_mau.csv,59,8927,1bb43afe7a571c1396367861a19d9c11a1d0e4b680ed03f3c9b2f55e374d318a,11_spark_pipeline,2026-11-19T01:48:44Z,"toi da 10 dong mau moi (loai, nguon, ly do); ban day du o quarantine/ va excluded/"
-outputs/tables/doi_soat_spark.csv,28,3400,ffdce6893ca1a97480880469447f33d0fed74169c74b3834661d20e6310309fd,11_spark_pipeline,2026-11-19T01:49:02Z,
-outputs/tables/so_sanh_parquet_csv.csv,4,1491,55b975f67d0c9937418d72f1a4abfb0e6737b694e0d3de6ebf23ce59dc0fad4e,16_so_sanh_dinh_dang,2026-11-19T01:50:32Z,cung truy van KPI 3 km theo nhom nam 2024 tren 4 cach luu; ĐẠT
-logs/plan_pruning_2024.txt,340,13214,a1f20710edb68b894fdd590c5b0787295fa3429abac52cbe511ba810c87a7b54,16_so_sanh_dinh_dang,2026-11-19T01:50:32Z,explain formatted cua 4 phuong an luu tru
-data/raw/danh-sach-cskcb.xlsx,30,14233,62c2fbc07851993ae0ce28658a4a5d40eebc763228dee7c8e43a2fd1f2f6f814,15_tuyen_tren,2026-11-19T01:50:41Z,dau vao: danh sach CSKCB So Y te TP Da Nang (nguoi dung cung cap)
-outputs/tables/cskcb_danang.csv,30,6068,585338546b798a3319013d23f1875be5003fbefbed0f485872781142d8700ba9,15_tuyen_tren,2026-11-19T01:50:41Z,"Danh sach CSKCB So Y te TP Da Nang da lam sach (tuyen, hang, cap CMKT, toa do)"
-data/reference/tt30_2024_goi_dich_vu.csv,15,3927,d73f89d899e6e8df257ed9d3e00651730578aa5c5a90e94a9c0bf9f4307c3eb4,15_tuyen_tren,2026-11-19T01:50:41Z,dau vao: 15 nhom goi dich vu y te co ban cua TYT theo TT 30/2024/TT-BYT
-data/reference/nq1251_sap_xep.csv,11,2745,cc8ee96c86dfbd03e31882a70c9021974f565788563970df5fdf83798eab7413,15_tuyen_tren,2026-11-19T01:50:41Z,dau vao: 8 don vi gop + 3 dieu chinh mot phan theo NQ 1251/NQ-UBTVQH15 ngay 24/10/2024
-outputs/tables/doi_soat_nq1251_quy_tac.csv,5,589,d05ac7d61e315011325c36147636d8040a1ed7aeaa478121db2b711e3e2ec1cc,15_tuyen_tren,2026-11-19T01:50:42Z,Doi soat quy tac du doan gop tram voi NQ 1251 (17 xa bi gop thanh 8 don vi tu 01/01/2025)
-outputs/tables/tyt_cskcb.csv,56,20013,3a9f5fa03cb39d7fb47971c0f0db48d07d4c9282006df7c81fea62eab90a21bf,15_tuyen_tren,2026-11-19T01:50:42Z,A15: khoang cach va so CSKCB quanh moi TYT theo cap CMKT; ung_vien_A15_moi = >= 6 CSKCB/2km
-outputs/tables/tyt_cskcb_theo_nhom.csv,3,531,39211bc83c0cc454e5fe147086987f4f44106c5f5eeb2b8a143397e0d912236d,15_tuyen_tren,2026-11-19T01:50:42Z,A15: tong hop CSKCB quanh TYT theo nhom dia ban
-outputs/tables/doi_soat_nq1251_theo_xa.csv,56,7864,30ac6085839bf17685c23cce48cacdeecba7a140c867e6dbe69df4401221f16a,15_tuyen_tren,2026-11-19T01:50:42Z,Phan loai tung xa: quy tac A15 moi vs thuc te NQ 1251
-outputs/tables/ung_vien_gop_tram.csv,17,5516,94fa87b135bfccb6f92b0587be20f9b358bab5ee28fd1a4a857e0eb4abf11663,15_tuyen_tren,2026-11-19T01:50:42Z,A15 moi: ung vien RA SOAT (khong phai de nghi dong cua); nguong 6 CSKCB trong 2 km
-outputs/tables/kiem_tra_run_manifest.csv,71,6297,d8e02dafcc2743c19b4289a969b5cc69b8408a8ace46c5b2770911416ca28d8c,17_chot_so_lieu,2026-11-19T01:58:43Z,doi chieu SHA-256 moi file ket qua voi run_manifest.csv
-outputs/tables/so_lieu_chot.csv,62,16529,bf6bd4bab6723319442eb76f7dc8a810110eeedfbf233e305a317d2264d94389,17_chot_so_lieu,2026-11-19T01:58:43Z,con so chot cho bao cao kem file nguon va SHA-256 luc ghi
+data/raw/danh-sach-cskcb.xlsx,30.0,14233,62c2fbc07851993ae0ce28658a4a5d40eebc763228dee7c8e43a2fd1f2f6f814,15_tuyen_tren,2026-11-19T01:50:41Z,dau vao: danh sach CSKCB So Y te TP Da Nang (nguoi dung cung cap)
+data/reference/tt30_2024_goi_dich_vu.csv,15.0,3927,d73f89d899e6e8df257ed9d3e00651730578aa5c5a90e94a9c0bf9f4307c3eb4,15_tuyen_tren,2026-11-19T01:50:41Z,dau vao: 15 nhom goi dich vu y te co ban cua TYT theo TT 30/2024/TT-BYT
+data/reference/nq1251_sap_xep.csv,11.0,2745,cc8ee96c86dfbd03e31882a70c9021974f565788563970df5fdf83798eab7413,15_tuyen_tren,2026-11-19T01:50:41Z,dau vao: 8 don vi gop + 3 dieu chinh mot phan theo NQ 1251/NQ-UBTVQH15 ngay 24/10/2024
+data/lake/bronze/source_system=worldpop/ingestion_date=2026-11-26/pop_100m_raw.csv,3006720.0,71357558,bdce0084878c81a435efd7d6c8281dcdd1fd5f429fe910a7a7d98a996a35cff2,01b_nap_bronze,2026-11-26T16:59:29Z,"pixel 100 m x nam, gia tri tho (NoData -99999 giu nguyen)"
+data/lake/bronze/source_system=worldpop/ingestion_date=2026-11-26/pop_1km_raw.csv,454656.0,13198711,904df3c6ec7a1ed042ddedce532004f90e95bfe503dcf8c4e414d202c5216b60,01b_nap_bronze,2026-11-26T16:59:30Z,"luoi 1 km: pop + 7 nhom tuoi 60-90+, 2015-2030 (2025-2030 la so CHIEU), gia tri tho"
+data/lake/bronze/source_system=co_so_y_te/ingestion_date=2026-11-26/tyt_raw.csv,65.0,4002,a4126c652a1195b0d81cbcea6a698ea08ca0135b6a6d53e3e35358619d368912,01b_nap_bronze,2026-11-26T16:59:30Z,"nguyen van location-tyt.xlsx (ca dong tieu de, dong ten quan)"
+data/lake/bronze/source_system=co_so_y_te/ingestion_date=2026-11-26/cskcb_raw.csv,30.0,6836,5ed3485e3f569a7fb6cd20d901fef5ae4d7a600510b66335f10d78875dc93c9c,01b_nap_bronze,2026-11-26T16:59:30Z,nguyen van danh sach CSKCB (cac o la chuoi)
+data/lake/bronze/source_system=danh_muc/ingestion_date=2026-11-26/dm_56_tram.csv,56.0,12614,30a360b2c9ffc15ed3c6bf57916fd33ee456be33f94224b582719ecd7b9cc14d,01b_nap_bronze,2026-11-26T16:59:30Z,ban sao nguyen van danh muc tham chieu
+data/lake/bronze/source_system=danh_muc/ingestion_date=2026-11-26/dan_so_nq1251.csv,17.0,4354,caf40bc4c2ab3b151686f0fbbd0dc3733fc1c4e89ef3e992de3fb35329b056f4,01b_nap_bronze,2026-11-26T16:59:30Z,ban sao nguyen van danh muc tham chieu
+data/lake/bronze/source_system=danh_muc/ingestion_date=2026-11-26/nq1251_sap_xep.csv,11.0,2723,c446f49c407062ae5f89e4aa8cb16fd87cbbf6e36d45e9a9ec74b5051b8655b2,01b_nap_bronze,2026-11-26T16:59:30Z,ban sao nguyen van danh muc tham chieu
+data/lake/bronze/source_system=danh_muc/ingestion_date=2026-11-26/tt30_goi_dich_vu.csv,15.0,3919,f269203f91d486ff2331001ce5f7e79b43ba3f94a5665430de9e61eec66c4723,01b_nap_bronze,2026-11-26T16:59:30Z,ban sao nguyen van danh muc tham chieu
+data/lake/bronze/source_system=ranh_gioi/ingestion_date=2026-11-26/gadm41_da_nang_cap3.geojson,56.0,51292,8ee8954fa1d7f3be981bec40cf0854f49f10608ba43da8ba163341c259829600,01b_nap_bronze,2026-11-26T16:59:30Z,"GADM 4.1 cap xa, chi Da Nang, hinh hoc nguyen ban (hoc thuat, khong phan phoi lai)"
+data/lake/bronze/source_system=tra_cuu_khong_gian/ingestion_date=2026-11-26/ranh_gioi_56_xa.geojson,56.0,44135,a6c6bd8b041acfccff95a3533453761295d353c6754d5da6f61c4ed7ad687972,01c_tra_cuu_khong_gian,2026-11-26T16:59:31Z,"ranh gioi 56 xa, nguon chinh GADM"
+data/lake/bronze/source_system=tra_cuu_khong_gian/ingestion_date=2026-11-26/duong_nut.csv,236981.0,10415308,354f4ca8a9f354c3757a33c91b99635a3ce41dd9add0a6187139e8b64fe0cf70,01c_tra_cuu_khong_gian,2026-11-26T16:59:32Z,nut do thi duong (UTM 49N)
+data/lake/bronze/source_system=tra_cuu_khong_gian/ingestion_date=2026-11-26/duong_canh.csv,253466.0,13072037,056edf5449d754270d67d0db493d3317980ef96e0e60540cca305fee060bfebe,01c_tra_cuu_khong_gian,2026-11-26T16:59:32Z,"canh do thi duong: do dai (m), thoi gian xe may (phut) (A6)"
+data/lake/bronze/source_system=tra_cuu_khong_gian/ingestion_date=2026-11-26/o_luoi_100m.csv,300672.0,44352846,130f22c95c5afb9a10791ac9890f4fad85c337cd05002716f4b9a9984ccacbc7,01c_tra_cuu_khong_gian,2026-11-26T16:59:34Z,"moi pixel 100 m trong hop bao; ma_tram rong = ngoai 56 xa; do cao, nut duong gan nhat"
+data/lake/bronze/source_system=worldpop/ingestion_date=2026-11-27/pop_100m_raw.csv,3006720,71357558,bdce0084878c81a435efd7d6c8281dcdd1fd5f429fe910a7a7d98a996a35cff2,1b_chuyen_doi_bronze,2026-11-27T01:00:51Z,"pixel 100 m x nam, gia tri tho (NoData -99999 giu nguyen)"
+data/lake/bronze/source_system=worldpop/ingestion_date=2026-11-27/pop_1km_raw.csv,454656,13198711,904df3c6ec7a1ed042ddedce532004f90e95bfe503dcf8c4e414d202c5216b60,1b_chuyen_doi_bronze,2026-11-27T01:00:52Z,"luoi 1 km: pop + 7 nhom tuoi 60-90+, 2015-2030 (2025-2030 la so CHIEU), gia tri tho"
+data/lake/bronze/source_system=co_so_y_te/ingestion_date=2026-11-27/tyt_raw.csv,65,4002,a4126c652a1195b0d81cbcea6a698ea08ca0135b6a6d53e3e35358619d368912,1b_chuyen_doi_bronze,2026-11-27T01:00:52Z,"nguyen van location-tyt.xlsx (ca dong tieu de, dong ten quan)"
+data/lake/bronze/source_system=co_so_y_te/ingestion_date=2026-11-27/cskcb_raw.csv,30,6836,5ed3485e3f569a7fb6cd20d901fef5ae4d7a600510b66335f10d78875dc93c9c,1b_chuyen_doi_bronze,2026-11-27T01:00:52Z,nguyen van danh sach CSKCB (cac o la chuoi)
+data/lake/bronze/source_system=danh_muc/ingestion_date=2026-11-27/dm_56_tram.csv,56,12614,30a360b2c9ffc15ed3c6bf57916fd33ee456be33f94224b582719ecd7b9cc14d,1b_chuyen_doi_bronze,2026-11-27T01:00:52Z,ban sao nguyen van danh muc tham chieu
+data/lake/bronze/source_system=danh_muc/ingestion_date=2026-11-27/dan_so_nq1251.csv,17,4354,caf40bc4c2ab3b151686f0fbbd0dc3733fc1c4e89ef3e992de3fb35329b056f4,1b_chuyen_doi_bronze,2026-11-27T01:00:52Z,ban sao nguyen van danh muc tham chieu
+data/lake/bronze/source_system=danh_muc/ingestion_date=2026-11-27/nq1251_sap_xep.csv,11,2723,c446f49c407062ae5f89e4aa8cb16fd87cbbf6e36d45e9a9ec74b5051b8655b2,1b_chuyen_doi_bronze,2026-11-27T01:00:52Z,ban sao nguyen van danh muc tham chieu
+data/lake/bronze/source_system=danh_muc/ingestion_date=2026-11-27/tt30_goi_dich_vu.csv,15,3919,f269203f91d486ff2331001ce5f7e79b43ba3f94a5665430de9e61eec66c4723,1b_chuyen_doi_bronze,2026-11-27T01:00:52Z,ban sao nguyen van danh muc tham chieu
+data/lake/bronze/source_system=ranh_gioi/ingestion_date=2026-11-27/gadm41_da_nang_cap3.geojson,56,51292,8ee8954fa1d7f3be981bec40cf0854f49f10608ba43da8ba163341c259829600,1b_chuyen_doi_bronze,2026-11-27T01:00:52Z,"GADM 4.1 cap xa, chi Da Nang, hinh hoc nguyen ban (hoc thuat, khong phan phoi lai)"
+outputs/tables/1_du_lieu_nguon/bronze_danh_muc.csv,9,2479,110089fac92bd2020441ab5a23754829e3e16c3e963fed6341be0b9723a4118f,1b_chuyen_doi_bronze,2026-11-27T01:00:52Z,danh muc bang Bronze nap ngay 2026-11-27
+outputs/tables/1_du_lieu_nguon/qa_boundaries.csv,56,5669,10b05b758903fea1fd79d1dac262282434c9999f0537870987a65dd5fe2374fd,1c_tra_cuu_khong_gian,2026-11-27T01:00:52Z,nguon chinh GADM (A12)
+data/lake/bronze/source_system=tra_cuu_khong_gian/ingestion_date=2026-11-27/ranh_gioi_56_xa.geojson,56,44135,a6c6bd8b041acfccff95a3533453761295d353c6754d5da6f61c4ed7ad687972,1c_tra_cuu_khong_gian,2026-11-27T01:00:52Z,"ranh gioi 56 xa, nguon chinh GADM"
+outputs/tables/1_du_lieu_nguon/qa_network.csv,20,840,472a6f06555e19dd79ab1b1c446863de881665419d831f95222e6d511866baff,1c_tra_cuu_khong_gian,2026-11-27T01:00:53Z,moc OSM 2026-11-15T22:53:48Z (A6)
+data/lake/bronze/source_system=tra_cuu_khong_gian/ingestion_date=2026-11-27/duong_nut.csv,236981,10415308,354f4ca8a9f354c3757a33c91b99635a3ce41dd9add0a6187139e8b64fe0cf70,1c_tra_cuu_khong_gian,2026-11-27T01:00:53Z,nut do thi duong (UTM 49N)
+data/lake/bronze/source_system=tra_cuu_khong_gian/ingestion_date=2026-11-27/duong_canh.csv,253466,13072037,056edf5449d754270d67d0db493d3317980ef96e0e60540cca305fee060bfebe,1c_tra_cuu_khong_gian,2026-11-27T01:00:53Z,"canh do thi duong: do dai (m), thoi gian xe may (phut) (A6)"
+data/lake/bronze/source_system=tra_cuu_khong_gian/ingestion_date=2026-11-27/o_luoi_100m.csv,300672,44352846,130f22c95c5afb9a10791ac9890f4fad85c337cd05002716f4b9a9984ccacbc7,1c_tra_cuu_khong_gian,2026-11-27T01:00:55Z,"moi pixel 100 m trong hop bao; ma_tram rong = ngoai 56 xa; do cao, nut duong gan nhat"
+outputs/tables/1_du_lieu_nguon/spark_bang_da_doc.csv,12,1242,bc384dc6795411fad0d8e659c311efc6f074b98ec5566d9df7415a3f2ab0fc7f,b1_doc,2026-11-27T01:01:39Z,"Buoc 1: bang Bronze da doc, schema, so dong"
+outputs/tables/2_chat_luong/spark_so_dong_theo_nguon.csv,11,575,de20f12c075ff3414abe127d71be83a98c29141e626de0129ebdc3e6315d733a,b2_kiem_tra_lam_sach,2026-11-27T01:01:39Z,so dong tho / sach / loi du lieu / ngoai pham vi tung nguon Bronze
+outputs/tables/2_chat_luong/spark_quarantine_tong_hop.csv,7,376,c3358a7dfe56829ddc6b94b82bedc6484dab0b7e9b3786258dc1cd7696a9d72e,b2_kiem_tra_lam_sach,2026-11-27T01:01:39Z,"dong bi loai theo loai (LOI_DU_LIEU / NGOAI_PHAM_VI), nguon, ly do"
+outputs/tables/2_chat_luong/spark_quarantine_mau.csv,59,9479,84c88f2baa70002f2a382c80fa9884c2ef9a574783240339c2cebd260b7fffa9,b2_kiem_tra_lam_sach,2026-11-27T01:01:39Z,"toi da 10 dong mau moi (loai, nguon, ly do)"
+outputs/tables/2_chat_luong/qa_official_population.csv,34,8500,7ffade76b205f181c74c64b51b32f2139c8bbcd1b1bb0eb17982b0746c4122b8,b2_kiem_tra_lam_sach,2026-11-27T01:01:39Z,quy tac +-3% chi canh bao (WorldPop la uoc tinh mo hinh); moc so lieu NQ 1251 chua xac dinh nam
+outputs/tables/2_chat_luong/cskcb_danang.csv,30,6068,507af36c802590dbccd5b9068e1deddcf6917b9200204e7d658960afd1ec5f43,b3_bien_doi,2026-11-27T01:01:39Z,"CSKCB So Y te da kiem tra (tuyen, hang, cap CMKT, toa do) (A17)"
+outputs/tables/2_chat_luong/qa_grid.csv,9,389,12c553198a5782ce35817545250703c3234490a0d94150122008bb24433ad319,b3_bien_doi,2026-11-27T01:01:39Z,kiem tra luoi dan so va mang duong sau chuan hoa
+outputs/tables/2_chat_luong/qa_stations.csv,56,5066,4a074ff67c64562d5849fd7036dab8a7c80e1604ca60c723e9ee3012b682bfb3,b3_bien_doi,2026-11-27T01:01:39Z,"kiem tra toa do 56 tram (A5, A13)"
+outputs/tables/2_chat_luong/tram_y_te_56.csv,56,13116,59fbcf54d3efe1f5c98678e28a8ea76d50eec9724cb75693fdd4ab42d1b8607d,b3_bien_doi,2026-11-27T01:01:39Z,"56 tram: toa do, nam trong ranh gioi xa, khoang cach toi tam dan cu (A5, A13)"
+outputs/tables/3_mo_ta_kpi/kpi_tong_hop_spark.csv,28,2512,44d2f2e09a1577cf05b62ac14dad1379bcd38b01af602687c1517588717201d5,b4_tong_hop,2026-11-27T01:01:39Z,KPI chinh + phu nam 2024 (Spark)
+outputs/tables/3_mo_ta_kpi/kpi_theo_nam_spark.csv,10,1608,4180d2de76f2a0359733603a3ac05b160e964ea1a7bbbe86d2103dde25f05c5d,b4_tong_hop,2026-11-27T01:01:39Z,56 tram giu nguyen qua cac nam (A14)
+outputs/tables/3_mo_ta_kpi/kpi_theo_xa_nam_spark.csv,560,75338,dedf1605c7f7f66a1c1a5d55f43afa2113775910c8841f6418b48d852a35c7a0,b4_tong_hop,2026-11-27T01:01:39Z,xa x nam = gold/fact_health_access_yearly (A14)
+outputs/tables/3_mo_ta_kpi/kpi_theo_xa_spark.csv,56,13186,7694b748709a352540556561d1bca21387228109b00514d66ed966e8be8c89e7,b4_tong_hop,2026-11-27T01:01:39Z,"theo xa nam 2024, kem mang duong va CSKCB"
+outputs/tables/3_mo_ta_kpi/kpi_theo_nhom_spark.csv,3,801,97861a6352e2d4fd8c07fcd2815217f53da2e0c626c844c6a4180ae3f56d752e,b4_tong_hop,2026-11-27T01:01:39Z,phuong / xa dong bang / xa mien nui (A7)
+outputs/tables/3_mo_ta_kpi/kpi_theo_nhom_spark_sql.csv,3,265,2f6ead3241592718f73033c2e7f2c42207f909c53fb8608f20c0e9b01b5154cd,b4_tong_hop,2026-11-27T01:01:39Z,KPI theo nhom viet bang Spark SQL - doi soat voi kpi_theo_nhom_spark.csv
+outputs/tables/3_mo_ta_kpi/kpi_theo_quan_spark.csv,7,1335,6d7b66653cd84076d79c0fa17249ecabfc1e438e5048694e4aa2cb7cac83ccf7,b4_tong_hop,2026-11-27T01:01:39Z,7 quan/huyen truoc 2025
+outputs/tables/3_mo_ta_kpi/tram_vung_phuc_vu_spark.csv,56,5398,d8fad8c875b14bb3625e999324816c0b2ee0c4079e722341395923eaedc9f8e8,b4_tong_hop,2026-11-27T01:01:39Z,dan phuc vu boi tram gan nhat (chim bay)
+outputs/tables/4_chan_doan/white_zones.csv,261,39901,6f26a61fb3611fa576f2f22da6127d5dcee099cc617111ad4fcc4d71c130a99d,b4_tong_hop,2026-11-27T01:01:39Z,"vung trang > 5 km, vung xam 3-5 km, vung lom > 20 phut (A8, A18)"
+outputs/tables/5_khuyen_nghi/scenario_nq1251.csv,3,481,66eaad06002e5e8ced1d5679e8a9c91b495b491e6d11d1241baa18576e38374e,b4_khuyen_nghi,2026-11-27T01:01:39Z,kich ban giu 1 tram moi nhom gop NQ 1251
+outputs/tables/5_khuyen_nghi/greedy_curve.csv,22,672,ead48c73c9a956f56d65fac00b216c9a77fc014a94dc943620902b7145a66fa8,b4_khuyen_nghi,2026-11-27T01:01:39Z,do phu 3 km theo so diem moi K (A10)
+outputs/tables/5_khuyen_nghi/greedy_sites.csv,10,1490,fe191223c0b652450ad54746abd7d214d6fabebabb56e288d3f5612db5a266cf,b4_khuyen_nghi,2026-11-27T01:01:39Z,"diem dat moi de xuat (tham lam, R = 3 km, A10)"
+outputs/tables/5_khuyen_nghi/greedy_before_after.csv,5,447,71985216bd0180b3687f7de9f344a76abb05bc3a5e74c86b80b4afd06e0f2bef,b4_khuyen_nghi,2026-11-27T01:01:39Z,truoc / sau khi them K diem de xuat
+outputs/tables/5_khuyen_nghi/doi_soat_nq1251_quy_tac.csv,5,589,d05ac7d61e315011325c36147636d8040a1ed7aeaa478121db2b711e3e2ec1cc,b4_khuyen_nghi,2026-11-27T01:01:39Z,p-value lac quan vi nguong chon sau khi biet NQ 1251 (A15)
+outputs/tables/5_khuyen_nghi/tyt_cskcb.csv,56,20108,11973194882c125ca85a2d9b72eab496ba1c398c7829641957d4cfabdb1d0c30,b4_khuyen_nghi,2026-11-27T01:01:39Z,khoang cach va so CSKCB quanh moi TYT; ung_vien_A15_moi = >= 6 CSKCB/2km (danh sach ra soat)
+outputs/tables/5_khuyen_nghi/tyt_cskcb_theo_nhom.csv,3,530,ac8bb769c8c3745a01adc8bad381cf38888dfab83e88a29afe5b44a1f1b92e3f,b4_khuyen_nghi,2026-11-27T01:01:39Z,"CSKCB quanh TYT theo nhom dia ban (A15, A17)"
+outputs/tables/5_khuyen_nghi/doi_soat_nq1251_theo_xa.csv,56,7911,7f09d0981c213b73e3ae00da08faf7297be63b5acbff8138015c83246d118551,b4_khuyen_nghi,2026-11-27T01:01:39Z,phan loai tung xa: quy tac A15 moi vs NQ 1251
+outputs/tables/5_khuyen_nghi/ung_vien_gop_tram.csv,17,5530,3ef9408fe48c9302968c43601aa291d419dae0084e9701b18765c08bbdc1a5f9,b4_khuyen_nghi,2026-11-27T01:01:39Z,"ung vien RA SOAT (khong phai de nghi dong cua); nguong 6 CSKCB trong 2 km (A15, A16)"
+outputs/tables/6_du_bao/commune_series.csv,560,67245,1a81e7496ceec8651280bfe4c6b141337544b7acc7fe9bea228b45c5505fd6f4,b4_du_bao,2026-11-27T01:01:39Z,chuoi theo xa 2015-2024: truc tiep 100 m va ha cap 1 km (A4)
+outputs/tables/6_du_bao/validation_downscale_A4.csv,9,337,bbe4b654564acae83158768796cf1f69e3e45dc91694a96b1c481cbeb129fef0,b4_du_bao,2026-11-27T01:01:39Z,kiem dinh A4: chuoi ha cap vs truc tiep 100 m
+outputs/tables/6_du_bao/forecast_worldpop_chieu.csv,6,268,112b9880e110a88d20b79b92dd48f06d7b6250bf924c2c4fb0586c76cf3eb77b,b4_du_bao,2026-11-27T01:01:39Z,tong so CHIEU WorldPop 2025-2030 ha cap ve 56 xa (chi de doi chieu)
+outputs/tables/6_du_bao/forecast_backtest.csv,16,1055,b36fc1c0b5da767fef30d7555ca1b28b28c1378a831f01d8a2d03f7dc81a6639,b4_du_bao,2026-11-27T01:01:39Z,backtest chi do kha nang tai tao chuoi WorldPop (#Truthmode)
+outputs/tables/6_du_bao/forecast_model_choice.csv,2,145,070fb0d57b881401c0869f05cc708e000d145b97ec7342cae8d99eac6d4c8de3,b4_du_bao,2026-11-27T01:01:39Z,mo hinh co MAPE trung binh 2 goc nho nhat
+outputs/tables/6_du_bao/forecast_commune_2030.csv,56,9992,c3720c7eb9339abaca6877efb66efe840759653413f9a4501621101ce38bcace,b4_du_bao,2026-11-27T01:01:39Z,DU BAO 2030 theo 56 xa cu (A9) - khong phai so do
+outputs/tables/6_du_bao/forecast_total_2030.csv,14,349,c5ddbe51ae59b81d06545b9a6ef6be4b80edc548fed407c0918df726d425e427,b4_du_bao,2026-11-27T01:01:39Z,tong du bao 56 xa
+outputs/tables/6_du_bao/access_2030_change.csv,56,6785,e9fe513f2457f4342372bcdb8e8ec351e1bccac1a60ab783e4c832dcc1c29fad,b4_du_bao,2026-11-27T01:01:39Z,"tiep can 3 km 2030 (du bao, giu 56 tram, A9)"
+outputs/tables/6_du_bao/access_2030_total.csv,1,158,34059d15705fa2a7e437bfc37a098c7679abe90716632379df93ed64e9a88560,b4_du_bao,2026-11-27T01:01:39Z,tiep can 3 km toan 56 xa 2030 (du bao)
+outputs/tables/luoi_100m/dan_cu_luoi_100m.csv,41221,9346689,d79966f4e0ff7cc0df7b85c7c07de543a767b1a2fdc6ca5b6e1401b5fe722f43,b5_ghi,2026-11-27T01:01:41Z,"luoi dan cu 100 m tu raster WorldPop (A2, A3)"
+outputs/tables/luoi_100m/tiep_can_luoi_100m.csv,41221,5304109,2100878f206591aa730dd57a3c6aaf084ca2a1e3655258d8e6161d8871422b0f,b5_ghi,2026-11-27T01:01:41Z,"khoang cach chim bay + mang duong moi o toi TYT va CSKCB (A1, A5, A6)"
+outputs/tables/7_kiem_chung/so_sanh_parquet_csv.csv,4,1497,abc06c8dea56fd6f929fddb3c33a9684081022a46768699df7b30c3cb244df6a,b5_ghi,2026-11-27T01:01:44Z,cung truy van KPI 3 km theo nhom nam 2024 tren 4 cach luu
+logs/plan_pruning_2024.txt,219,9082,6f48b9fa3d13f96face36282ac08de601f7a50431c4d8ee1601dc8d9c2371101,b5_ghi,2026-11-27T01:01:44Z,explain formatted cua 4 phuong an luu tru
+outputs/tables/7_kiem_chung/qa_summary.csv,28,2769,3ca1c48ec06e35230ab65e1b1a29ff97a8610bace60cf0e85c0311d9ad34d32e,b5_ghi,2026-11-27T01:01:44Z,tong hop kiem tra chat luong
+outputs/tables/7_kiem_chung/doi_soat_spark.csv,48,4965,bfcfb8fb32ed59f8ab67f664cf499814b5958c08adfead4832ab0636c9137888,b5_ghi,2026-11-27T01:01:44Z,"bao toan so dong/tong dan, Spark SQL vs DataFrame, so voi bo so 19/11/2026"
+outputs/tables/7_kiem_chung/thoi_gian_5_buoc.csv,5,554,642fa2929f9d13e8966ecedfceaf1cb1cd7d33a373d66f88919c083342b79fcc,b5_ghi,2026-11-27T01:01:44Z,"thoi gian 5 buoc Spark, master=local[*]"
+outputs/figures/h1_ban_do_khoang_cach.png,,216644,ade0cd483f382ab9f545701e7ab5ef55b5d4aea9e54792bbb0373b6d501b360b,bao_cao,2026-11-27T01:01:46Z,
+outputs/figures/h2_vung_trang_dia_hinh.png,,230400,57484f72f895955e3c0b214ae3ef6a488718cc47261fba014416bca48086af10,bao_cao,2026-11-27T01:01:46Z,
+outputs/figures/h3_ty_le_3km_theo_xa.png,,107593,0e0c2dea3fdc84d30f609a7547029aa3146627059c3c04236e2cbbe49bb7c5d8,bao_cao,2026-11-27T01:01:46Z,
+outputs/figures/h4_mat_do_vs_khoang_cach.png,,74996,cf01667d57fc90f9851afd2c629ca5bd5fe3238e83638fbef6d4c766ea9e5d10,bao_cao,2026-11-27T01:01:46Z,
+outputs/figures/h5_du_bao_dan_so.png,,94082,74bd02424ba07c8658109e690f6a74578da5fa4b26946152ca1255d81bedd1a0,bao_cao,2026-11-27T01:01:47Z,
+outputs/figures/h7_de_xuat_vi_tri.png,,161183,bd957a42d146cc5612c0c59bc1f2fce697eb7d97b4c2322828196be8dfa73c2d,bao_cao,2026-11-27T01:01:47Z,
+outputs/tables/1_du_lieu_nguon/xa_phuong_56_toa_do.csv,56,9883,cac6249f9a9ffd4aaf1a3d79cd47b420c989c4d3de8fcb22d14bb13932c119a4,bao_cao,2026-11-27T01:01:47Z,"56 xa/phuong truoc 01/01/2025: so tren ban do h8, tam, khung toa do"
+outputs/tables/7_kiem_chung/pham_vi_da_nang_cu.csv,12,959,61338a7ef6026007ecac4a1b594e3ab83409d938ba58595380d3068c09b6fd9b,bao_cao,2026-11-27T01:01:47Z,pham vi 56 xa/phuong theo GADM 4.1
+outputs/figures/h8_ban_do_hanh_chinh_truoc_2025.png,,538840,609631335b1cab8a2d326db85e4b03141fd9a76a504ada72f389d517775cd132,bao_cao,2026-11-27T01:01:47Z,ban do hanh chinh 56 xa/phuong truoc 01/01/2025
+outputs/tables/5_khuyen_nghi/ban_do_truoc_sau_de_xuat.csv,6,350,785d781b0f4228af9cb66c58c23b10ae7e88b2dec5e425ca7d0deb66a548f5a3,bao_cao,2026-11-27T01:01:47Z,"dan 2024 theo lop khoang cach, truoc va sau khi them 5 diem"
+outputs/figures/h9_truoc_sau_de_xuat.png,,394603,cc1afa4ccfef04e85afff8b7eb901042738d01f0909a2f9addaeced9cb80d775,bao_cao,2026-11-27T01:01:47Z,ban do truoc/sau khi them 5 diem de xuat
+outputs/tables/7_kiem_chung/tu_dien_du_lieu.csv,19,5750,04a1709295ca52bdbe7da00c4e3e2ff72988744dc80499244e8feb8daaadcce6,bao_cao,2026-11-27T01:01:47Z,tu dien bang Bronze / Silver / Gold va bang ket qua chinh
+outputs/tables/7_kiem_chung/kiem_tra_run_manifest.csv,57,5681,3d006fd8ba6cb37f849595726b54c6568bac524821ee4bc023369c4d4ccb17cb,bao_cao,2026-11-27T01:01:47Z,doi chieu SHA-256 moi file ket qua voi run_manifest.csv
+outputs/tables/7_kiem_chung/so_lieu_chot.csv,55,15831,48bade5e0ae4df6027ce443db8045a857822d426aad4cdb6a0b8be0f6d341bdc,bao_cao,2026-11-27T01:01:47Z,con so chot cho bao cao kem file nguon va SHA-256

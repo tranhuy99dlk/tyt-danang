@@ -1,0 +1,57 @@
+﻿ma_tram,ten_day_du,quan_huyen,loai_dv,ty_le_3km_2024,ty_le_3km_2030,ty_le60_3km_2024,ty_le60_3km_2030,dan_ngoai_3km_2024,dan_ngoai_3km_2030,dan_tren_5km_2024,dan_tren_5km_2030,dan60_ngoai_3km_2030,thay_doi_pp,thay_doi_60_pp,giam_tiep_can
+TYT30,Xã Hòa Phước,Huyện Hòa Vang,Xã,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,-0.0,False
+TYT22,Xã Hòa Liên,Huyện Hòa Vang,Xã,98.67,98.68,98.67,98.67,159.57,164.03,0.0,0.0,22.99,0.01,0.01,False
+TYT21,Xã Hòa Bắc,Huyện Hòa Vang,Xã,56.52,56.55,56.52,56.55,1462.61,1500.37,773.89,793.45,200.91,0.03,0.03,False
+TYT27,Xã Hòa Phong,Huyện Hòa Vang,Xã,89.84,89.85,89.82,89.84,1964.71,2021.79,0.0,0.0,283.25,0.01,0.01,False
+TYT23,Xã Hòa Ninh,Huyện Hòa Vang,Xã,42.19,42.21,42.19,42.21,2957.23,3050.65,660.5,684.45,428.1,0.02,0.02,False
+TYT31,Xã Hòa Khương,Huyện Hòa Vang,Xã,87.99,87.98,87.33,87.33,1928.38,1985.64,18.95,19.26,296.8,-0.01,0.0,False
+TYT29,Xã Hòa Tiến,Huyện Hòa Vang,Xã,99.01,99.01,98.85,98.86,202.63,208.83,0.0,0.0,34.25,-0.0,0.0,False
+TYT24,Xã Hòa Sơn,Huyện Hòa Vang,Xã,86.57,86.54,86.55,86.53,1991.18,2058.88,0.0,0.0,288.71,-0.03,-0.03,False
+TYT26,Xã Hòa Phú,Huyện Hòa Vang,Xã,79.33,79.36,78.79,78.82,1047.28,1077.37,451.0,463.62,155.93,0.02,0.04,False
+TYT25,Xã Hòa Nhơn,Huyện Hòa Vang,Xã,94.16,94.15,94.16,94.15,824.75,850.86,0.0,0.0,119.43,-0.01,-0.01,False
+TYT28,Xã Hòa Châu,Huyện Hòa Vang,Xã,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT36,Phường Hòa Minh,Quận Liên Chiểu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT33,Phường Hòa Hiệp Nam,Quận Liên Chiểu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,-0.0,False
+TYT35,Phường Hòa Khánh Nam,Quận Liên Chiểu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT32,Phường Hòa Hiệp Bắc,Quận Liên Chiểu,Phường,97.13,97.14,97.1,97.11,591.2,605.96,196.28,200.27,85.92,0.01,0.01,False
+TYT34,Phường Hòa Khánh Bắc,Quận Liên Chiểu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT10,Phường Hoà Hải,Quận Ngũ Hành Sơn,Phường,97.32,97.3,97.17,97.16,843.76,875.78,0.0,0.0,129.29,-0.01,-0.01,False
+TYT07,Phường Mỹ An,Quận Ngũ Hành Sơn,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT09,Phường Hoà Quý,Quận Ngũ Hành Sơn,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT08,Phường Khuê Mỹ,Quận Ngũ Hành Sơn,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT01,Phường Hòa An,Quận Cẩm Lệ,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT03,Phường Hòa Phát,Quận Cẩm Lệ,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT06,Phường Hòa Xuân,Quận Cẩm Lệ,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT05,Phường Hòa Thọ Đông,Quận Cẩm Lệ,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT02,Phường Khuê Trung,Quận Cẩm Lệ,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT04,Phường Hòa Thọ Tây,Quận Cẩm Lệ,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT50,Phường Thọ Quang,Quận Sơn Trà,Phường,95.7,95.69,95.7,95.69,1498.79,1557.41,523.69,542.36,217.87,-0.01,-0.01,False
+TYT53,Phường An Hải Bắc,Quận Sơn Trà,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT56,Phường An Hải Đông,Quận Sơn Trà,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT55,Phường An Hải Tây,Quận Sơn Trà,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT51,Phường Nại Hiên Đông,Quận Sơn Trà,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT52,Phường Mân Thái,Quận Sơn Trà,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT54,Phường Phước Mỹ,Quận Sơn Trà,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT38,Phường Thuận Phước,Quận Hải Châu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT41,Phường Hải Châu II,Quận Hải Châu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,-0.0,False
+TYT39,Phường Thạch Thang,Quận Hải Châu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT42,Phường Phước Ninh,Quận Hải Châu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT43,Phường Hòa Thuận Tây,Quận Hải Châu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,-0.0,False
+TYT47,Phường Bình Thuận,Quận Hải Châu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT40,Phường Hải Châu I,Quận Hải Châu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT46,Phường Bình Hiên,Quận Hải Châu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT37,Phường Thanh Bình,Quận Hải Châu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT45,Phường Nam Dương,Quận Hải Châu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT49,Phường Hòa Cường Nam,Quận Hải Châu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT48,Phường Hòa Cường Bắc,Quận Hải Châu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT44,Phường Hòa Thuận Đông,Quận Hải Châu,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT14,Phường Xuân Hà,Quận Thanh Khê,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT13,Phường Thanh Khê Đông,Quận Thanh Khê,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT17,Phường Vĩnh Trung,Quận Thanh Khê,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT18,Phường Thạc Gián,Quận Thanh Khê,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT16,Phường Chính Gián,Quận Thanh Khê,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT15,Phường Tân Chính,Quận Thanh Khê,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT11,Phường Tam Thuận,Quận Thanh Khê,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT12,Phường Thanh Khê Tây,Quận Thanh Khê,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT19,Phường An Khê,Quận Thanh Khê,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+TYT20,Phường Hòa Khê,Quận Thanh Khê,Phường,100.0,100.0,100.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False

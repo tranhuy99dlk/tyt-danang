@@ -1,28 +1,23 @@
-# Moi truong va file tam
+# Môi trường Python và file tạm (tạo lại được)
 .venv/
 __pycache__/
 *.pyc
 .DS_Store
 .ipynb_checkpoints/
+.ruff_cache/
 *.part
 
-# Du lieu nguon tai lai duoc bang scripts/01_download.sh
-# GADM: giay phep khong cho phan phoi lai -> khong bao gio dua len kho
+# Dữ liệu nguồn tải lại được bằng scripts/1_thu_thap/1a_tai_du_lieu.sh
+# GADM: giấy phép không cho phân phối lại -> không bao giờ đưa lên kho
 data/raw/gadm/
 data/raw/worldpop/
 data/raw/terrain/
 
-# San pham trung gian, tao lai duoc bang run_all.sh / run_spark.sh
-data/interim/
-data/landing/
-data/spark/
-logs/
+# Hồ dữ liệu Bronze / Silver / Gold: tạo lại bằng scripts/chay_toan_bo.sh; có ranh giới GADM nên không đưa lên kho
+data/lake/
 
-# Ket qua pham vi cu (nam co so 2025, co du bao 2030) - khong dung cho bao cao
-_luu_tru_pham_vi_2015_2030/
-
-# Ket qua cua cac phien ban script cu (khong dung cho bao cao)
-_luu_tru_ban_cu/
-
-# Moi truong Python dong goi cho executor tren YARN (tao lai bang scripts/11c_yarn_python_env.sh)
+# Môi trường Python đóng gói cho executor trên YARN (tạo lại bằng scripts/cum_hdfs_yarn/yarn_python_env.sh)
 data/yarn/
+
+# Nhật ký từng lần chạy
+logs/

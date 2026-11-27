@@ -1,0 +1,57 @@
+﻿ma_tram,ten,trong_ranh_gioi,nguon,cap_trung_toa_do_50m,kc_ngoai_ranh_gioi_m,kc_tram_tam_dan_cu_m,kc_toi_nut_duong_m
+TYT01,Phường Hòa An,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,272.0,10.1
+TYT02,Phường Khuê Trung,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,347.0,27.6
+TYT03,Phường Hòa Phát,False,NHAP TAY (data/raw/location-tyt.xlsx),0,55.1,1223.0,42.9
+TYT04,Phường Hòa Thọ Tây,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,998.0,29.0
+TYT05,Phường Hòa Thọ Đông,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,971.0,27.5
+TYT06,Phường Hòa Xuân,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,370.0,10.0
+TYT07,Phường Mỹ An,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,714.0,19.3
+TYT08,Phường Khuê Mỹ,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,543.0,15.4
+TYT09,Phường Hoà Quý,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,427.0,16.0
+TYT10,Phường Hoà Hải,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,387.0,12.0
+TYT11,Phường Tam Thuận,False,NHAP TAY (data/raw/location-tyt.xlsx),0,103.5,651.0,18.9
+TYT12,Phường Thanh Khê Tây,False,NHAP TAY (data/raw/location-tyt.xlsx),0,2.1,744.0,16.2
+TYT13,Phường Thanh Khê Đông,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,290.0,13.0
+TYT14,Phường Xuân Hà,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,323.0,13.8
+TYT15,Phường Tân Chính,False,NHAP TAY (data/raw/location-tyt.xlsx),0,54.3,267.0,5.7
+TYT16,Phường Chính Gián,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,223.0,2.7
+TYT17,Phường Vĩnh Trung,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,625.0,17.1
+TYT18,Phường Thạc Gián,False,NHAP TAY (data/raw/location-tyt.xlsx),0,21.0,683.0,27.2
+TYT19,Phường An Khê,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,749.0,27.1
+TYT20,Phường Hòa Khê,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,427.0,25.7
+TYT21,Xã Hòa Bắc,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,2686.0,9.4
+TYT22,Xã Hòa Liên,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,909.0,13.2
+TYT23,Xã Hòa Ninh,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,3150.0,11.1
+TYT24,Xã Hòa Sơn,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,1534.0,26.1
+TYT25,Xã Hòa Nhơn,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,218.0,19.7
+TYT26,Xã Hòa Phú,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,1001.0,19.3
+TYT27,Xã Hòa Phong,False,NHAP TAY (data/raw/location-tyt.xlsx),0,11.4,1182.0,13.4
+TYT28,Xã Hòa Châu,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,297.0,30.7
+TYT29,Xã Hòa Tiến,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,624.0,32.0
+TYT30,Xã Hòa Phước,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,1722.0,22.4
+TYT31,Xã Hòa Khương,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,792.0,3.5
+TYT32,Phường Hòa Hiệp Bắc,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,452.0,2.2
+TYT33,Phường Hòa Hiệp Nam,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,652.0,11.8
+TYT34,Phường Hòa Khánh Bắc,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,780.0,25.7
+TYT35,Phường Hòa Khánh Nam,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,403.0,3.9
+TYT36,Phường Hòa Minh,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,892.0,19.9
+TYT37,Phường Thanh Bình,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,236.0,11.3
+TYT38,Phường Thuận Phước,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,453.0,4.3
+TYT39,Phường Thạch Thang,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,64.0,14.1
+TYT40,Phường Hải Châu I,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,391.0,49.0
+TYT41,Phường Hải Châu II,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,289.0,25.4
+TYT42,Phường Phước Ninh,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,94.0,24.4
+TYT43,Phường Hòa Thuận Tây,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,768.0,27.8
+TYT44,Phường Hòa Thuận Đông,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,56.0,13.5
+TYT45,Phường Nam Dương,False,NHAP TAY (data/raw/location-tyt.xlsx),0,25.2,196.0,28.4
+TYT46,Phường Bình Hiên,False,NHAP TAY (data/raw/location-tyt.xlsx),0,50.5,112.0,14.7
+TYT47,Phường Bình Thuận,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,322.0,34.8
+TYT48,Phường Hòa Cường Bắc,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,418.0,21.1
+TYT49,Phường Hòa Cường Nam,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,210.0,23.6
+TYT50,Phường Thọ Quang,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,742.0,12.1
+TYT51,Phường Nại Hiên Đông,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,629.0,23.8
+TYT52,Phường Mân Thái,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,282.0,11.6
+TYT53,Phường An Hải Bắc,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,556.0,32.6
+TYT54,Phường Phước Mỹ,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,106.0,16.8
+TYT55,Phường An Hải Tây,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,756.0,15.4
+TYT56,Phường An Hải Đông,True,NHAP TAY (data/raw/location-tyt.xlsx),0,0.0,483.0,23.3
